@@ -5,7 +5,8 @@
 
 Fix for:
 ```
-os-collect-config: /usr/lib/python2.7/site-packages/requests/packages/urllib3/connectionpool.py:852: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+os-collect-config: /usr/lib/python2.7/site-packages/requests/packages/urllib3/connectionpool.py:852: 
+InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
 ```
 
 ```

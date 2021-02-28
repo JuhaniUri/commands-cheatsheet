@@ -1,6 +1,9 @@
 # Useful Linux commands
 
+#
 ## Partitions, LVM, LUKS, FS etc
+Something to look into:
+SSM https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ssm-common-tasks
 
 ### Create file that will utilize space from storage
 ```
@@ -64,4 +67,41 @@ Fstab entry:
 ### Find dublicates in fstab
 ```
 grep -vE "^#"  /etc/fstab  | awk  '{print $2}' |  uniq -d
+```
+
+
+##
+## Text manipulation with SED, AWK
+
+### SED: Insert line at very end
+```
+# Add tmp as in-memory entry to fstab
+sed -i -e '$atmpfs /tmp tmpfs strictatime,noexec,nodev,nosuid 0 0' /etc/fstab```
+```
+
+### SED: Insert line before match found
+```
+sed -i 's/.*plugins=ifcfg-rh,ibft.*/dns=none\n&/' /etc/NetworkManager/NetworkManager.conf
+```
+
+### SED with find: Replacing values in multiple files inside directory (in MAC)
+```
+find foldername -type f -exec grep -H 'hostname' {} \;
+find foldername -type f -name "*.yaml" -exec sed -i '' 's/hostname.local/new-hostname.local/g' {} \;
+```
+
+### SED with find: Replacing values in multiple files inside directory (in Linux)
+```
+find foldername/*/some-other/ -type f -name "*.yaml" -exec grep -H 'hostname' {} \;
+find foldername/*/some-other/ -type f -name "*.yaml" -exec sed -i 's/hostname.local/new-hostname.local/g' {} \;
+```
+
+
+### AWK: List of all locked accounts (accounts with passwords) :
+```
+awk -F: '{ system("passwd -S " $1)}' /etc/passwd | grep " LK "
+```
+### AWK: List of all unlocked accounts (accounts with passwords) :
+```
+awk -F: '{ system("passwd -S " $1)}' /etc/passwd | grep " PS "
 ```

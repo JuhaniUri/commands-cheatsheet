@@ -1,5 +1,6 @@
 # 1z0-071
 
+´´´
 CREATE TABLE cruise_orders (
     cruise_order_id  NUMBER,
     order_data       DATE,
@@ -74,3 +75,4 @@ CREATE TABLE cruises (
     CONSTRAINT cruise_pk PRIMARY KEY ( cruise_id )
 );
 
+´´´

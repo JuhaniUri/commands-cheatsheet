@@ -84,19 +84,19 @@ sed -i -e '$atmpfs /tmp tmpfs strictatime,noexec,nodev,nosuid 0 0' /etc/fstab```
 sed -i 's/.*plugins=ifcfg-rh,ibft.*/dns=none\n&/' /etc/NetworkManager/NetworkManager.conf
 ```
 
-### SED with find: Replacing values in multiple files inside directory (in MAC)
+### SED with find: Replacing values in multiple files inside directory (Mac)
 ```
 find foldername -type f -exec grep -H 'hostname' {} \;
 find foldername -type f -name "*.yaml" -exec sed -i '' 's/hostname.local/new-hostname.local/g' {} \;
 ```
 
-### SED with find: Replacing values in multiple files inside directory (in Linux)
+### SED with find: Replacing values in multiple files inside directory (Linux)
 ```
 find foldername/*/some-other/ -type f -name "*.yaml" -exec grep -H 'hostname' {} \;
 find foldername/*/some-other/ -type f -name "*.yaml" -exec sed -i 's/hostname.local/new-hostname.local/g' {} \;
 ```
 
-### SED with find: Replacing multiple values in multiple files in subdirectories (in MAC)
+### SED with find: Replacing multiple values in multiple files in subdirectories (Mac)
 ```
 find foldername/*/openstack  -type f -name "*.yaml" -exec sed -i '' '/firewall:/d;/l7policy:/d;/listener:/d;/member:/d;/healthmonitor:/d;/loadbalancer:/d' {} \
 ```

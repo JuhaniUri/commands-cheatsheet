@@ -96,6 +96,10 @@ find foldername/*/some-other/ -type f -name "*.yaml" -exec grep -H 'hostname' {}
 find foldername/*/some-other/ -type f -name "*.yaml" -exec sed -i 's/hostname.local/new-hostname.local/g' {} \;
 ```
 
+### SED with find: Replacing multiple values in multiple files in subdirectories (in MAC)
+```
+find foldername/*/openstack  -type f -name "*.yaml" -exec sed -i '' '/firewall:/d;/l7policy:/d;/listener:/d;/member:/d;/healthmonitor:/d;/loadbalancer:/d' {} \
+```
 
 ### AWK: List of all locked accounts (accounts with passwords) :
 ```

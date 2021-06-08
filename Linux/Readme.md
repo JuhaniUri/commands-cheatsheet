@@ -69,6 +69,14 @@ Fstab entry:
 grep -vE "^#"  /etc/fstab  | awk  '{print $2}' |  uniq -d
 ```
 
+##
+## Permissions
+
+### Test permissions of file/folder for user
+```
+# su -s /bin/bash td-agent
+$ ls -la /var/log/
+```
 
 ##
 ## Text manipulation with SED, AWK

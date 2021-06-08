@@ -72,7 +72,7 @@ grep -vE "^#"  /etc/fstab  | awk  '{print $2}' |  uniq -d
 ##
 ## Permissions
 
-### Test permissions of file/folder for user
+### Test permissions of file/folder for user, works even when user has "nologin"
 ```
 # su -s /bin/bash td-agent
 $ ls -la /var/log/

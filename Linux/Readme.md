@@ -124,3 +124,11 @@ awk -F: '{ system("passwd -S " $1)}' /etc/passwd | grep " LK "
 ```
 awk -F: '{ system("passwd -S " $1)}' /etc/passwd | grep " PS "
 ```
+
+
+## SSH keys 
+
+### ssh-keygen: generate private and public key to file
+```
+ssh-keygen -t rsa -b 4096 -out filename
+```

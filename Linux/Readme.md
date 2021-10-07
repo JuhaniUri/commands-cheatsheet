@@ -92,6 +92,12 @@ sed -i -e '$atmpfs /tmp tmpfs strictatime,noexec,nodev,nosuid 0 0' /etc/fstab```
 sed -i 's/.*plugins=ifcfg-rh,ibft.*/dns=none\n&/' /etc/NetworkManager/NetworkManager.conf
 ```
 
+### SED: replace IP in file
+```
+sed -i -e 's/11\.4\.0\.27/11\.4\.0\.10/g' terraform-outputs.yml
+```
+
+
 ### SED with find: Replacing values in multiple files inside directory (Mac)
 ```
 find foldername -type f -exec grep -H 'hostname' {} \;
@@ -108,6 +114,7 @@ find foldername/*/some-other/ -type f -name "*.yaml" -exec sed -i 's/hostname.lo
 ```
 find foldername/*/openstack  -type f -name "*.yaml" -exec sed -i '' '/firewall:/d;/l7policy:/d;/listener:/d;/member:/d;/healthmonitor:/d;/loadbalancer:/d' {} \
 ```
+
 
 ### AWK: List of all locked accounts (accounts with passwords) :
 ```

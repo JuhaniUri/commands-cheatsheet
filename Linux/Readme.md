@@ -133,6 +133,21 @@ awk -F: '{ system("passwd -S " $1)}' /etc/passwd | grep " PS "
 ssh-keygen -t rsa -b 4096 -out filename
 ```
 
+### Convert MIIE key content 
+
+Copy the value of the private_key_pem field.
+Reformat the copied value and save it in the current directory to a file named PRIVATE-KEY-FILE. Run:
+
+printf -- "YOUR-PRIVATE-KEY" > PRIVATE-KEY-FILE
+Where:
+
+YOUR-PRIVATE-KEY is the text of your private key.
+PRIVATE-KEY-FILE is the path to the private key file you are creating.
+For example:
+```
+$ printf --  "-----BEGIN RSA PRIVATE KEY----- MIIEkeycontents ----END RSA PRIVATE KEY-----" > bbr_key.pem
+```
+
 ## VIM magic
 
 ### How to insert a block of white spaces starting at the cursor position in VI

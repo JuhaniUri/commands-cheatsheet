@@ -150,18 +150,31 @@ $ printf --  "-----BEGIN RSA PRIVATE KEY----- MIIEkeycontents ----END RSA PRIVAT
 
 ## VIM magic
 
-### How to insert a block of white spaces starting at the cursor position in VI
+### vim: How to insert a block of white spaces starting at the cursor position in VI
 ```
-1. go in block visual mode ctrl-v
-2. select the lines you want to modify
-3. press shift+i (capital i)
-4. apply any changes I want for the first line. 
+1. Go in block visual mode ctrl-v
+2. Select the lines you want to modify
+3. Press shift+i (capital i)
+4. Apply any changes for the first line. 
 5. Leaving visual mode esc will apply all changes on the first line to all lines.
 ```
 
-### Delete multiple lines
+### vim: Delete the first X spaces for multiple lines
+```
+1. Go in block visual mode ctrl-v
+2. Select the area to delete with the arrows;
+3. Then press d to delete the selected area.
+4. Press Esc
+```
+
+### vim: Delete multiple lines
 ```
 1. Press the Esc key to go to normal mode.
 2. Place the cursor on the first line you want to delete.
 3. Type 5dd and hit Enter to delete the next five lines.
 ```
+
+
+## YAML
+
+### YAML validator -> yamllint

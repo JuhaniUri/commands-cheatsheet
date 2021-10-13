@@ -4,7 +4,7 @@
 ### Data migration with reindex and timestamp plus field query.
 Where "stage" is field
 "query" is value.
-  
+$i is elasticsearch index  
 
 
 ```

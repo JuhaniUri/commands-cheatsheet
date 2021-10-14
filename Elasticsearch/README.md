@@ -1,5 +1,43 @@
 # Elasticsearch 
 
+## General
+
+### Get indices by creation date
+```
+GET /_cat/indices/*somename-*/?h=i,ss,creation.date.string&s=creation.date
+```
+
+
+## Query DSL 
+
+### Search with multi condition
+```
+ {
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "fields": ["Firstname", "Lastname"],
+            "query": "John"
+          }
+        },
+        {
+          "range": {
+            "timestamp": {
+              "lt": "2021-04-07 17:49:45.090", "format": "yyyy-MM-dd HH:mm:ss.SSS" 
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+```
+
+
+
 
 ### Count with query 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/search-count.html

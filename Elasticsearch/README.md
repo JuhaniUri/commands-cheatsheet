@@ -1,7 +1,19 @@
 # Elasticsearch 
 
 
+### Count with query 
+
+```
+GET /audit.index/_count
+{
+  "query" : {
+    "term" : { "stage" : "prod" }
+  }
+}
+```
+
 ### Data migration with reindex and timestamp plus field query.
+
 Where "stage" is field
 "query" is value.
 $i is elasticsearch index  

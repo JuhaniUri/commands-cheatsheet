@@ -179,6 +179,10 @@ $ printf --  "-----BEGIN RSA PRIVATE KEY----- MIIEkeycontents ----END RSA PRIVAT
 ```
 ausearch -m avc -ts 10/22/2021
 ```
+### restorecon: restore file(s) default SELinux security contexts.
+```
+restorecon /etc/shadow
+```
 
 ## YAML
 

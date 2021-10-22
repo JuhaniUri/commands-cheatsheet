@@ -174,6 +174,11 @@ $ printf --  "-----BEGIN RSA PRIVATE KEY----- MIIEkeycontents ----END RSA PRIVAT
 3. Type 5dd and hit Enter to delete the next five lines.
 ```
 
+## SElinux 
+### ausearch: audit daemon logs for date
+```
+ausearch -m avc -ts 10/22/2021
+```
 
 ## YAML
 

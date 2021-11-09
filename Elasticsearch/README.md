@@ -93,3 +93,9 @@ curl -X POST -k -u $NEW_ELASTIC_USERNAME:$NEW_ELASTIC_PASSWORD "https://$NEW_ELA
 }
 
 ```
+
+### Details on the shards status
+
+```
+GET _cat/shards?v&h=index,shard,prirep,state,store,ip,unassigned.reason
+```

@@ -8,6 +8,7 @@
 ## Headers
 
 ## RMAN Clone in same server (Offline) 
+## RMAN Clone in same server (Online) 
 
 
 ### Check what we got:

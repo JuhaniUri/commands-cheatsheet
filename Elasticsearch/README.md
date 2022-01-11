@@ -1,5 +1,14 @@
 # Elasticsearch 
 
+- [Elasticsearch](#elasticsearch)
+  - [General](#general)
+    - [Get indices by creation date](#get-indices-by-creation-date)
+  - [Query DSL](#query-dsl)
+    - [Search with multi condition](#search-with-multi-condition)
+    - [Count with query](#count-with-query)
+    - [Data migration with reindex and timestamp plus field query.](#data-migration-with-reindex-and-timestamp-plus-field-query)
+    - [Details on the shards status](#details-on-the-shards-status)
+
 ## General
 
 ### Get indices by creation date

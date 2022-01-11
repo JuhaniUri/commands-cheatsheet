@@ -3,26 +3,32 @@
 
 ## RMAN Clone in same server (Offline) 
 
-```
+
 ###Preparation
 ###Check what we got:
+```
 --- List of all the User excluding default Users
 SELECT username 
 FROM all_users 
 WHERE oracle_maintained = 'N';
----Check the database size physical consume on disk (---20113)
-
+```
+```
 SELECT sum(bytes)/1024/1024 size_in_mb 
 FROM dba_data_files;
+```
+```
 --- Check what's invalid
-
 SELECT owner, object_type, object_name
 FROM all_objects
 WHERE status = 'INVALID';
+```
 ### Create missing dirs
+```
 mkdir -p /u01/app/oracle/product/admin/NEWTEST/{adump,dpdump,pfile}
 mkdir /u02/NEWTEST
+```
 ###Create dedicated disk
+```
 <TEST> oracle@testdb ~]$ parted /dev/xvdf mklabel msdos mkpart primary 1M 100% set 1 lvm on
 <TEST> oracle@testdb ~]$ pvcreate /dev/xvdf1
 <TEST> oracle@testdb ~]$ vgcreate vg_NEWTEST /dev/xvdf1
@@ -35,8 +41,10 @@ mkdir /u02/NEWTEST
  
 <TEST> oracle@testdb ~]$ chmod 750 /u02/NEWTEST
 <TEST> oracle@testdb ~]$ chown oracle:oinstall /u02/NEWTEST/
+```
 ###Clone the existing database to NEWTEST
 ###Startup to with mount mode
+```
 <TEST> oracle@testdb ~]$ sqlplus / as sysdba
 SQL*Plus: Release 10.2.0.3.0 - Production on Wed Oct 4 15:42:27 2017
  
@@ -59,8 +67,9 @@ Database mounted.
 SQL> CREATE PFILE='/tmp/initNEWTEST.ora' FROM spfile;
 SQL> ALTER DATABASE BACKUP CONTROLFILE TO TRACE AS '/tmp/NEWTESTcontrol.ctl';
 SQL> exit
-
+```
 ### Clone with RMAN
+```
 RMAN> RUN {
 BACKUP AS COPY DB_FILE_NAME_CONVERT ('/u02/TEST/','/u02/NEWTEST/') database;
 };
@@ -112,7 +121,10 @@ channel ORA_DISK_1: datafile copy complete, elapsed time: 00:00:01x
 Finished backup at 06-JAN-22
  
 RMAN> exit
+```
+
 ### Prep pfile
+```
 [<TEST>oracle@testdb u02]$ sed -i 's/TEST/NEWTEST/g' /tmp/initNEWTEST.ora
 [<TEST>oracle@testdb u02]$ sed -i 's/TEST/NEWTEST/g' /tmp/initNEWTEST.ora
  
@@ -173,7 +185,10 @@ DATAFILE
   '/u02/NEWTEST/sysaux02.dbf'
 CHARACTER SET AL32UTF8
 ;
+```
+
 ### Change the newly copied database to NEWTEST
+```
 export ORACLE_SID=NEWTEST
 SQL> startup nomount pfile='/tmp/initNEWTEST.ora';
  
@@ -181,11 +196,16 @@ SQL> @/tmp/NEWTEST.ctl
 SQL> alter database open resetlogs;
 SQL> ALTER TABLESPACE TEMP ADD TEMPFILE '/u02/NEWTEST/temp01.dbf' SIZE 500M reuse autoextend on maxsize 10G;
 SQL> create spfile from memory;
- 
+```
+
 ### Lets do startup test
+```
 SQL> shutdown immediate;
 SQL> startup;
+```
+
 ### Create and modify existing listener
+```
 [<TEST>oracle@testdb u02]$ cd /u01/app/oracle/product/12.2.0.1/db_1/network/admin
  
 [<TEST>oracle@testdb admin]$ cat listener.ora
@@ -209,8 +229,11 @@ TEST =
       (SERVICE_NAME = TEST)
     )
   )
-### To this:
 
+```
+
+### To this:
+```
 [<TEST>oracle@testdb admin]$ cat *.ora
 TEST =
   (DESCRIPTION_LIST =
@@ -255,15 +278,21 @@ NEWTEST =
  
 LISTENER_NEWTEST =
   (ADDRESS = (PROTOCOL = TCP)(HOST = testdb)(PORT = 1522))
+```
 #### Restart and Start listener
+```
 [<TEST>oracle@testdb admin]$ lsnrctl stop
 [<TEST>oracle@testdb admin]$ lsnrctl start
   
 [<TEST>oracle@testdb admin]$ lsnrctl start NEWTEST_TEST
-###Add to Oratab
-NEWTESTNEWTEST:/u01/app/oracle/product/12.2.0.1/db_1:N
+```
 
+###Add to Oratab
+```
+NEWTESTNEWTEST:/u01/app/oracle/product/12.2.0.1/db_1:N
+```
 ###Reset password and lock user that are unknown
+```
 ALTER USER SQLTEST ACCOUNT LOCK;
 
 ```

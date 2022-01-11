@@ -4,8 +4,7 @@
 ## RMAN Clone in same server (Offline) 
 
 
-###Preparation
-###Check what we got:
+### Check what we got:
 ```
 --- List of all the User excluding default Users
 SELECT username 

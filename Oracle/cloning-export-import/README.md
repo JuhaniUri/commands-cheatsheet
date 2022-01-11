@@ -1,14 +1,26 @@
 # Various export/import, RMAN and etc examples for cloning migrating data 
 
-##### Table of Contents  
-[Headers](#headers)  
-[Emphasis](#emphasis)  
-...snip...    
-<a name="headers"/>
-## Headers
-
+- [Various export/import, RMAN and etc examples for cloning migrating data](#various-exportimport-rman-and-etc-examples-for-cloning-migrating-data)
+  - [RMAN Clone in same server (Offline)](#rman-clone-in-same-server-offline)
+    - [Check what we got:](#check-what-we-got)
+    - [Create missing dirs](#create-missing-dirs)
+    - [Create dedicated disk](#create-dedicated-disk)
+    - [Clone the existing database to NEWTEST](#clone-the-existing-database-to-newtest)
+    - [Startup to with mount mode](#startup-to-with-mount-mode)
+    - [Clone with RMAN](#clone-with-rman)
+    - [Prep pfile](#prep-pfile)
+    - [Change the newly copied database to NEWTEST](#change-the-newly-copied-database-to-newtest)
+    - [Lets do startup test](#lets-do-startup-test)
+    - [Create and modify existing listener](#create-and-modify-existing-listener)
+    - [To this:](#to-this)
+      - [Restart and Start listener](#restart-and-start-listener)
+    - [Add to Oratab](#add-to-oratab)
+    - [Reset password and lock user that are unknown](#reset-password-and-lock-user-that-are-unknown)
+  - [RMAN Clone in same server (Online)](#rman-clone-in-same-server-online)
+  - [Clone with CP](#clone-with-cp)
+  - [Export/import](#exportimport)
 ## RMAN Clone in same server (Offline) 
-## RMAN Clone in same server (Online) 
+
 
 
 ### Check what we got:
@@ -304,4 +316,13 @@ NEWTESTNEWTEST:/u01/app/oracle/product/12.2.0.1/db_1:N
 ALTER USER SQLTEST ACCOUNT LOCK;
 
 ```
+
+
+
+## RMAN Clone in same server (Online) 
+
+## Clone with CP
+
+## Export/import
+
 

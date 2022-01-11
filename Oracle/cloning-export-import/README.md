@@ -22,12 +22,14 @@ SELECT owner, object_type, object_name
 FROM all_objects
 WHERE status = 'INVALID';
 ```
+
 ### Create missing dirs
 ```
 mkdir -p /u01/app/oracle/product/admin/NEWTEST/{adump,dpdump,pfile}
 mkdir /u02/NEWTEST
 ```
-###Create dedicated disk
+
+### Create dedicated disk
 ```
 <TEST> oracle@testdb ~]$ parted /dev/xvdf mklabel msdos mkpart primary 1M 100% set 1 lvm on
 <TEST> oracle@testdb ~]$ pvcreate /dev/xvdf1
@@ -42,8 +44,8 @@ mkdir /u02/NEWTEST
 <TEST> oracle@testdb ~]$ chmod 750 /u02/NEWTEST
 <TEST> oracle@testdb ~]$ chown oracle:oinstall /u02/NEWTEST/
 ```
-###Clone the existing database to NEWTEST
-###Startup to with mount mode
+### Clone the existing database to NEWTEST
+### Startup to with mount mode
 ```
 <TEST> oracle@testdb ~]$ sqlplus / as sysdba
 SQL*Plus: Release 10.2.0.3.0 - Production on Wed Oct 4 15:42:27 2017
@@ -287,11 +289,11 @@ LISTENER_NEWTEST =
 [<TEST>oracle@testdb admin]$ lsnrctl start NEWTEST_TEST
 ```
 
-###Add to Oratab
+### Add to Oratab
 ```
 NEWTESTNEWTEST:/u01/app/oracle/product/12.2.0.1/db_1:N
 ```
-###Reset password and lock user that are unknown
+### Reset password and lock user that are unknown
 ```
 ALTER USER SQLTEST ACCOUNT LOCK;
 

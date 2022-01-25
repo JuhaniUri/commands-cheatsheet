@@ -1,18 +1,22 @@
 
 # Database size
 
-### One database
-```
-select pg_database_size('test-db-1')/1024/1024;
-```
-
 ### All database listed
 ```
-select t1.datname AS db_name,  
+select t1.datname AS db_name,
        pg_size_pretty(pg_database_size(t1.datname)) as db_size
 from pg_database t1
 order by pg_database_size(t1.datname) desc;
 ```
+
+### One database
+
+-- Database Size
+SELECT pg_size_pretty(pg_database_size('Database Name'));
+-- Table Size
+SELECT pg_size_pretty(pg_relation_size('table_name'));
+
+
 
 
 

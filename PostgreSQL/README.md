@@ -10,11 +10,12 @@ order by pg_database_size(t1.datname) desc;
 ```
 
 ### One database
-
+```
 -- Database Size
 SELECT pg_size_pretty(pg_database_size('Database Name'));
 -- Table Size
 SELECT pg_size_pretty(pg_relation_size('table_name'));
+```
 
 
 

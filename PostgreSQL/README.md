@@ -72,7 +72,7 @@ CREATE TABLE schema1.t_random13 (LIKE schema1.t_random12 INCLUDING ALL);
 ```
 SELECT grantor, grantee, table_schema, table_name, privilege_type
 FROM information_schema.table_privileges
-WHERE grantee = 'myuser'
+WHERE grantee = '**myuser**'
 ```
 
 

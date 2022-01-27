@@ -57,7 +57,7 @@ SELECT pg_size_pretty(pg_relation_size('table_name'));
 
 ### Generate create table statement
 ```
-SELECT generate_create_table_statement('schema1.t_random12');
+
 ```
 
 ### Create table like

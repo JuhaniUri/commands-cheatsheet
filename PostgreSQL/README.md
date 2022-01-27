@@ -1,4 +1,15 @@
-
+- [Generic stuff](#generic-stuff)
+    - [List all tables](#list-all-tables)
+- [Database size](#database-size)
+    - [All database listed](#all-database-listed)
+    - [One database](#one-database)
+- [Export/Import](#exportimport)
+    - [Export to CSV](#export-to-csv)
+    - [Import from CSV](#import-from-csv)
+- [Create tables from](#create-tables-from)
+    - [Generate create table statement](#generate-create-table-statement)
+    - [Create table like](#create-table-like)
+- [User/Role privileges](#userrole-privileges)
 
 # Generic stuff
 

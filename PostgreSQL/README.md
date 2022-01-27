@@ -17,9 +17,31 @@ SELECT pg_size_pretty(pg_database_size('Database Name'));
 SELECT pg_size_pretty(pg_relation_size('table_name'));
 ```
 
+# Export/Import
+
+### Export to CSV
+```
+\COPY schema1.t_random12 TO /tmp/schema1.t_random12 DELIMITER ',' CSV HEADER;
+```
+
+### Import from CSV
+```
+\COPY schema1.t_random13 FROM /tmp/schema1.t_random12 DELIMITER ',' CSV HEADER;
+```
 
 
 
+# Create tables from 
+
+### Generate create table statement
+```
+SELECT generate_create_table_statement('schema1.t_random12');
+```
+
+### Create table like
+```
+CREATE TABLE schema1.t_random13 (LIKE schema1.t_random12 INCLUDING ALL);
+```
 
 
 

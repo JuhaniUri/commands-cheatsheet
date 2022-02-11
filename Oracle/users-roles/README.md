@@ -85,7 +85,6 @@ ORDER BY username;
 SET VERIFY ON
 ```
 
-
 ### 2. For showing the specific profiles property
 ```
 select * from dba_profiles where profile='DEFAULT';

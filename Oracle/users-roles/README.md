@@ -1,12 +1,20 @@
 # User and role setups for Oracle 
-
+- [User and role setups for Oracle](#user-and-role-setups-for-oracle)
+  - [Developer role](#developer-role)
+    - [Create role](#create-role)
+    - [Create daily job](#create-daily-job)
+    - [Grant access to role](#grant-access-to-role)
+  - [Oracle profile and change the password lifetime limit](#oracle-profile-and-change-the-password-lifetime-limit)
+    - [1. Check view users:](#1-check-view-users)
+    - [2. For showing the specific profiles property](#2-for-showing-the-specific-profiles-property)
+    - [3. Allow users to keep their password forever:](#3-allow-users-to-keep-their-password-forever)
+    - [4. Verify](#4-verify)
 
 ## Developer role
 ### Create role
 ```
 CREATE ROLE DEVELOPER_READ_ONLY;
 GRANT CREATE SESSION TO DEVELOPER_READ_ONLY;
-
 ```
 
 ### Create daily job

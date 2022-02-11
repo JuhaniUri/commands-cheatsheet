@@ -48,3 +48,47 @@ END;
 GRANT DEVELOPER_READ_ONLY TO USER;
 ```
 
+
+## Oracle profile and change the password lifetime limit
+
+### 1. Check view users:
+```
+SET LINESIZE 200 VERIFY OFF
+
+COLUMN username FORMAT A20
+COLUMN account_status FORMAT A16
+COLUMN default_tablespace FORMAT A15
+COLUMN temporary_tablespace FORMAT A15
+COLUMN profile FORMAT A15
+
+SELECT username,
+       account_status,
+       TO_CHAR(lock_date, 'DD-MON-YYYY') AS lock_date,
+       TO_CHAR(expiry_date, 'DD-MON-YYYY') AS expiry_date,
+       default_tablespace,
+       temporary_tablespace,
+       TO_CHAR(created, 'DD-MON-YYYY') AS created,
+       profile,
+       authentication_type
+FROM   dba_users
+WHERE  username LIKE UPPER('%&1%')
+ORDER BY username;
+
+SET VERIFY ON
+```
+
+
+### 2. For showing the specific profiles property
+```
+select * from dba_profiles where profile='DEFAULT';
+```
+
+### 3. Allow users to keep their password forever:
+```
+alter profile "DEFAULT" limit password_life_time unlimited;
+```
+
+### 4. Verify 
+```
+select * from dba_profiles where profile='DEFAULT';
+```

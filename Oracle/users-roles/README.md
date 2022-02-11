@@ -31,9 +31,7 @@ END;',
             enabled => TRUE,
             auto_drop => FALSE,
             comments => 'Access for developers');
-
          
-     
  
     DBMS_SCHEDULER.SET_ATTRIBUTE( 
              name => '"SYSTEM"."REFRESH_ACCESS_TO_DEVELOPER_READ_ONLY"', 
@@ -41,8 +39,6 @@ END;',
     DBMS_SCHEDULER.SET_ATTRIBUTE( 
              name => '"SYSTEM"."REFRESH_ACCESS_TO_DEVELOPER_READ_ONLY"', 
              attribute => 'logging_level', value => DBMS_SCHEDULER.LOGGING_OFF);
-      
-   
   
     
 END;

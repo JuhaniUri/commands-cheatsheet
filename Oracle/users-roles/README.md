@@ -59,7 +59,7 @@ GRANT DEVELOPER_READ_ONLY TO USER;
 
 ## Oracle profile and change the password lifetime limit
 
-### 1. Check view users:
+### 1. List users:
 ```
 SET LINESIZE 200 VERIFY OFF
 

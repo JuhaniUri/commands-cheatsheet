@@ -59,7 +59,7 @@ GRANT DEVELOPER_READ_ONLY TO USER;
 
 ## Oracle profile and change the password lifetime limit
 
-### 1. List users:
+### 1. List users
 ```
 SET LINESIZE 200 VERIFY OFF
 
@@ -91,7 +91,7 @@ SET VERIFY ON
 select * from dba_profiles where profile='DEFAULT';
 ```
 
-### 3. Allow users to keep their password forever:
+### 3. Allow users to keep their password forever
 ```
 alter profile "DEFAULT" limit password_life_time unlimited;
 ```

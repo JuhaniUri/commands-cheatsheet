@@ -19,6 +19,10 @@
   - [RMAN Clone in same server (Online)](#rman-clone-in-same-server-online)
   - [Clone with CP](#clone-with-cp)
   - [Export/import](#exportimport)
+  - [Export and import data with a help of bash scripts](#export-and-import-data-with-a-help-of-bash-scripts)
+    - [Prepartion](#prepartion)
+  - [In live eg. source](#in-live-eg-source)
+  - [In dev/test eg. destation](#in-devtest-eg-destation)
 ## RMAN Clone in same server (Offline) 
 
 
@@ -324,5 +328,45 @@ ALTER USER SQLTEST ACCOUNT LOCK;
 ## Clone with CP
 
 ## Export/import
+
+## Export and import data with a help of bash scripts 
+This useful if you need to refresh some dev/test env
+
+### Prepartion 
+- Export from live database 
+- Copy dumps to test/dev server 
+
+## In live eg. source
+In LIVE under user oracle is script that export data to /orabackup
+/home/oracle/export-for-test/exp-data.sh
+
+It export for all 3 databases (DB1,DB2,DB3) and you get 3 files.
+
+
+## In dev/test eg. destation 
+2.2) Copy dump files from /mnt to /u02/dump
+
+2.3) Execute import_script.sh
+
+Script does following: 
+- drops schemas (banksyst, reports, dserver)
+- imports data from dump
+- compiles schema 
+- scramble data
+
+
+Scripts is located at /imp_dump
+
+Execute as follows:
+´´´
+sh import_script.sh DB1 DB1-2019-03-14.dmp
+sh import_script.sh DB2 DB2-2019-03-14.dmp
+sh import_script.sh DB3 DB3-2019-03-14.dmp
+´´´
+
+Happy end!
+
+
+
 
 

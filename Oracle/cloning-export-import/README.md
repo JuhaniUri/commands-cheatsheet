@@ -358,11 +358,11 @@ Script does following:
 Scripts is located at /imp_dump
 
 Execute as follows:
-´´´
+```
 sh import_script.sh DB1 DB1-2019-03-14.dmp
 sh import_script.sh DB2 DB2-2019-03-14.dmp
 sh import_script.sh DB3 DB3-2019-03-14.dmp
-´´´
+```
 
 Happy end!
 

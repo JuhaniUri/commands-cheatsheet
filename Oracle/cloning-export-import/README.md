@@ -337,16 +337,14 @@ This useful if you need to refresh some dev/test env
 - Copy dumps to test/dev server 
 
 ### In live eg. source
-In LIVE under user oracle is script that export data to /orabackup
-export_dump_for_test/exp_data.sh
+In LIVE under user oracle is script that export data to /orabackup. Save scripts for example export_dump_for_test/exp_data.sh
 
 It export for all 3 databases (DB1,DB2,DB3) and you get 3 files.
 
 
 ### In dev/test eg. destation 
-2.2) Copy dump files for example /u03/dump
-
-2.3) Execute import_script.sh
+Copy dump files for example to /u03/dump
+Execute import_script.sh
 
 Script does following: 
 - drops schemas (banksyst, reports, dserver)
@@ -355,7 +353,7 @@ Script does following:
 - scramble data
 
 
-Scripts is located at /imp_dump
+Scripts are located at /imp_dump
 
 Execute as follows:
 ```

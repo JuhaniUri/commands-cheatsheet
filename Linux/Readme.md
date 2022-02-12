@@ -70,9 +70,12 @@ xfs_growfs /dev/mapper/crypted_lvm
 parted /dev/sdb mklabel msdos mkpart primary 1M 100% set 1 lvm on
 pvcreate /dev/sdb1
 vgcreate vg_pgsql /dev/sdb1
-lvcreate -L 20G -n lv_pgsql vg_pgsql
+  lvcreate -L 20G -n lv_pgsql vg_pgsql
+  or 
+  lvcreate -l 100%FREE -n lv_pgsql vg_pgsql
 mkfs.xfs /dev/mapper/vg_pgsql-lv_pgsql
 ```
+
 ### Growpart if disk was increased 
 ```
 growpart /dev/sda 1

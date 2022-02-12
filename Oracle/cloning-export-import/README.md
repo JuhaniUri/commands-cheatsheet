@@ -21,8 +21,8 @@
   - [Export/import](#exportimport)
   - [Export and import data with a help of bash scripts](#export-and-import-data-with-a-help-of-bash-scripts)
     - [Prepartion](#prepartion)
-  - [In live eg. source](#in-live-eg-source)
-  - [In dev/test eg. destation](#in-devtest-eg-destation)
+    - [In live eg. source](#in-live-eg-source)
+    - [In dev/test eg. destation](#in-devtest-eg-destation)
 ## RMAN Clone in same server (Offline) 
 
 
@@ -336,14 +336,14 @@ This useful if you need to refresh some dev/test env
 - Export from live database 
 - Copy dumps to test/dev server 
 
-## In live eg. source
+### In live eg. source
 In LIVE under user oracle is script that export data to /orabackup
 /home/oracle/export-for-test/exp-data.sh
 
 It export for all 3 databases (DB1,DB2,DB3) and you get 3 files.
 
 
-## In dev/test eg. destation 
+### In dev/test eg. destation 
 2.2) Copy dump files from /mnt to /u02/dump
 
 2.3) Execute import_script.sh

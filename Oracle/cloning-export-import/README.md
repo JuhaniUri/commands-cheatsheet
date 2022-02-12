@@ -338,13 +338,13 @@ This useful if you need to refresh some dev/test env
 
 ### In live eg. source
 In LIVE under user oracle is script that export data to /orabackup
-/home/oracle/export-for-test/exp-data.sh
+export_dump_for_test/exp_data.sh
 
 It export for all 3 databases (DB1,DB2,DB3) and you get 3 files.
 
 
 ### In dev/test eg. destation 
-2.2) Copy dump files from /mnt to /u02/dump
+2.2) Copy dump files for example /u03/dump
 
 2.3) Execute import_script.sh
 

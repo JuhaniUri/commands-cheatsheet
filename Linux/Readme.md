@@ -13,6 +13,7 @@
   - [Permissions](#permissions)
     - [Test permissions of file/folder for user, works even when user has "nologin"](#test-permissions-of-filefolder-for-user-works-even-when-user-has-nologin)
   - [Text manipulation with SED, AWK](#text-manipulation-with-sed-awk)
+    - [SED: Replace in file (Mac)](#sed-replace-in-file-mac)
     - [SED: Insert line at very end](#sed-insert-line-at-very-end)
     - [SED: Insert line before match found](#sed-insert-line-before-match-found)
     - [SED: replace IP in file](#sed-replace-ip-in-file)
@@ -116,6 +117,11 @@ $ ls -la /var/log/
 
 ##
 ## Text manipulation with SED, AWK
+
+### SED: Replace in file (Mac)
+```
+sed -i '' 's/ARENDUS_FULL/DEV_FULL/g' developer_role.txt
+```
 
 ### SED: Insert line at very end
 ```

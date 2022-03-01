@@ -3,7 +3,7 @@
 Backups in short.
 
 
-## Requrements ak input for admins
+## Business requrements 
 * RTO: Recovery Time Objective is the amount of downtime a business can tolerate.
 * RPO: Recovery Point Objective the amount of data that can be lost within a period.
 
@@ -25,6 +25,7 @@ Backups in short.
 
 ## Regular testing 
 * Yearly
+* Quarterly  
 * Often overlooked or with low priority
 
 ## Monitoring 

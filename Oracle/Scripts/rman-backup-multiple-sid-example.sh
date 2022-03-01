@@ -1,113 +1,97 @@
 #!/bin/bash
 ######################################################################################
-#Cariables
-export NLS_DATE_FORMAT="dd-mm-yyyy hh:mm:ss"
-rmanzabbix=/tmp/ORAbackupstatus
-SID="EE LV LT"
+#Prep
+#CONFIGURE RETENTION POLICY TO REDUNDANCY 2;
+#CONFIGURE CHANNEL DEVICE TYPE DISK MAXPIECESIZE 5 G;
+#CONFIGURE CONTROLFILE AUTOBACKUP OFF;
+#Variables
+SID="E1 L1 L2"
+export NLS_DATE_FORMAT='Mon DD YYYY HH24:MI:SS'
 
-#Colors to script
-ok=$(printf "\e[1;31;32m%-10s\e[00m" "[OK]")
-fail=$(printf "\e[1;31;31m%-10s\e[00m" "[FAIL]")
 
+. /home/oracle/.bash_profile
+# Check is process is already running.
+# If lock file already exists exit.
+LOCK_FILE=/tmp/orabackup.lock
+if [ -e $LOCK_FILE ]
+then
+  echo "backup already running"
+  exit 0;
+fi
+# Create a lock file containing the current
+# process id to prevent other tests from running.
+echo $$ > $LOCK_FILE
 
-#Variables for 2nd backup
-ctfile=/orabackup/flash_recovery_area/$dbname/autobackup/$date/
-backupfile=/orabackup/flash_recovery_area/$dbname/backupset/$date/
-destctfolder=/2ndbackup/LIVE/orabackup/flash_recovery_area/$dbname/autobackup/
-destbackupfolder=/2ndbackup/LIVE/orabackup/flash_recovery_area/$dbname/backupset/
-archlog=/orabackup/flash_recovery_area/$dbname/archivelog/$date/
-destarchlog=/2ndbackup/LIVE/orabackup/flash_recovery_area/$dbname/archivelog/
+######################################################################################
 
-################################# Full or Incremental backup #################################
 case "$1" in
-  FULL | INCR)
-    type=$1
-  ;;
-  bacula)
-    if [ $(date \+\%u) = 7 ];
-      then type="FULL"
-    else
-      type="INCR"
-    fi
-  ;;
-  *)
-    echo "usage: $0 (INCR|FULL)"
-  ;;
-esac
-######################################################################################
 
-case "$type" in
-
-INCR)
-
+arch)
 for i in $SID
 do
-echo $date $time "STARTING: Incremental backup for database $i"
+echo "STARTING: Redolog switch  $i"
 export ORACLE_SID=$i
 
-rman target /' <<!
-run {
-ALLOCATE CHANNEL RMAN_BACK_CH01 TYPE DISK;
-CROSSCHECK BACKUP;
-BACKUP AS COMPRESSED BACKUPSET INCREMENTAL LEVEL 1 TAG = 'rman_L1_incr_${date}' DATBASE;
+
+rman target=/ << EOF
 sql 'ALTER SYSTEM ARCHIVE LOG CURRENT';
-BACKUP AS COMPRESSED BACKUPSET ARCHIVELOG ALL FORMAT 'rman_arch_%d_%u_%s_%T' DELETE INPUT;
-BACKUP AS COMPRESSED BACKUPSET CURRENT CONTROLFILE FORMAT 'rman_ctrl_%d_%u_%s_%T';
-BACKUP AS COMPRESSED BACKUPSET SPFILE FORMAT 'rman_spfile_%d_%u_%s_%T';
-CROSSCHECK BACKUP;
-DELETE NOPROMPT OBSOLETE;
-DELETE NOPROMPT EXPIRED BACKUP;
-RELEASE CHANNEL RMAN_BACK_CH01;
-}
-!
-echo "FINISHED: INCREMENTAL backup for database $i"
+BACKUP AS COMPRESSED BACKUPSET ARCHIVELOG ALL TAG = 'ARCH' DELETE INPUT;
+EXIT;
+EOF
 done
 ;;
 
-######################################################################################
-
-FULL)
-
-for i in $SID
-do
-echo $date $time "STARTING: Full backup for database $i"
-export ORACLE_SID=$i
-
-rman target /' <<!
-run {
-ALLOCATE CHANNEL RMAN_BACK_CH01 TYPE DISK;
-CROSSCHECK BACKUP;
-BACKUP AS COMPRESSED BACKUPSET INCREMENTAL LEVEL 0 TAG = 'rman_L0_full_${date}' DATBASE;
-sql 'ALTER SYSTEM ARCHIVE LOG CURRENT';
-BACKUP AS COMPRESSED BACKUPSET ARCHIVELOG ALL FORMAT 'rman_arch_%d_%u_%s_%T' DELETE INPUT;
-BACKUP AS COMPRESSED BACKUPSET CURRENT CONTROLFILE FORMAT 'rman_ctrl_%d_%u_%s_%T';
-BACKUP AS COMPRESSED BACKUPSET current SPFILE FORMAT 'rman_spfile_%d_%u_%s_%T';
-CROSSCHECK BACKUP;
-DELETE NOPROMPT OBSOLETE;
-DELETE NOPROMPT EXPIRED BACKUP;
-RELEASE CHANNEL RMAN_BACK_CH01;
-}
-!
-echo "FINISHED: Full backup for database $i"
-done
-;;
-
-################## Copy backups to another disk  ################
-# Note. This quite old example. One could do this with rsync or smth else
-
-#    if
-#        cp -ra $ctfile $destctfolder && cp -ra $backupfile $destbackupfolder && chmod -R 755 /2ndbackup/LIVE/orabackup/flash_recovery_area/$ORACLE_SID
-#    then
-#        echo $date $time "arhiveerimine:" $ok
-#    else
-#        echo $date $time "arhiveerimine:" $fail
-#    fi
-#;;
 
 ############################################################################
+
+full)
+for i in $SID
+do
+echo "STARTING: Full backup for database $i"
+export ORACLE_SID=$i
+
+rman target=/ << EOF
+CROSSCHECK BACKUP;
+CONFIGURE RETENTION POLICY TO REDUNDANCY 2;
+BACKUP INCREMENTAL LEVEL 0 TAG = 'rman_L0_full' DATABASE;
+sql 'ALTER SYSTEM ARCHIVE LOG CURRENT';
+BACKUP AS COMPRESSED BACKUPSET ARCHIVELOG ALL DELETE INPUT;
+BACKUP AS COMPRESSED BACKUPSET SPFILE;
+BACKUP AS COMPRESSED BACKUPSET CURRENT CONTROLFILE;
+CROSSCHECK BACKUP;
+DELETE NOPROMPT OBSOLETE;
+DELETE NOPROMPT EXPIRED BACKUP;
+EXIT;
+EOF
+done
+;;
+
+
+############################################################################
+incr)
+for i in $SID
+do
+echo "STARTING: Incremental backup for database $i"
+export ORACLE_SID=$i
+
+rman target=/ << EOF
+CROSSCHECK BACKUP;
+CONFIGURE RETENTION POLICY TO REDUNDANCY 2;
+BACKUP AS COMPRESSED BACKUPSET INCREMENTAL LEVEL 1 TAG = 'rman_L1_incr' DATABASE;
+sql 'ALTER SYSTEM ARCHIVE LOG CURRENT';
+BACKUP AS COMPRESSED BACKUPSET ARCHIVELOG ALL DELETE INPUT;
+BACKUP AS COMPRESSED BACKUPSET SPFILE;
+BACKUP AS COMPRESSED BACKUPSET CURRENT CONTROLFILE;
+CROSSCHECK BACKUP;
+DELETE NOPROMPT OBSOLETE;
+EXIT;
+EOF
+done
+;;
 ############################################################################
 *)
-     echo "usage: $0 (INCR|FULL)"
+     echo "usage: $0 (arch|full|incr)"
 ;;
 ############################################################################
 esac
+rm -f $LOCK_FILE

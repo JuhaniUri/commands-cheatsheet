@@ -1,8 +1,8 @@
 ## Data that needs to be encrypted:
 
-Credit Card Payment Data  (PCI)
-Personal Information
-Intellectual Property
+* Credit Card Payment Data  (PCI)
+* Personal Information
+* Intellectual Property
 
 
 ## Compliance Requirement:

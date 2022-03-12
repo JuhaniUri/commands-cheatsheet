@@ -6,3 +6,8 @@ for car in v_cars:
         print(car.upper())
     else:
         print(car.title())
+
+
+# Conditional tests
+>>> car = 'bmw'
+>>> car == 'bmw'

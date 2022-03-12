@@ -10,6 +10,8 @@
     - [Generate create table statement](#generate-create-table-statement)
     - [Create table like](#create-table-like)
 - [User/Role privileges](#userrole-privileges)
+- [psql](#psql)
+    - [Watch](#watch)
 
 # Generic stuff
 
@@ -84,4 +86,27 @@ SELECT grantee AS user, CONCAT(table_schema, '.', table_name) AS table,
     END AS grants
 FROM information_schema.role_table_grants
 GROUP BY table_name, table_schema, grantee;
+```
+
+# psql
+
+### Watch 
+```
+postgres=# SELECT * FROM pg_replication_slots;
+ slot_name | plugin | slot_type | datoid | database | temporary | active | active_pid | xmin | catalog_xmin | restart_lsn | confirmed_flush_lsn
+-----------+--------+-----------+--------+----------+-----------+--------+------------+------+--------------+-------------+---------------------
+(0 rows)
+
+postgres=# \watch 1
+                                                   Thu 10 Mar 2022 12:03:25 PM UTC (every 1s)
+
+ slot_name | plugin | slot_type | datoid | database | temporary | active | active_pid | xmin | catalog_xmin | restart_lsn | confirmed_flush_lsn
+-----------+--------+-----------+--------+----------+-----------+--------+------------+------+--------------+-------------+---------------------
+(0 rows)
+
+                                                   Thu 10 Mar 2022 12:03:26 PM UTC (every 1s)
+
+ slot_name | plugin | slot_type | datoid | database | temporary | active | active_pid | xmin | catalog_xmin | restart_lsn | confirmed_flush_lsn
+-----------+--------+-----------+--------+----------+-----------+--------+------------+------+--------------+-------------+---------------------
+(0 rows)
 ```

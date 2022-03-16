@@ -9,5 +9,5 @@ for car in v_cars:
 
 
 # Conditional tests
->>> car = 'bmw'
->>> car == 'bmw'
+car = 'bmw'
+car == 'bmw'

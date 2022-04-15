@@ -140,7 +140,7 @@ CREATE TABLE schema_demo.demo_random1 AS SELECT s, md5(random()::text) FROM gene
 ### pgbench usage with existing database
 --- This will create 4 tables under public schema
 ```
-pgbench -h 10.180.1.14 -p 5432 -U a9sfba065bf5bc3839486ac9f81c1e9b0fb5db0467c -i -s 150 randomdemo
+pgbench -h 10.180.1.14 -p 5432 -U TESTUSER -i -s 150 randomdemo
 Password:
 dropping old tables...
 creating tables...

@@ -16,6 +16,8 @@
     - [Create database](#create-database)
     - [Create Schema](#create-schema)
     - [Create some random data](#create-some-random-data)
+- [Performance testing](#performance-testing)
+    - [pgbench usage with existing database](#pgbench-usage-with-existing-database)
 
 # Generic stuff
 
@@ -131,4 +133,29 @@ CREATE SCHEMA schema_demo;
 --this will generate ca 130MB of data, will run 4-8sec.
 ```
 CREATE TABLE schema_demo.demo_random1 AS SELECT s, md5(random()::text) FROM generate_Series(1,2000000) s;  
+```
+
+# Performance testing 
+
+### pgbench usage with existing database
+--- This will create 4 tables under public schema
+```
+pgbench -h 10.180.1.14 -p 5432 -U a9sfba065bf5bc3839486ac9f81c1e9b0fb5db0467c -i -s 150 randomdemo
+Password:
+dropping old tables...
+creating tables...
+generating data...
+100000 of 15000000 tuples (0%) done (elapsed 0.02 s, remaining 3.03 s)
+200000 of 15000000 tuples (1%) done (elapsed 0.04 s, remaining 3.01 s)
+300000 of 15000000 tuples (2%) done (elapsed 0.06 s, remaining 2.98 s)
+400000 of 15000000 tuples (2%) done (elapsed 0.08 s, remaining 3.00 s)
+500000 of 15000000 tuples (3%) done (elapsed 0.19 s, remaining 5.58 s)
+...
+14700000 of 15000000 tuples (98%) done (elapsed 18.21 s, remaining 0.37 s)
+14800000 of 15000000 tuples (98%) done (elapsed 18.29 s, remaining 0.25 s)
+14900000 of 15000000 tuples (99%) done (elapsed 18.54 s, remaining 0.12 s)
+15000000 of 15000000 tuples (100%) done (elapsed 18.64 s, remaining 0.00 s)
+vacuuming...
+creating primary keys...
+done.
 ```

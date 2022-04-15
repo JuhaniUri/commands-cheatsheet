@@ -130,7 +130,7 @@ CREATE SCHEMA schema_demo;
 ```
 
 ### Create some random data
---this will generate ca 130MB of data, will run 4-8sec.
+It will generate ca 130MB of data, will run 4-8sec.
 ```
 CREATE TABLE schema_demo.demo_random1 AS SELECT s, md5(random()::text) FROM generate_Series(1,2000000) s;  
 ```
@@ -138,7 +138,7 @@ CREATE TABLE schema_demo.demo_random1 AS SELECT s, md5(random()::text) FROM gene
 # Performance testing 
 
 ### pgbench usage with existing database
---- This will create 4 tables under public schema
+It will create 4 tables under public schema
 ```
 pgbench -h 10.180.1.14 -p 5432 -U TESTUSER -i -s 150 randomdemo
 Password:

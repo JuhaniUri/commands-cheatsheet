@@ -11,7 +11,7 @@
     - [Generate create table statement](#generate-create-table-statement)
     - [Create table like](#create-table-like)
 - [User/Role privileges](#userrole-privileges)
-- [psql](#psql)
+- [psql tips and tricks](#psql-tips-and-tricks)
     - [Watch](#watch)
 - [Create database with random data](#create-database-with-random-data)
     - [Create database](#create-database)
@@ -106,7 +106,7 @@ FROM information_schema.role_table_grants
 GROUP BY table_name, table_schema, grantee;
 ```
 
-# psql
+# psql tips and tricks
 
 ### Watch 
 ```

@@ -6,6 +6,7 @@
 - [Export/Import](#exportimport)
     - [Export to CSV](#export-to-csv)
     - [Import from CSV](#import-from-csv)
+    - [pg_dump](#pg_dump)
 - [Create tables from](#create-tables-from)
     - [Generate create table statement](#generate-create-table-statement)
     - [Create table like](#create-table-like)
@@ -58,6 +59,19 @@ SELECT pg_size_pretty(pg_relation_size('table_name'));
 ```
 \COPY schema1.t_random13 FROM /tmp/schema1.t_random12 DELIMITER ',' CSV HEADER;
 ```
+
+### pg_dump
+Compressed
+```
+pg_dump -h 10.1.1.14 -U username -W -F t randomdemo > /tmp/randomdemo.tar
+```
+
+In plain 
+```
+pg_dump -h 10.1.1.14 -U username -W randomdemo > /tmp/randomdemo.dump
+```
+
+
 
 # Create tables from 
 

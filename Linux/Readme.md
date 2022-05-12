@@ -6,6 +6,7 @@
     - [LUKS: Format the filesystem with LUKS and add extra password to slot1](#luks-format-the-filesystem-with-luks-and-add-extra-password-to-slot1)
     - [LUKS: Resize VG/LV with LUKS](#luks-resize-vglv-with-luks)
     - [Create part/VG/LV/FS](#create-partvglvfs)
+    - [Add disk to VG and grwo](#add-disk-to-vg-and-grwo)
     - [Growpart if disk was increased](#growpart-if-disk-was-increased)
     - [Deactive/Active LV](#deactiveactive-lv)
     - [Mounting a Windows fileshare (tested with RHEL6)](#mounting-a-windows-fileshare-tested-with-rhel6)
@@ -75,6 +76,15 @@ vgcreate vg_pgsql /dev/sdb1
   or 
   lvcreate -l 100%FREE -n lv_pgsql vg_pgsql
 mkfs.xfs /dev/mapper/vg_pgsql-lv_pgsql
+```
+
+### Add disk to VG and grwo
+```
+parted /dev/xvdr mklabel msdos mkpart primary 1M 100% set 1 lvm on
+pvcreate /dev/xvdr1
+vgextend vg_new_docs /dev/xvdr1
+lvextend -l +100%FREE /dev/vg_new_docs/lv_doku
+xfs_growfs /dev/vg_new_docs/lv_doku
 ```
 
 ### Growpart if disk was increased 

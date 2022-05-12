@@ -19,6 +19,8 @@
   - [RMAN Clone in same server (Online)](#rman-clone-in-same-server-online)
   - [Clone with CP](#clone-with-cp)
   - [Export/import](#exportimport)
+    - [Export](#export)
+    - [Import](#import)
   - [Export and import data with a help of bash scripts](#export-and-import-data-with-a-help-of-bash-scripts)
     - [Prepartion](#prepartion)
     - [In live eg. source](#in-live-eg-source)
@@ -329,11 +331,26 @@ ALTER USER SQLTEST ACCOUNT LOCK;
 
 ## Export/import
 
+
+### Export
+```
+expdp userid=\'/ as sysdba\' SCHEMAS=USER1,USER2 DIRECTORY=DUMPDIR DUMPFILE=USER_2021_05%U FILESIZE=5G
+```
+
+### Import 
+```
+impdp system SCHEMAS=USER1,USER2 DIRECTORY=DUMPDIR DUMPFILE=USER_2022_05%U
+```
+
+
+
 ## Export and import data with a help of bash scripts 
 This useful if you need to refresh some dev/test env
 
+
 ### Prepartion 
 - Export from live database 
+ 
 - Copy dumps to test/dev server 
 
 ### In live eg. source

@@ -4,6 +4,9 @@
     - [Create role](#create-role)
     - [Create daily job](#create-daily-job)
     - [Grant access to role](#grant-access-to-role)
+  - [Create a readonly role](#create-a-readonly-role)
+    - [Create role](#create-role-1)
+    - [Grant select and debug](#grant-select-and-debug)
   - [Oracle profile and change the password lifetime limit](#oracle-profile-and-change-the-password-lifetime-limit)
     - [1. List users](#1-list-users)
     - [2. For showing the specific profiles property](#2-for-showing-the-specific-profiles-property)
@@ -54,6 +57,25 @@ END;
 ### Grant access to role
 ```
 GRANT DEVELOPER_READ_ONLY TO USER;
+```
+
+## Create a readonly role
+
+### Create role
+```
+CREATE ROLE READ_ONLY;
+```
+### Grant select and debug
+```
+BEGIN
+  FOR t IN (SELECT object_name, object_type, owner FROM all_objects WHERE OWNER in ('SCHEMA1', 'SCHEMA2', 'SCHEMA3')  AND object_type IN ('TABLE','VIEW','PROCEDURE','FUNCTION','PACKAGE', 'PACKAGE BODY')) LOOP
+    IF t.object_type IN ('TABLE', 'VIEW') THEN
+      EXECUTE IMMEDIATE 'GRANT SELECT ON '||t.owner||'.'||t.object_name||' TO READ_ONLY';
+    ELSIF t.object_type IN ('PROCEDURE','FUNCTION','PACKAGE','PACKAGE BODY') THEN
+      EXECUTE IMMEDIATE 'GRANT DEBUG ON '||t.owner||'.'||t.object_name||' TO READ_ONLY';
+    END IF;
+  END LOOP;
+END;
 ```
 
 

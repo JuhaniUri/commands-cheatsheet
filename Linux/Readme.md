@@ -35,6 +35,8 @@
     - [restorecon: restore file(s) default SELinux security contexts.](#restorecon-restore-files-default-selinux-security-contexts)
   - [YAML](#yaml)
     - [YAML validator -> yamllint](#yaml-validator---yamllint)
+  - [Find](#find)
+    - [Find with file name](#find-with-file-name)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -239,3 +241,10 @@ restorecon /etc/shadow
 ## YAML
 
 ### YAML validator -> yamllint
+
+
+## Find
+### Find with file name
+```
+find / -name logstash.yml
+```

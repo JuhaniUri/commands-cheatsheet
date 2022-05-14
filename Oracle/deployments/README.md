@@ -34,6 +34,9 @@ Remeber to cleanup once you are done.
 - [ ] **What user should be used for deploying? Are schemas prefix in place?** 
 
 
+
+
+
 ### Check that you are in right db
 ```
 SELECT sys_context('userenv', 'instance_name') FROM dual;

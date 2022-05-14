@@ -3,7 +3,7 @@
 If possible use some version control software your database like Liquibase
 https://www.liquibase.org/
 
-In case that not possible, try to follow these steps:
+In case that is not possible, try to follow these steps:
 
 ### Pre-checks
 

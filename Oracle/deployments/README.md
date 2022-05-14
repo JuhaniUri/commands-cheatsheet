@@ -1,4 +1,4 @@
-# Deployment best practice
+# Deployments best practices
 
 If possible use some version control software your database like Liquibase
 https://www.liquibase.org/
@@ -7,15 +7,15 @@ In case that not possible, try to follow these steps:
 
 ### Pre-checks
 
-- Check the space on tablespaces and storage (in case large updates)
+- [ ] Check the space on tablespaces and storage (in case large updates)
 
-In case of lot of DML use this in header, this will stop script in case of statment error.
+- [ ] In case of lot of DML use this in header, this will stop script in case of statment error.
 https://docs.oracle.com/en/database/oracle/oracle-database/19/sqpug/WHENEVER-SQLERROR.html#GUID-66C1C12C-5E95-4440-A37B-7CCE7E33491C
 ```
 WHENEVER SQLERROR EXIT SQL.SQLCODE
 ```
 
-- Make backups for faster recovery:
+- [ ] Make backups for faster recovery:
 
     a) go with expdp 
     ```
@@ -31,7 +31,7 @@ WHENEVER SQLERROR EXIT SQL.SQLCODE
 Note check the table size beforehand!
 Remeber to cleanup once you are done.
 
-- What user should be used for deploying? Are schemas prefix in place?
+- [ ] What user should be used for deploying? Are schemas prefix in place?
 
 
 ### Check that you are in right db

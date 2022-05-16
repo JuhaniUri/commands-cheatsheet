@@ -19,6 +19,8 @@
     - [Create some random data](#create-some-random-data)
 - [Performance testing](#performance-testing)
     - [pgbench usage with existing database](#pgbench-usage-with-existing-database)
+- [pg_extension](#pg_extension)
+    - [dblink](#dblink)
 
 # Generic stuff
 
@@ -172,4 +174,38 @@ generating data...
 vacuuming...
 creating primary keys...
 done.
+```
+
+# pg_extension
+
+### dblink
+```
+$ psql postgres
+psql (11.10)
+Type "help" for help.
+ 
+postgres=# SELECT * FROM pg_extension;
+ extname | extowner | extnamespace | extrelocatable | extversion | extconfig | extcondition
+---------+----------+--------------+----------------+------------+-----------+--------------
+ plpgsql |       10 |           11 | f              | 1.0        |           |
+(1 row)
+ 
+postgres=# CREATE EXTENSION dblink;
+CREATE EXTENSION
+postgres=# SELECT * FROM pg_extension;
+ extname | extowner | extnamespace | extrelocatable | extversion | extconfig | extcondition
+---------+----------+--------------+----------------+------------+-----------+--------------
+ plpgsql |       10 |           11 | f              | 1.0        |           |
+ dblink  |       10 |         2200 | t              | 1.2        |           |
+(2 rows)  
+ 
+postgres=# select * from dblink('dbname=test-db-1 port=5432 host=10.0.14.2
+user=user password=***', 'select username from schema1.demousers') AS t1(t text);
+ 
+     t
+------------
+ uriiijuh
+ uriiijuh2
+ unknown
+(3 rows)
 ```

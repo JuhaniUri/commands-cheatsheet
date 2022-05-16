@@ -23,11 +23,10 @@ Backups in short.
 ## Data at rest
 * Encryption
 
-## Regular testing 
+## Regular testing (Often overlooked or with low priority)
+
 * Yearly
 * Quarterly  
-* Often overlooked or with low priority
 
-## Monitoring 
-* Very critical part of backups
-* Ofter not implemented 
+## Monitoring (Ofter not implemented)
+* Critical part of backups

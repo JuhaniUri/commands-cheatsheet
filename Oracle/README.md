@@ -29,9 +29,20 @@ ALTER TABLESPACE DAT1 ADD datafile '/u02/TEST/DAT1_06.dbf' size 1G autoextend on
 ALTER DATABASE datafile '/u02/TEST/DAT1_01.dbf' AUTOEXTEND ON next 512m  maxsize 10G;
 ```
 
+### Check if autoextend is enabled
+```
+select file_name,autoextensible  from  dba_data_files where tablespace_name='ORCLTBS';;
+```
+
 ### Enable autoextend with maxsize
 ```
 select 'alter database datafile ' || '''' || file_name || '''' || ' autoextend on maxsize 12G;' from dba_data_files where tablespace_name not like 'UNDO%';
+```
+
+or
+
+```
+select 'alter database datafile ' || '''' || file_name || '''' || ' autoextend on next 512m maxsize 20G;' from dba_data_files where tablespace_name='ORCLTBS';
 ```
 
 ## Indexes

@@ -36,7 +36,7 @@ Modifications script:
 
 ```
 cat changes.sh
-useradd -m -p "test123" teco ; usermod -aG sudo test
+useradd -m -p "test123" commonuser ; usermod -aG sudo commonuser
 sed -i "s/.*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
 ssh-keygen -A
 apt-get remove cloud-init -y

@@ -2,8 +2,8 @@
 
 ## Trace
 ```
-EXEC DBMS_MONITOR.client_id_trace_enable(client_id=>'EMKIS', waits=>TRUE, binds=>TRUE);
-EXEC DBMS_MONITOR.client_id_trace_disable(client_id=>'EMKIS');
+EXEC DBMS_MONITOR.client_id_trace_enable(client_id=>'TEST', waits=>TRUE, binds=>TRUE);
+EXEC DBMS_MONITOR.client_id_trace_disable(client_id=>'TEST');
 ```
 
 
@@ -32,12 +32,10 @@ SQL> select ADDRESS, HASH_VALUE from V$SQLAREA where SQL_ID like '7yc%';
 
 no rows selected
 
+```
 Note to Oracle 10g R2 Customers
 The enhanced DBMS_SHARED_POOL package with the PURGE procedure is included in the 10.2.0.4 patchset release.
 10.2.0.2 and 10.2.0.3 customers can download and install RDBMS patch 5614566 to get access to these enhancements in DBMS_SHARED_POOL package.
-
-```
-
 
 ## Logs
 

@@ -8,6 +8,7 @@
     - [Count with query](#count-with-query)
     - [Data migration with reindex and timestamp plus field query.](#data-migration-with-reindex-and-timestamp-plus-field-query)
     - [Details on the shards status](#details-on-the-shards-status)
+    - [Exlude some nodes by IP](#exlude-some-nodes-by-ip)
 
 ## General
 
@@ -107,4 +108,15 @@ curl -X POST -k -u $NEW_ELASTIC_USERNAME:$NEW_ELASTIC_PASSWORD "https://$NEW_ELA
 
 ```
 GET _cat/shards?v&h=index,shard,prirep,state,store,ip,unassigned.reason
+```
+
+
+### Exlude some nodes by IP
+```
+curl -X PUT -k -u $ELASTIC_USERNAME:$ELASTIC_PASSWORD "https://localhost:9200/_cluster/settings?pretty" -H 'Content-Type: application/json' -d'
+{
+  "transient": {
+    "cluster.routing.allocation.exclude._ip": "10.175.138.*"
+  }
+}
 ```

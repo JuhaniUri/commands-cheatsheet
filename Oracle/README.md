@@ -28,3 +28,23 @@ ALTER TABLESPACE DAT1 ADD datafile '/u02/TEST/DAT1_06.dbf' size 1G autoextend on
 ```
 ALTER DATABASE datafile '/u02/TEST/DAT1_01.dbf' AUTOEXTEND ON next 512m  maxsize 10G;
 ```
+
+### Enable autoextend with maxsize
+```
+select 'alter database datafile ' || '''' || file_name || '''' || ' autoextend on maxsize 12G;' from dba_data_files where tablespace_name not like 'UNDO%';
+```
+
+## Indexes
+### View unusable
+```
+select owner, index_name from dba_indexes where status='UNUSABLE';
+```
+
+### Rebuild unusable indexes
+```
+select 'alter index '||owner||'.'||index_name||' rebuild ONLINE;' from dba_indexes where status='UNUSABLE';
+```
+
+## Logs
+
+### 

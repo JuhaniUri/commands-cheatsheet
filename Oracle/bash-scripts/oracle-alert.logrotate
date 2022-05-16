@@ -1,0 +1,12 @@
+# Logrotate file for Oracle Alert
+# /etc/logrotate.d/oracle-alert
+
+/u01/oracle/admin/TEST/bdump/alert_TEST.log {
+    missingok
+    weekly
+    rotate 12
+    compress
+    delaycompress	
+    create 640 oracle oinstall
+}
+

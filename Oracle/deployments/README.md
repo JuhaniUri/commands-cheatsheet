@@ -53,7 +53,7 @@ WHERE status = 'INVALID'
 ORDER BY owner, object_type, object_name;
 ```
 
-### Do changes 
+### Do your changes 
 
 
 

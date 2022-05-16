@@ -14,3 +14,98 @@ sed -i "s/ExecStart=.*/ExecStart=\/usr\/bin\/python -W \"ignore:Unverified HTTPS
 systemctl daemon-reload
 systemctl restart os-collect-config
 ```
+
+### Image modification with qemu
+
+Requirements: 
+- user with sudo rights
+- complex password
+- Allow password logins
+
+Download ubuntu 18.04 cloud image and resize disk to 20G
+
+```
+wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
+ 
+qemu-img info bionic-server-cloudimg-amd64.img
+qemu-img resize bionic-server-cloudimg-amd64.img 20G
+```
+
+
+Modifications script:
+
+```
+cat changes.sh
+useradd -m -p "test123" teco ; usermod -aG sudo test
+sed -i "s/.*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+ssh-keygen -A
+apt-get remove cloud-init -y
+```
+
+Do changes:
+
+```
+sudo virt-customize -a bionic-server-cloudimg-amd64.img --run changes.sh
+```
+
+Review changes by coping image to /tmp and mounting it:
+```
+cp bionic-server-cloudimg-amd64.img /tmp/
+sudo guestmount -a /tmp/bionic-server-cloudimg-amd64.img -i --rw /mnt
+```
+ Verify that user is created: 
+```
+sudo cat /mnt/etc/passwd
+```
+If everything looks OK, then umount mnt.
+Convert the img to vmdk:
+```
+qemu-img convert -f qcow2 bionic-server-cloudimg-amd64.img -O vmdk bionic-server-cloudimg-amd64.vmdk
+```
+
+
+
+### Image modification with virt-customize
+
+```
+virt-customize -a xenial-server-cloudimg-amd64-disk1.img --root-password password:passw0rd
+virt-customize -a xenial-server-cloudimg-amd64-disk1.img --uninstall cloud-init
+```
+
+### Image modification with virt-customize and questmount
+
+
+Mount image to /mnt 
+```
+guestmount -a /tmp/CentOS-6-x86_64-GenericCloud-1809.qcow2 -i --rw /mnt
+```
+
+Change the cloud-init username to cloud-user:
+```
+sed -i 's/name: centos/name: cloud-user/g' /mnt/etc/cloud/cloud.cfg
+```
+
+Unmount and convert to vmdk
+```
+guestunmount /mnt/
+qemu-img convert -p -f qcow2 -O vmdk -o adapter_type=lsilogic,subformat=streamOptimized,compat6 /tmp/CentOS-6-x86_64-GenericCloud-1809.qcow2 /tmp/mvp/CentOS-6-x86_64-GenericCloud-1809.vmdk
+```
+
+### Basic image setup and layout  
+
+- Set the proper Timezone  
+- Install basic packages:  zip unzip wget open-vm-tools 
+- Make release number /etc/my-image-release
+- Default Filesystem layout as bellow. 
+NAME	SIZE	TYPE	MOUNTPOINT
+sda	20G	disk	
+├─sda1	512M	part	
+└─sda2	18.1G	part	
+├─vg_root-lv_root	3G	lvm	/
+├─vg_root-lv_tmp	128M	lvm	/tmp
+├─vg_root-lv_vartmp	512M	lvm	/var/tmp
+├─vg_root-lv_opt	1G	lvm	/opt
+├─vg_root-lv_var	4G	lvm	/var
+├─vg_root-lv_varlog	1G	lvm	/var/log
+├─vg_root-lv_varlogaudit	128M	lvm	/var/log/audit
+├─vg_root-lv_home	512M	lvm	/home

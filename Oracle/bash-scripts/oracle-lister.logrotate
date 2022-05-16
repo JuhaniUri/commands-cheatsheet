@@ -1,0 +1,17 @@
+# Logrotate file for Oracle Listener
+# /etc/logrotate.d/oracle-listener
+
+/opt/oracle/product/10.2.0/TEST/network/log/listener.log {
+    missingok
+    daily
+    rotate 31
+    compress
+    delaycompress
+    create 644 oracle oinstall
+    prerotate
+        su - oracle -c "lsnrctl set Log_status off"
+    endscript
+    postrotate
+        su - oracle -c "lsnrctl set Log_status on"
+    endscript
+}

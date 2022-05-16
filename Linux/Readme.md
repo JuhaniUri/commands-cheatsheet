@@ -37,6 +37,8 @@
     - [YAML validator -> yamllint](#yaml-validator---yamllint)
   - [Find](#find)
     - [Find with file name](#find-with-file-name)
+  - [Network](#network)
+    - [Route (RHEL6)](#route-rhel6)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -247,4 +249,12 @@ restorecon /etc/shadow
 ### Find with file name
 ```
 find / -name logstash.yml
+```
+
+## Network
+### Route (RHEL6)
+```
+cat /etc/sysconfig/network-scripts/route-eth0
+10.00.4.0/24 via 10.00.6.33 dev eth0
+10.00.2.0/24 via 10.00.6.33 dev eth0
 ```

@@ -39,6 +39,15 @@ select file_name,autoextensible  from  dba_data_files where tablespace_name='ORC
 select 'alter database datafile ' || '''' || file_name || '''' || ' autoextend on maxsize 12G;' from dba_data_files where tablespace_name not like 'UNDO%';
 ```
 
+### Swap undo tablespace
+```
+CREATE UNDO TABLESPACE undotbs2 DATAFILE '/u02/prelive/PREEE/undotbs02.dbf' SIZE 1G AUTOEXTEND ON NEXT 100M maxsize 3G;
+ALTER SYSTEM SET UNDO_TABLESPACE=undotbs2;
+DROP TABLESPACE undotbs1 INCLUDING CONTENTS AND DATAFILES;
+```
+
+
+
 or
 
 ```
@@ -59,3 +68,6 @@ select 'alter index '||owner||'.'||index_name||' rebuild ONLINE;' from dba_index
 ## Logs
 
 ### 
+
+
+

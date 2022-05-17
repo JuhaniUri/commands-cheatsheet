@@ -39,6 +39,8 @@
     - [Find with file name](#find-with-file-name)
   - [Network](#network)
     - [Route (RHEL6)](#route-rhel6)
+  - [Cron and stuff](#cron-and-stuff)
+    - [Flock usage](#flock-usage)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -257,4 +259,12 @@ find / -name logstash.yml
 cat /etc/sysconfig/network-scripts/route-eth0
 10.00.4.0/24 via 10.00.6.33 dev eth0
 10.00.2.0/24 via 10.00.6.33 dev eth0
+```
+
+
+## Cron and stuff
+### Flock usage
+```
+53 3 * * * root  /usr/bin/flock -n /var/lock/rman.lock /bin/bash /root/rman-ln.sh full
+*/10 0,1,2,3,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 * * * root  /usr/bin/flock -n /var/lock/rman.lock /bin/bash /root/rman-ln.sh arch
 ```

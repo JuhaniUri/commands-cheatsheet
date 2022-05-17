@@ -15,6 +15,8 @@ systemctl daemon-reload
 systemctl restart os-collect-config
 ```
 
+
+
 ### Image modification with qemu
 
 Requirements: 
@@ -109,3 +111,16 @@ sda	20G	disk
 ├─vg_root-lv_varlog	1G	lvm	/var/log
 ├─vg_root-lv_varlogaudit	128M	lvm	/var/log/audit
 ├─vg_root-lv_home	512M	lvm	/home
+
+
+### Socks proxy usage
+
+- Open an SSH connection to a remote server
+```
+ssh -q -D 1999 username@11.11.11.29
+```
+
+### Send email from command line
+```
+echo "Hello there" | mail -s "testing" -r sender@company.com someone@gmail.com
+```

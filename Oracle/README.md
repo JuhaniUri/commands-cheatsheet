@@ -38,6 +38,10 @@ select file_name,autoextensible  from  dba_data_files where tablespace_name='ORC
 ```
 select 'alter database datafile ' || '''' || file_name || '''' || ' autoextend on maxsize 12G;' from dba_data_files where tablespace_name not like 'UNDO%';
 ```
+or
+```
+select 'alter database datafile ' || '''' || file_name || '''' || ' autoextend on next 512m maxsize 20G;' from dba_data_files where tablespace_name='ORCLTBS';
+```
 
 ### Swap undo tablespace
 ```
@@ -46,13 +50,16 @@ ALTER SYSTEM SET UNDO_TABLESPACE=undotbs2;
 DROP TABLESPACE undotbs1 INCLUDING CONTENTS AND DATAFILES;
 ```
 
-
-
-or
-
+### temp tablespace switch
 ```
-select 'alter database datafile ' || '''' || file_name || '''' || ' autoextend on next 512m maxsize 20G;' from dba_data_files where tablespace_name='ORCLTBS';
+select PROPERTY_NAME,PROPERTY_VALUE from database_properties where property_name like '%TEMP%';
+
+CREATE TEMPORARY TABLESPACE TEMP2 TEMPFILE '/u02/testbaas/temp201.dbf' SIZE 100M reuse autoextend on maxsize 2G;
+ALTER DATABASE DEFAULT TEMPORARY TABLESPACE temp2;
+DROP TABLESPACE temp1 INCLUDING CONTENTS AND DATAFILES;
 ```
+
+
 
 ## Indexes
 ### View unusable

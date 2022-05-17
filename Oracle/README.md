@@ -78,3 +78,100 @@ select 'alter index '||owner||'.'||index_name||' rebuild ONLINE;' from dba_index
 
 
 
+### Move table/lob to new tablespace
+
+```
+CREATE TABLESPACE XML_IO2
+datafile '/u02/TEST/XML_IO2_01.dbf'
+size 3000m;
+
+
+select owner, table_name,tablespace_name
+   from dba_tables
+  where tablespace_name='XML_IO';
+
+ALTER TABLE SHR.XML_IO MOVE TABLESPACE XML_IO2;
+ALTER TABLE YHR.XML_IO MOVE TABLESPACE XML_IO2;
+
+
+
+select segment_name , segment_type, tablespace_name, owner from dba_segments
+where tablespace_name = 'XML_IO';
+
+
+SELECT OWNER,COLUMN_NAME,SEGMENT_NAME,TABLESPACE_NAME FROM DBA_LOBS WHERE TABLE_NAME='XML_IO';
+SELECT OWNER,INDEX_NAME,INDEX_TYPE,TABLESPACE_NAME FROM DBA_INDEXES WHERE TABLE_NAME='XML_IO';
+
+
+ALTER TABLE YHR.XML_IO MOVE LOB(XML) STORE AS (TABLESPACE XML_IO2);
+ALTER TABLE SHR.XML_IO MOVE LOB(XML) STORE AS (TABLESPACE XML_IO2);
+
+
+DROP TABLESPACE XML_IO INCLUDING CONTENTS AND DATAFILES;
+```
+
+### Move indexes to tablespace
+```
+select INDEX_NAME, tablespace_name
+from all_indexes
+where owner = 'TEST'
+
+
+select 'ALTER INDEX ' || OWNER || '.' || INDEX_NAME || ' REBUILD TABLESPACE ' || TABLESPACE_NAME || ';' from DBA_INDEXES WHERE OWNER='TEST';
+select 'ALTER TABLE ' || OWNER || '.' || TABLE_NAME || ' MOVE TABLESPACE ' || TABLESPACE_NAME || ';' from DBA_TABLES WHERE OWNER='TEST';
+
+
+select segment_name , segment_type from dba_segments
+where tablespace_name ='TEST';
+
+```
+### Disable jobs at startup
+
+```
+STARTUP MOUNT;
+ALTER SYSTEM ENABLE RESTRICTED SESSION;
+ALTER DATABASE OPEN;
+alter system set job_queue_processes=0 scope=both;
+ALTER SYSTEM DISABLE RESTRICTED SESSION;
+```
+
+To start again
+```
+alter system set job_queue_processes=1000 scope=both;
+```
+
+
+### DBCA examples
+```
+dbca -silent -createDatabase \
+-templateName General_Purpose.dbc \
+-gdbName test \
+-sid test \
+-sysPassword **** \
+-systemPassword **** \
+-emConfiguration NONE \
+-datafileDestination /u02 \
+-recoveryAreaDestination /u03 \
+-storageType FS \
+-characterSet AL32UTF8 \
+-nationalCharacterSet AL16UTF16 \
+-registerWithDirService false \
+-listeners LISTENER_1521;
+```
+
+### using pipes in linux and oracle
+```
+export ORACLE_SID=test1 && echo "alter database tempfile '/oradata/test1/temp01.dbf' drop;"| sqlplus -S "/ as sysdba"
+echo "ALTER TABLESPACE temp ADD TEMPFILE '/oradata/test1/temp01.dbf' SIZE 100M reuse autoextend on maxsize 2000M;"| sqlplus -S "/ as sysdba"
+```
+
+
+### Startup for pdbs
+```
+CREATE OR REPLACE TRIGGER open_pdbs 
+  AFTER STARTUP ON DATABASE 
+BEGIN 
+   EXECUTE IMMEDIATE 'ALTER PLUGGABLE DATABASE ALL OPEN'; 
+END open_pdbs;
+/
+```

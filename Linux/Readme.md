@@ -39,8 +39,11 @@
     - [Find with file name](#find-with-file-name)
   - [Network](#network)
     - [Route (RHEL6)](#route-rhel6)
+    - [Poor man port forwarding](#poor-man-port-forwarding)
   - [Cron and stuff](#cron-and-stuff)
     - [Flock usage](#flock-usage)
+    - [Bring colors to shell](#bring-colors-to-shell)
+    - [FTP script](#ftp-script)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -261,10 +264,39 @@ cat /etc/sysconfig/network-scripts/route-eth0
 10.00.2.0/24 via 10.00.6.33 dev eth0
 ```
 
+### Poor man port forwarding
+```
+ncat -l –k 844 --sh-exec "ncat 192.168.12.7 84" &
+```
+
 
 ## Cron and stuff
 ### Flock usage
 ```
 53 3 * * * root  /usr/bin/flock -n /var/lock/rman.lock /bin/bash /root/rman-ln.sh full
 */10 0,1,2,3,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 * * * root  /usr/bin/flock -n /var/lock/rman.lock /bin/bash /root/rman-ln.sh arch
+```
+
+
+### Bring colors to shell
+```
+[<LIVE> user@bastion ~]$ cat /etc/profile.d/label.sh
+shortname=$(/bin/hostname | /bin/cut -c 9-14)
+export PS1='\[\e[1;31m\][<LIVE> \u@$shortname \W]\[\e[0m\]$ '
+```
+
+### FTP script
+```
+#!/bin/sh
+HOST='193.3.4.5'
+USER='user'
+PASSWD='********'
+ftp -n -v $HOST << EOT
+binary
+user $USER $PASSWD
+prompt
+cd DUMP/20161231
+mput 20161231_0*.dmp
+bye
+EOT
 ```

@@ -21,3 +21,10 @@
 
 •	Encryption of data (e.g. passwords, certificates)
     o	Use ansible-vault when you want to store sensitive information (passwords, privatekeys, certs)
+
+
+
+### Adhoc
+
+ansible all -s -m shell -a 'hostname' -i hosts --become-method=sudo
+ansible all -s -m shell -a 'yum update -y' -i hosts --become-method=sudo

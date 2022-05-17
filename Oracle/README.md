@@ -175,3 +175,20 @@ BEGIN
 END open_pdbs;
 /
 ```
+
+
+### Hourly/Daily Archive generation
+
+```
+select trunc(COMPLETION_TIME,'HH') Hour,thread# , round(sum(BLOCKS*BLOCK_SIZE)/1048576) MB,count(*) Archives from v$archived_log
+group by trunc(COMPLETION_TIME,'HH'),thread#  order by 1 ;
+```
+
+
+### Force logging
+The FORCE LOGGING option is the safest method to ensure that all the changes made in the database will be captured and available for recovery in the redo logs. 
+
+```
+ALTER DATABASE FORCE LOGGING;
+```
+Check more: https://www.orafaq.com/wiki/Nologging_and_force_logging

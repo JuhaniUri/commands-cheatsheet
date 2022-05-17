@@ -44,6 +44,8 @@
     - [Flock usage](#flock-usage)
     - [Bring colors to shell](#bring-colors-to-shell)
     - [FTP script](#ftp-script)
+    - [Split logs](#split-logs)
+    - [sync logs to nfs](#sync-logs-to-nfs)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -299,4 +301,16 @@ cd DUMP/20161231
 mput 20161231_0*.dmp
 bye
 EOT
+```
+
+
+### Split logs
+```
+split -b 141m B8465job2.log
+```
+
+
+### sync logs to nfs
+```
+ /bin/df -t nfs | /bin/grep /2ndarchlog && touch /2ndarchlog/test && time -p (rsync -rvu --progress --exclude-from=/root/rsync-excludes --delete /backup/rman/ /2ndarchlog && echo 'Sync archivelog done in:')
 ```

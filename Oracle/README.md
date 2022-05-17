@@ -192,3 +192,24 @@ The FORCE LOGGING option is the safest method to ensure that all the changes mad
 ALTER DATABASE FORCE LOGGING;
 ```
 Check more: https://www.orafaq.com/wiki/Nologging_and_force_logging
+
+
+### Add more redo
+```
+ALTER DATABASE ADD LOGFILE GROUP 7 ('/oradata/eeprd/redo07.log') SIZE 500m;
+ALTER DATABASE ADD LOGFILE GROUP 8 ('/oradata/eeprd/redo08.log') SIZE 500m;
+ALTER DATABASE ADD LOGFILE GROUP 9 ('/oradata/eeprd/redo09.log') SIZE 500m;
+ALTER DATABASE ADD LOGFILE GROUP 10 ('/oradata/eeprd/redo10.log') SIZE 500m;
+```
+
+
+### Check the RMAN status
+```
+SELECT SID, SERIAL#, CONTEXT, SOFAR, TOTALWORK,
+       ROUND(SOFAR/TOTALWORK*100,2) "%_COMPLETE"
+FROM   V$SESSION_LONGOPS
+WHERE  OPNAME LIKE 'RMAN%'
+AND    OPNAME NOT LIKE '%aggregate%'
+AND    TOTALWORK != 0
+AND    SOFAR <> TOTALWORK;
+```

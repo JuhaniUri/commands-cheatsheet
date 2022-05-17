@@ -6,6 +6,22 @@ EXEC DBMS_MONITOR.client_id_trace_enable(client_id=>'TEST', waits=>TRUE, binds=>
 EXEC DBMS_MONITOR.client_id_trace_disable(client_id=>'TEST');
 ```
 
+```
+EXEC DBMS_MONITOR.session_trace_enable(session_id => 191, serial_num=>37401, waits=>TRUE, binds=>TRUE);
+EXEC DBMS_MONITOR.session_trace_disable(session_id =>191, serial_num=>37401);
+```
+
+
+
+### trace whole database and get explain as well
+
+
+```
+SQL> ALTER SYSTEM SET sql_trace = true SCOPE=MEMORY;
+SQL> ALTER SYSTEM SET sql_trace = false SCOPE=MEMORY;
+$ tkprof eeuat_ora_11894.trc eeuat_ora_11894.prf EXPLAIN=user/***@eeuat SYS=NO
+```
+
 
 ## Shared pool
 

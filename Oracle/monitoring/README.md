@@ -1,7 +1,7 @@
 # Monitoring
 
 ## Alertlog
-### Errors 
+### Errors (Oracle 11)
 
 | **Category**                          | **Errors Returned in this Category** | **Comparison Operator** | **Default Warning Threshold**                              | **Default Critical Threshold** |
 | ------------------------------------- | ------------------------------------ | ----------------------- | ---------------------------------------------------------- | ------------------------------ |

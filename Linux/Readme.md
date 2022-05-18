@@ -9,6 +9,7 @@
     - [Add disk to VG and grwo](#add-disk-to-vg-and-grwo)
     - [Growpart if disk was increased](#growpart-if-disk-was-increased)
     - [Deactive/Active LV](#deactiveactive-lv)
+    - [LVM reduce](#lvm-reduce)
     - [Mounting a Windows fileshare (tested with RHEL6)](#mounting-a-windows-fileshare-tested-with-rhel6)
     - [Find dublicates in fstab](#find-dublicates-in-fstab)
   - [Permissions](#permissions)
@@ -112,6 +113,69 @@ xfs_growfs /dev/mapper/lvm_pool_data1-lvol001
 lvchange -an /dev/lvm_pool_data1/lvol001
 lvchange -ay /dev/lvm_pool_data1/lvol001
 ```
+
+### LVM reduce
+
+```
+e2fsck -f /dev/mapper/VolGroup00-orabackup
+resize2fs /dev/mapper/VolGroup00-orabackup 60G
+lvreduce -L 60G /dev/mapper/VolGroup00-orabackup
+```
+
+```
+[root@TEST ~]# pvs -o+pv_used
+  PV         VG         Fmt  Attr PSize  PFree  Used
+  /dev/xvda2 VolGroup00 lvm2 a--  29.88G     0  29.88G
+  /dev/xvdb1 VolGroup00 lvm2 a--  63.47G 33.47G 30.00G
+  /dev/xvdc1 VolGroup00 lvm2 a--  68.34G 63.34G  5.00G
+```
+```
+[root@TEST ~]# pvmove /dev/xvdc1
+  /dev/xvdc1: Moved: 0.0%
+  /dev/xvdc1: Moved: 5.0%
+  /dev/xvdc1: Moved: 10.0%
+  /dev/xvdc1: Moved: 15.0%
+  /dev/xvdc1: Moved: 20.6%
+  /dev/xvdc1: Moved: 25.6%
+  /dev/xvdc1: Moved: 30.6%
+  /dev/xvdc1: Moved: 36.2%
+  /dev/xvdc1: Moved: 41.2%
+  /dev/xvdc1: Moved: 46.2%
+  /dev/xvdc1: Moved: 51.9%
+  /dev/xvdc1: Moved: 56.9%
+  /dev/xvdc1: Moved: 62.5%
+  /dev/xvdc1: Moved: 67.5%
+  /dev/xvdc1: Moved: 72.5%
+  /dev/xvdc1: Moved: 78.1%
+  /dev/xvdc1: Moved: 83.1%
+  /dev/xvdc1: Moved: 88.1%
+  /dev/xvdc1: Moved: 93.8%
+  /dev/xvdc1: Moved: 98.8%
+  /dev/xvdc1: Moved: 100.0%
+```
+```
+[root@TEST ~]# pvs -o+pv_used
+  PV         VG         Fmt  Attr PSize  PFree  Used
+  /dev/xvda2 VolGroup00 lvm2 a--  29.88G     0  29.88G
+  /dev/xvdb1 VolGroup00 lvm2 a--  63.47G 28.47G 35.00G
+  /dev/xvdc1 VolGroup00 lvm2 a--  68.34G 68.34G     0
+```
+9.	vgreduce VolGroup00 /dev/xvdc1
+```
+[root@TEST ~]# vgreduce VolGroup00 /dev/xvdc1
+  Removed "/dev/xvdc1" from volume group "VolGroup00"
+```
+10.	pvremove 
+```
+[root@TEST ~]# pvs
+  PV         VG         Fmt  Attr PSize  PFree
+  /dev/xvda2 VolGroup00 lvm2 a--  29.88G     0
+  /dev/xvdb1 VolGroup00 lvm2 a--  63.47G 28.47G
+  /dev/xvdc1            lvm2 a--  68.35G 68.35G
+[root@STEST ~]# pvremove /dev/xvdc1
+  Labels on physical volume "/dev/xvdc1" successfully wiped
+```
+
 
 ### Mounting a Windows fileshare (tested with RHEL6)
 ```

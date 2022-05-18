@@ -124,3 +124,25 @@ ssh -q -D 1999 username@11.11.11.29
 ```
 echo "Hello there" | mail -s "testing" -r sender@company.com someone@gmail.com
 ```
+
+### Lock file usage inside script
+```
+# Check is process is already running.
+# If lock file already exists exit.
+LOCK_FILE=/tmp/orabackup.lock
+if [ -e $LOCK_FILE ]
+then
+  exit 0;
+fi
+
+# Create a lock file containing the current
+# process id to prevent other tests from running.
+echo $$ > $LOCK_FILE
+
+# Add your processing here.
+#
+#
+
+# Clear down lock file ready for the next run.
+rm -f $LOCK_FILE
+```

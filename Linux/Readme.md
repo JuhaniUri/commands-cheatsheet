@@ -47,6 +47,7 @@
     - [FTP script](#ftp-script)
     - [Split logs](#split-logs)
     - [sync logs to nfs](#sync-logs-to-nfs)
+  - [Concatenate multiple files and include filename as section headers](#concatenate-multiple-files-and-include-filename-as-section-headers)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -377,4 +378,10 @@ split -b 141m B8465job2.log
 ### sync logs to nfs
 ```
  /bin/df -t nfs | /bin/grep /2ndarchlog && touch /2ndarchlog/test && time -p (rsync -rvu --progress --exclude-from=/root/rsync-excludes --delete /backup/rman/ /2ndarchlog && echo 'Sync archivelog done in:')
+```
+
+
+## Concatenate multiple files and include filename as section headers
+```
+more *.sh | cat
 ```

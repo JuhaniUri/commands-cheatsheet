@@ -149,7 +149,7 @@ rm -f $LOCK_FILE
 
 
 ### Bash script month/week/daily
-
+https://nicaw.wordpress.com/2013/04/18/bash-backup-rotation-script/
 ```
 # It is logical to run this script daily. We take files from source folder and move them to
 # appropriate destination folder

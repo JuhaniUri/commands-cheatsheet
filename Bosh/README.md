@@ -29,3 +29,7 @@ bosh -d d392343 logs
 $ bosh env --details
 ```
 
+### List deployment with disks
+```
+bosh -d service-instance_e8ae83e3-dbd9-4eee-b467-24cbf97b2d3b is -i
+```

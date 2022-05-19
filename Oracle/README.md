@@ -74,7 +74,6 @@ select 'alter index '||owner||'.'||index_name||' rebuild ONLINE;' from dba_index
 
 ## Logs
 
-### 
 
 
 
@@ -212,4 +211,21 @@ WHERE  OPNAME LIKE 'RMAN%'
 AND    OPNAME NOT LIKE '%aggregate%'
 AND    TOTALWORK != 0
 AND    SOFAR <> TOTALWORK;
+```
+
+
+## Startup/shutdown
+###	Shutdown Immediate Hangs / Active Processes Prevent Shutdown (Doc ID 416658.1)
+
+Symptom: 
+Alert.log shows:
+Active call for process 22181 user 'oracle' program 'oracle@TESTDB2'
+Active call for process 25813 user 'oracle' program 'oracle@TESTDB2'
+SHUTDOWN: waiting for active calls to complete.
+
+Solution:
+```
+shutdown abort
+startup restrict
+shutdown normal
 ```

@@ -329,6 +329,47 @@ ALTER USER SQLTEST ACCOUNT LOCK;
 
 ## Clone with CP
 
+
+1.	Source database
+```
+export ORACLE_SID=stat
+sqlplus / as sysdba@stat
+alter database begin backup;
+!cp -vrp /u02/stat/*.dbf /u02/stattest/
+alter database end backup;
+alter system switch logfile;
+alter database backup controlfile to trace as ‘/tmp/control_script.sql’;
+exit;
+
+```
+
+
+2.	On the clone –
+
+```
+!rm /u02/stat/*.ctl
+```
+
+Replace sid in control file:
+```
+sed -e s/stat/stattest/g /tmp/control_script.sql
+```
+
+```
+startup nomount
+@/tmp/control_script.sql
+alter database open resetlogs;
+ALTER SYSTEM SET LOCAL_LISTENER = "(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1522))" SCOPE=BOTH sid='stattest'
+```
+
+to-do.
+- Create control file
+- Check undotbs and temp
+
+http://hemantoracledba.blogspot.com.ee/2009/05/rename-database-while-cloning-it.html
+
+
+
 ## Export/import
 
 

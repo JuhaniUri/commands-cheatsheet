@@ -6,7 +6,7 @@
     - [LUKS: Format the filesystem with LUKS and add extra password to slot1](#luks-format-the-filesystem-with-luks-and-add-extra-password-to-slot1)
     - [LUKS: Resize VG/LV with LUKS](#luks-resize-vglv-with-luks)
     - [Create part/VG/LV/FS](#create-partvglvfs)
-    - [Add disk to VG and grwo](#add-disk-to-vg-and-grwo)
+    - [Add disk to VG and grow](#add-disk-to-vg-and-grow)
     - [Growpart if disk was increased](#growpart-if-disk-was-increased)
     - [Deactive/Active LV](#deactiveactive-lv)
     - [LVM reduce](#lvm-reduce)
@@ -91,7 +91,7 @@ vgcreate vg_pgsql /dev/sdb1
 mkfs.xfs /dev/mapper/vg_pgsql-lv_pgsql
 ```
 
-### Add disk to VG and grwo
+### Add disk to VG and grow
 ```
 parted /dev/xvdr mklabel msdos mkpart primary 1M 100% set 1 lvm on
 pvcreate /dev/xvdr1

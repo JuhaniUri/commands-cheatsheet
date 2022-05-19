@@ -146,3 +146,23 @@ echo $$ > $LOCK_FILE
 # Clear down lock file ready for the next run.
 rm -f $LOCK_FILE
 ```
+
+
+### Bash script month/week/daily
+
+```
+# It is logical to run this script daily. We take files from source folder and move them to
+# appropriate destination folder
+# On first month day do
+if [ "$month_day" -eq 1 ] ; then
+  destination=backup.monthly/$date_daily
+else
+  # On saturdays do
+  if [ "$week_day" -eq 6 ] ; then
+    destination=backup.weekly/$date_daily
+  else
+    # On any regular day do
+    destination=backup.daily/$date_daily
+  fi
+fi
+```

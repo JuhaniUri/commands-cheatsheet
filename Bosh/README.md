@@ -12,16 +12,26 @@ bosh -d service-instance_c2f6cdd6-8b8c-4ba6-8faa-37deba1d4572 vms --vitals --col
 bosh -d d5413e ssh -c 'date'
 ```
 
+### Tasks recent
+
+```
+bosh tasks --recent
+```
 ### Tasks debug
 
 ```
 bosh task --debug 263
 ```
 
+
+
+
 ### Logs
 ```
 bosh -d d392343 logs
 ```
+
+
 
 ## Certificates
 ### Get current certificates

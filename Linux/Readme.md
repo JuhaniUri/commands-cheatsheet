@@ -48,6 +48,7 @@
     - [Split logs](#split-logs)
     - [sync logs to nfs](#sync-logs-to-nfs)
   - [Concatenate multiple files and include filename as section headers](#concatenate-multiple-files-and-include-filename-as-section-headers)
+  - [Disk speed quick and easy](#disk-speed-quick-and-easy)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -384,6 +385,22 @@ split -b 141m B8465job2.log
 ## Concatenate multiple files and include filename as section headers
 ```
 more *.sh | cat
+```
+
+
+
+## Disk speed quick and easy
+```
+[root@DB11-01 bin]# hdparm -tT /dev/xvdb1
+
+/dev/xvdb1:
+Timing cached reads:   6044 MB in  1.99 seconds = 3032.71 MB/sec
+Timing buffered disk reads:  222 MB in  3.01 seconds =  73.67 MB/sec
+
+[root@DB11-01 bin]# hdparm -tT /dev/xvdc1
+/dev/xvdc1:
+Timing cached reads:   6132 MB in  1.99 seconds = 3076.04 MB/sec
+Timing buffered disk reads:  302 MB in  3.01 seconds = 100.46 MB/sec
 ```
 
 

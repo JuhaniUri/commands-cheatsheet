@@ -5,7 +5,7 @@ https://www.liquibase.org/
 
 In case that is not possible, try to follow these steps:
 
-## Structure your scripts
+## Structure examples for scripts
 
 ### SQLplus and master script
 
@@ -69,14 +69,13 @@ commit;
 ### Manual deployment pre-checks
 
 - [ ] **Check the space on tablespaces and storage (in case large updates)** 
-
+- [ ] **What user should be used for deploying? Are schemas prefix in place?** 
 - [ ] **In case of lot of DML use this in header, this will stop script in case of statment error.** 
 https://docs.oracle.com/en/database/oracle/oracle-database/19/sqpug/WHENEVER-SQLERROR.html#GUID-66C1C12C-5E95-4440-A37B-7CCE7E33491C
 ```
 WHENEVER SQLERROR EXIT SQL.SQLCODE
 ```
-
-- [ ] **Make backups for faster recovery** 
+- [ ] **Make additional backups for recovery** 
 
     a) go with expdp 
     ```
@@ -91,12 +90,6 @@ WHENEVER SQLERROR EXIT SQL.SQLCODE
 
 Note check the table size beforehand!
 Remeber to cleanup once you are done.
-
-- [ ] **What user should be used for deploying? Are schemas prefix in place?** 
-
-
-<br/>
-<br/>
 
 
 ### Check that you are in right db

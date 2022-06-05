@@ -78,7 +78,7 @@ WHENEVER SQLERROR EXIT SQL.SQLCODE
 ```
 4\. Make additional backups for recovery
     
-    4.1\. expdp 
+    4.1\. Datapump (expdp) 
     ```
     expdp system/** TABLES=schema1.table1, schema1.table2 DIRECTORY=dumpdir DUMPFILE=pre-deploy-export-date.dmp
     ```

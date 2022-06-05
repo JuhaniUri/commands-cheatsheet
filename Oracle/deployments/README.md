@@ -68,7 +68,9 @@ commit;
 ### Manual deployment pre-checks
 
 1\.  Check the space on tablespaces and storage
+
 2\. What user should be used for deploying? Are schemas prefix in place?
+
 3\. In case of lot of DML use this in header, this will stop script in case of statment error
 https://docs.oracle.com/en/database/oracle/oracle-database/19/sqpug/WHENEVER-SQLERROR.html#GUID-66C1C12C-5E95-4440-A37B-7CCE7E33491C
 ```
@@ -76,12 +78,12 @@ WHENEVER SQLERROR EXIT SQL.SQLCODE
 ```
 4\. Make additional backups for recovery
     
-    ** go with expdp 
+    4.1\. expdp 
     ```
     expdp system/** TABLES=schema1.table1, schema1.table2 DIRECTORY=dumpdir DUMPFILE=pre-deploy-export-date.dmp
     ```
 
-    ** go with CTAS
+    4.2\. CTAS
     ```
     SQL> CREATE TABLE emp_backup AS SELECT * FROM emp;
     Table created.

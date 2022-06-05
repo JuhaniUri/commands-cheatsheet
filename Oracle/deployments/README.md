@@ -67,7 +67,7 @@ commit;
 
 ### Manual deployment pre-checks
 
-* Check the space on tablespaces and storage
+1\.  Check the space on tablespaces and storage
 * What user should be used for deploying? Are schemas prefix in place?
 * In case of lot of DML use this in header, this will stop script in case of statment error
 https://docs.oracle.com/en/database/oracle/oracle-database/19/sqpug/WHENEVER-SQLERROR.html#GUID-66C1C12C-5E95-4440-A37B-7CCE7E33491C

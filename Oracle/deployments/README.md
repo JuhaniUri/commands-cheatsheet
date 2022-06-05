@@ -3,7 +3,6 @@
 If possible use some version control software your database like Liquibase
 https://www.liquibase.org/
 
-In case that is not possible, try to follow these steps:
 
 ## Structure examples for scripts
 
@@ -31,7 +30,7 @@ spool off
 ```
 
 
-### Individual files changes by numbers for execution
+### Individual files numbering for execution
 
 Script namiming (number, type, name)
 

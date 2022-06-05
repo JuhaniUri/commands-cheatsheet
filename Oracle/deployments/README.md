@@ -30,7 +30,7 @@ spool off
 ```
 
 
-### Individual files numbering for execution
+### Individual files with numbering for execution
 
 Script namiming (number, type, name)
 
@@ -63,7 +63,7 @@ commit;
 
 
 
-## Deployment  best practices
+## Deployment best practices
 
 ### Manual deployment pre-checks
 

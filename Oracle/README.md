@@ -230,4 +230,18 @@ startup restrict
 shutdown normal
 ```
 
+## Move controlfile location
+```
+show parameter control_files
+shutdow immediate;
+mv /mnt/SKA2TUUM2/control02.ctl /u01/SKA2TUUM2/control02.ctl
+startup nomount;
+alter system set control_files='/u01/SKA2TUUM2/control01.ctl','/u01/SKA2TUUM2/control02.ctl' scope=SPFILE;
+shutdown immediate;
 
+
+startup nomount;
+show parameter control_files
+alter database mount;
+alter database open;
+```

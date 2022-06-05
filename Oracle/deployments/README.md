@@ -4,6 +4,15 @@ If possible use some version control software your database like Liquibase
 https://www.liquibase.org/
 
 
+- [Deployment and scripts best practices](#deployment-and-scripts-best-practices)
+  - [Structure examples for scripts](#structure-examples-for-scripts)
+    - [SQLplus and master script](#sqlplus-and-master-script)
+    - [Individual files with numbering for execution](#individual-files-with-numbering-for-execution)
+    - [Lot of changes DML in one file](#lot-of-changes-dml-in-one-file)
+    - [Extentsions for files](#extentsions-for-files)
+  - [Deployment best practices](#deployment-best-practices)
+    - [Manual deployment pre-checks](#manual-deployment-pre-checks)
+
 ## Structure examples for scripts
 
 ### SQLplus and master script

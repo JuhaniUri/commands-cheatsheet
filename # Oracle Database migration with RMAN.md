@@ -15,7 +15,7 @@ chown oracle:dba /nfs/<SID>/ARCH
 ### Test run initial transfer stage:
 ALTER SYSTEM ARCHIVE LOG CURRENT;
 rman target / << EOF
-backup incremental level 0 as copy format '/nfs/eeprd/db/%U' database;
+backup incremental level 0 as copy format '/nfs/test/db/%U' database;
 EOF
 
 
@@ -23,7 +23,7 @@ EOF
 rman target / <<EOF
 backup  incremental level 1 for recover of copy database;
 recover copy of database;
-backup as copy current controlfile format ‘/nfs/eeprd/db/%U’;
+backup as copy current controlfile format ‘/nfs/test/db/%U’;
 EOF
 (Assuming there is sufficient space in fast recovery area for incremental backup).
 Test run post test run stage:

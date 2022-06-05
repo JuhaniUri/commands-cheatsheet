@@ -195,10 +195,10 @@ Check more: https://www.orafaq.com/wiki/Nologging_and_force_logging
 
 ### Add more redo
 ```
-ALTER DATABASE ADD LOGFILE GROUP 7 ('/oradata/eeprd/redo07.log') SIZE 500m;
-ALTER DATABASE ADD LOGFILE GROUP 8 ('/oradata/eeprd/redo08.log') SIZE 500m;
-ALTER DATABASE ADD LOGFILE GROUP 9 ('/oradata/eeprd/redo09.log') SIZE 500m;
-ALTER DATABASE ADD LOGFILE GROUP 10 ('/oradata/eeprd/redo10.log') SIZE 500m;
+ALTER DATABASE ADD LOGFILE GROUP 7 ('/oradata/test/redo07.log') SIZE 500m;
+ALTER DATABASE ADD LOGFILE GROUP 8 ('/oradata/test/redo08.log') SIZE 500m;
+ALTER DATABASE ADD LOGFILE GROUP 9 ('/oradata/test/redo09.log') SIZE 500m;
+ALTER DATABASE ADD LOGFILE GROUP 10 ('/oradata/test/redo10.log') SIZE 500m;
 ```
 
 
@@ -234,9 +234,9 @@ shutdown normal
 ```
 show parameter control_files
 shutdow immediate;
-mv /mnt/SKA2TUUM2/control02.ctl /u01/SKA2TUUM2/control02.ctl
+mv /mnt/test/control02.ctl /u01/test/control02.ctl
 startup nomount;
-alter system set control_files='/u01/SKA2TUUM2/control01.ctl','/u01/SKA2TUUM2/control02.ctl' scope=SPFILE;
+alter system set control_files='/u01/test/control01.ctl','/u01/test/control02.ctl' scope=SPFILE;
 shutdown immediate;
 
 

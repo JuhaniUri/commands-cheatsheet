@@ -35,10 +35,10 @@ spool off
 
 Script namiming (number, type, name)
 
-1_PKG_MANAGE.sql
-2_PKG_MANAGE_BODY.sql
-3_classes.sql
-4_update_test_view.sql
+- 1_PKG_MANAGE.sql
+- 2_PKG_MANAGE_BODY.sql
+- 3_classes.sql
+- 4_update_test_view.sql
 
 
 ### Lot of changes DML in one file 
@@ -56,10 +56,10 @@ commit;
 
 ### Extentsions for files
 
-.pks - Package Spec
-.pkb - Package Body
-.pck - Package with Spec and Body
-.sql - Everyrhing else
+- .pks - Package Spec
+- .pkb - Package Body
+- .pck - Package with Spec and Body
+- .sql - Everyrhing else
 
 
 

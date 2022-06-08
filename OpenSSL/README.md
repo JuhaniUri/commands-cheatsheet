@@ -19,3 +19,27 @@ openssl x509 -in ca.cert -text -noout -sha256 -fingerprint
 ```
 openssl x509 -noout -modulus -in web.crt | openssl md5 ; openssl rsa -noout -modulus -in web.key | openssl md5
 ```
+
+### Create request with respone file
+#### Create csr file
+```
+$cat csr_details_for_web.txt
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+req_extensions = req_ext
+distinguished_name = dn
+[ dn ]
+C=FI
+L=Helsinki
+O=TEST
+CN=web.fi
+[ req_ext ]
+```
+
+#### Create key and csr
+```
+$openssl req -new -sha256 -days 720 -newkey rsa:2048 -keyout web.key -out web.csr -config csr_details_for_web.txt
+$openssl req -in web.csr -noout -text
+```

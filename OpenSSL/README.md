@@ -15,4 +15,7 @@
 openssl x509 -in ca.cert -text -noout -sha256 -fingerprint
 ```
 
-
+### Validate that Cert matches key:
+```
+openssl x509 -noout -modulus -in web.crt | openssl md5 ; openssl rsa -noout -modulus -in web.key | openssl md5
+```

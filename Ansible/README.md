@@ -1,4 +1,4 @@
-# Generic ansbile 
+# Generic ansible 
 
 ### Setup for organization
 

@@ -99,6 +99,7 @@ qemu-img convert -p -f qcow2 -O vmdk -o adapter_type=lsilogic,subformat=streamOp
 - Install basic packages:  zip unzip wget open-vm-tools 
 - Make release number /etc/my-image-release
 - Default Filesystem layout as bellow. 
+```
 NAME	SIZE	TYPE	MOUNTPOINT
 sda	20G	disk	
 ├─sda1	512M	part	
@@ -111,7 +112,7 @@ sda	20G	disk
 ├─vg_root-lv_varlog	1G	lvm	/var/log
 ├─vg_root-lv_varlogaudit	128M	lvm	/var/log/audit
 ├─vg_root-lv_home	512M	lvm	/home
-
+```
 
 ### Socks proxy usage
 

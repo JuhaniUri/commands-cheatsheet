@@ -49,6 +49,8 @@ ORDER BY owner, object_type, object_name;
 ```
 
 7\. Do changes 
+Note when deploying PL/SQL with SQLdeveloper do this:
+set define off;
 
 
 8\. Check invalid count

@@ -35,7 +35,7 @@ Script namiming (number, type, name)
 
 
 ### Lot of changes DML in one file 
-User sqlerror exit
+Use "sqlerror exit"
 
 Example
 ```

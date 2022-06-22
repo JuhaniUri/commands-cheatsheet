@@ -70,7 +70,7 @@ qemu-img convert -f qcow2 bionic-server-cloudimg-amd64.img -O vmdk bionic-server
 ### Image modification with virt-customize
 
 ```
-virt-customize -a xenial-server-cloudimg-amd64-disk1.img --root-password password:passw0rd
+virt-customize -a xenial-server-cloudimg-amd64-disk1.img --root-password password:passw1rd
 virt-customize -a xenial-server-cloudimg-amd64-disk1.img --uninstall cloud-init
 ```
 

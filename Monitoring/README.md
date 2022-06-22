@@ -1,6 +1,6 @@
 # Monitoring
 
-## Infra general
+## Linux (Minimal)
 
 - CPU usage (Load)
 - Memory usage

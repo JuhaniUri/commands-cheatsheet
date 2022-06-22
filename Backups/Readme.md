@@ -11,7 +11,7 @@ Backups should not be on the same physical storage with your Production system.
 
 ## Types
 * Full (If size and backup time is acceptable, then go for daily Full backups)
-* Differential ( you can always do 
+* Differential
 * Incremental
 
 ## Strategy 
@@ -31,3 +31,5 @@ Backups should not be on the same physical storage with your Production system.
 
 ## Monitoring (Ofter not implemented)
 * Critical part of backups
+
+ 

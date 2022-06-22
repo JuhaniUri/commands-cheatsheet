@@ -30,7 +30,8 @@ Backups should not be on the same physical storage with your Production system.
 * Quarterly  
 
 ## Monitoring (Ofter not implemented)
-* How long it took
 * Status (OK or failed)
+* How long it took
+
 
  

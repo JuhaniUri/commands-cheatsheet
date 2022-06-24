@@ -1,4 +1,4 @@
-## Some examples how desing your scripts
+## Some examples how design your scripts
 
 ### SQLplus and master script
 
@@ -24,7 +24,7 @@ spool off
 ```
 
 
-### Individual files with numbering for execution
+### Individual files with numbering as execution order
 
 Script namiming (number, type, name)
 

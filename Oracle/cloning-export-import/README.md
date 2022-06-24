@@ -387,7 +387,9 @@ impdp system SCHEMAS=USER1,USER2 DIRECTORY=DUMPDIR DUMPFILE=USER_2022_05%U
 
 ## Export and import data with a help of bash scripts 
 This useful if you need to refresh some dev/test env
-https://github.com/JuhaniUri/commands-cheatsheet/tree/main/Oracle/cloning-export-import
+
+https://github.com/JuhaniUri/commands-cheatsheet/tree/main/Oracle/cloning-export-import/export_dump_for_test
+
 
 ### Prepartion 
 - Export from live database 
@@ -403,6 +405,7 @@ It export for all 3 databases (DB1,DB2,DB3) and you get 3 files.
 ### In dev/test eg. destation 
 Copy dump files for example to /u03/dump
 Execute import_script.sh
+https://github.com/JuhaniUri/commands-cheatsheet/tree/main/Oracle/cloning-export-import/imp_dump
 
 Script does following: 
 - drops schemas (banksyst, reports, dserver)

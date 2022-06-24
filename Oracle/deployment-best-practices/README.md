@@ -8,7 +8,7 @@ https://www.liquibase.org/
 
 ### Manual deployment pre-checks
 
-1\.  Check the space on tablespaces and storage
+1\. Check free space on tablespaces and storage
 
 2\. What user should be used for deploying? Are schemas prefix in place?
 
@@ -48,7 +48,7 @@ WHERE status = 'INVALID'
 ORDER BY owner, object_type, object_name;
 ```
 
-7\. Do changes 
+7\. Do changes/deployment
 Note when deploying PL/SQL with SQLdeveloper do this:
 set define off;
 

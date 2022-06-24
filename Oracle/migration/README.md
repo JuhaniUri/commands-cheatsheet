@@ -1,4 +1,4 @@
-# Migration from one database server to another
+# Notes when migrating database server
 
 
 ### Pre-checks
@@ -28,23 +28,3 @@ select * from dba_registry;
 - [ ] **Always use md5sum take hash transfering files** 
 
 
-
-<br/>
-<br/>
-
-
-### Check that you are in right db
-
-
-### Check invalid objects before (can be skipped in case of only DML).
-
-### Do your changes 
-
-
-
-### Check invalid count
-
-### Compile if needed
-```
-EXEC DBMS_UTILITY.COMPILE_SCHEMA( schema => 'USER', compile_all => FALSE);
-```

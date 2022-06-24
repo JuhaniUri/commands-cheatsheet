@@ -13,7 +13,7 @@ EXEC DBMS_MONITOR.session_trace_disable(session_id =>191, serial_num=>37401);
 
 
 
-### trace whole database and get explain as well
+### Trace whole database and get explain plan
 
 
 ```

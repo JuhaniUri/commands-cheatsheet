@@ -387,7 +387,7 @@ impdp system SCHEMAS=USER1,USER2 DIRECTORY=DUMPDIR DUMPFILE=USER_2022_05%U
 
 ## Export and import data with a help of bash scripts 
 This useful if you need to refresh some dev/test env
-
+https://github.com/JuhaniUri/commands-cheatsheet/tree/main/Oracle/cloning-export-import
 
 ### Prepartion 
 - Export from live database 

@@ -1,5 +1,32 @@
 # General & Daily tasks
 
+- [General & Daily tasks](#general--daily-tasks)
+  - [Backup settings](#backup-settings)
+    - [Show Recovery are (RMAN)](#show-recovery-are-rman)
+    - [Change FRA size](#change-fra-size)
+    - [Set location](#set-location)
+    - [Change location](#change-location)
+    - [Check the RMAN status](#check-the-rman-status)
+  - [Tablespaces and datafiles](#tablespaces-and-datafiles)
+    - [Add datafile to TABLESPACE](#add-datafile-to-tablespace)
+    - [Resize datafile](#resize-datafile)
+    - [Check if autoextend is enabled](#check-if-autoextend-is-enabled)
+    - [Enable autoextend with maxsize](#enable-autoextend-with-maxsize)
+    - [Swap undo tablespace](#swap-undo-tablespace)
+    - [Temp tablespace switch](#temp-tablespace-switch)
+    - [Move table/lob to new tablespace](#move-tablelob-to-new-tablespace)
+  - [Indexes](#indexes)
+    - [View unusable](#view-unusable)
+    - [Rebuild unusable indexes](#rebuild-unusable-indexes)
+    - [Move indexes to tablespace](#move-indexes-to-tablespace)
+  - [Redologs](#redologs)
+    - [Hourly/Daily Archive generation](#hourlydaily-archive-generation)
+    - [Force logging](#force-logging)
+    - [Add more redo](#add-more-redo)
+  - [Random stuff](#random-stuff)
+
+
+
 ## Backup settings
 ### Show Recovery are (RMAN)
 ```
@@ -18,6 +45,19 @@ alter system set db_recovery_file_dest='/u03/flash_recovery_area/' scope=both;
 ```
 alter system set log_archive_dest_1='LOCATION=USE_DB_RECOVERY_FILE_DEST' scope=both;
 ```
+
+### Check the RMAN status
+```
+SELECT SID, SERIAL#, CONTEXT, SOFAR, TOTALWORK,
+       ROUND(SOFAR/TOTALWORK*100,2) "%_COMPLETE"
+FROM   V$SESSION_LONGOPS
+WHERE  OPNAME LIKE 'RMAN%'
+AND    OPNAME NOT LIKE '%aggregate%'
+AND    TOTALWORK != 0
+AND    SOFAR <> TOTALWORK;
+```
+
+
 ## Tablespaces and datafiles
 ### Add datafile to TABLESPACE
 ```
@@ -50,7 +90,7 @@ ALTER SYSTEM SET UNDO_TABLESPACE=undotbs2;
 DROP TABLESPACE undotbs1 INCLUDING CONTENTS AND DATAFILES;
 ```
 
-### temp tablespace switch
+### Temp tablespace switch
 ```
 select PROPERTY_NAME,PROPERTY_VALUE from database_properties where property_name like '%TEMP%';
 
@@ -58,24 +98,6 @@ CREATE TEMPORARY TABLESPACE TEMP2 TEMPFILE '/u02/testbaas/temp201.dbf' SIZE 100M
 ALTER DATABASE DEFAULT TEMPORARY TABLESPACE temp2;
 DROP TABLESPACE temp1 INCLUDING CONTENTS AND DATAFILES;
 ```
-
-
-
-## Indexes
-### View unusable
-```
-select owner, index_name from dba_indexes where status='UNUSABLE';
-```
-
-### Rebuild unusable indexes
-```
-select 'alter index '||owner||'.'||index_name||' rebuild ONLINE;' from dba_indexes where status='UNUSABLE';
-```
-
-## Logs
-
-
-
 
 ### Move table/lob to new tablespace
 
@@ -109,6 +131,20 @@ ALTER TABLE SHR.XML_IO MOVE LOB(XML) STORE AS (TABLESPACE XML_IO2);
 DROP TABLESPACE XML_IO INCLUDING CONTENTS AND DATAFILES;
 ```
 
+
+## Indexes
+### View unusable
+```
+select owner, index_name from dba_indexes where status='UNUSABLE';
+```
+
+### Rebuild unusable indexes
+```
+select 'alter index '||owner||'.'||index_name||' rebuild ONLINE;' from dba_indexes where status='UNUSABLE';
+```
+
+
+
 ### Move indexes to tablespace
 ```
 select INDEX_NAME, tablespace_name
@@ -122,59 +158,9 @@ select 'ALTER TABLE ' || OWNER || '.' || TABLE_NAME || ' MOVE TABLESPACE ' || TA
 
 select segment_name , segment_type from dba_segments
 where tablespace_name ='TEST';
-
-```
-### Disable jobs at startup
-
-```
-STARTUP MOUNT;
-ALTER SYSTEM ENABLE RESTRICTED SESSION;
-ALTER DATABASE OPEN;
-alter system set job_queue_processes=0 scope=both;
-ALTER SYSTEM DISABLE RESTRICTED SESSION;
 ```
 
-To start again
-```
-alter system set job_queue_processes=1000 scope=both;
-```
-
-
-### DBCA examples
-```
-dbca -silent -createDatabase \
--templateName General_Purpose.dbc \
--gdbName test \
--sid test \
--sysPassword **** \
--systemPassword **** \
--emConfiguration NONE \
--datafileDestination /u02 \
--recoveryAreaDestination /u03 \
--storageType FS \
--characterSet AL32UTF8 \
--nationalCharacterSet AL16UTF16 \
--registerWithDirService false \
--listeners LISTENER_1521;
-```
-
-### using pipes in linux and oracle
-```
-export ORACLE_SID=test1 && echo "alter database tempfile '/oradata/test1/temp01.dbf' drop;"| sqlplus -S "/ as sysdba"
-echo "ALTER TABLESPACE temp ADD TEMPFILE '/oradata/test1/temp01.dbf' SIZE 100M reuse autoextend on maxsize 2000M;"| sqlplus -S "/ as sysdba"
-```
-
-
-### Startup for pdbs
-```
-CREATE OR REPLACE TRIGGER open_pdbs 
-  AFTER STARTUP ON DATABASE 
-BEGIN 
-   EXECUTE IMMEDIATE 'ALTER PLUGGABLE DATABASE ALL OPEN'; 
-END open_pdbs;
-/
-```
-
+## Redologs
 
 ### Hourly/Daily Archive generation
 
@@ -202,19 +188,36 @@ ALTER DATABASE ADD LOGFILE GROUP 10 ('/oradata/test/redo10.log') SIZE 500m;
 ```
 
 
-### Check the RMAN status
-```
-SELECT SID, SERIAL#, CONTEXT, SOFAR, TOTALWORK,
-       ROUND(SOFAR/TOTALWORK*100,2) "%_COMPLETE"
-FROM   V$SESSION_LONGOPS
-WHERE  OPNAME LIKE 'RMAN%'
-AND    OPNAME NOT LIKE '%aggregate%'
-AND    TOTALWORK != 0
-AND    SOFAR <> TOTALWORK;
-```
 
 
-## Startup/shutdown
+## Random stuff 
+
+```
+### Disable jobs at startup
+
+```
+STARTUP MOUNT;
+ALTER SYSTEM ENABLE RESTRICTED SESSION;
+ALTER DATABASE OPEN;
+alter system set job_queue_processes=0 scope=both;
+ALTER SYSTEM DISABLE RESTRICTED SESSION;
+```
+
+To start again
+```
+alter system set job_queue_processes=1000 scope=both;
+```
+
+### Startup for pdbs
+```
+CREATE OR REPLACE TRIGGER open_pdbs 
+  AFTER STARTUP ON DATABASE 
+BEGIN 
+   EXECUTE IMMEDIATE 'ALTER PLUGGABLE DATABASE ALL OPEN'; 
+END open_pdbs;
+/
+```
+
 ###	Shutdown Immediate Hangs / Active Processes Prevent Shutdown (Doc ID 416658.1)
 
 Symptom: 
@@ -230,7 +233,32 @@ startup restrict
 shutdown normal
 ```
 
-## Move controlfile location
+### DBCA examples
+```
+dbca -silent -createDatabase \
+-templateName General_Purpose.dbc \
+-gdbName test \
+-sid test \
+-sysPassword **** \
+-systemPassword **** \
+-emConfiguration NONE \
+-datafileDestination /u02 \
+-recoveryAreaDestination /u03 \
+-storageType FS \
+-characterSet AL32UTF8 \
+-nationalCharacterSet AL16UTF16 \
+-registerWithDirService false \
+-listeners LISTENER_1521;
+```
+
+### Using pipes in Linux with Oracle
+```
+export ORACLE_SID=test1 && echo "alter database tempfile '/oradata/test1/temp01.dbf' drop;"| sqlplus -S "/ as sysdba"
+echo "ALTER TABLESPACE temp ADD TEMPFILE '/oradata/test1/temp01.dbf' SIZE 100M reuse autoextend on maxsize 2000M;"| sqlplus -S "/ as sysdba"
+```
+
+
+### Move controlfile location
 ```
 show parameter control_files
 shutdow immediate;
@@ -245,3 +273,4 @@ show parameter control_files
 alter database mount;
 alter database open;
 ```
+

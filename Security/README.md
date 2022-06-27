@@ -13,5 +13,5 @@
 ## Defends in layers
 ![defense in layers](defense-in-layers.jpg)
 
-![defense in layers](defense-in-layers-icons.png)
+![defense in layers](..defense-in-layers-icons.png)
 

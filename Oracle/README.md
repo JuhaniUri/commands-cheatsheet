@@ -24,6 +24,11 @@
     - [Force logging](#force-logging)
     - [Add more redo](#add-more-redo)
   - [Random stuff](#random-stuff)
+    - [Disable jobs at startup](#disable-jobs-at-startup)
+    - [Startup for pdbs](#startup-for-pdbs)
+    - [DBCA examples](#dbca-examples)
+    - [Using pipes in Linux with Oracle](#using-pipes-in-linux-with-oracle)
+    - [Move controlfile location](#move-controlfile-location)
 
 
 
@@ -191,8 +196,6 @@ ALTER DATABASE ADD LOGFILE GROUP 10 ('/oradata/test/redo10.log') SIZE 500m;
 
 
 ## Random stuff 
-
-```
 ### Disable jobs at startup
 
 ```

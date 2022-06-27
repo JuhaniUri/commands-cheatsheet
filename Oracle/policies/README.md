@@ -19,20 +19,20 @@ So I generally have kept thing simple and used this pattern:
 ### LIVE:
 Some 4 letter synonym for application.
 
-Example: APP
+- APP
 
 ### TEST and DEV: [ENV]+[SID]
 
 As example: 
-TESTAPP
-DEVAPP
+- TESTAPP
+- DEVAPP
 
 
 Or you could even simplfy this with general rule: [ENV]+[SID]
 
-LIVEAPP
-TESTAPP 
-DEVAPP
+- LIVEAPP
+- TESTAPP
+- DEVAPP
 
 
 

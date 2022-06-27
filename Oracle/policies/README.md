@@ -14,7 +14,8 @@ ORALCE DB_NAME restrictions (Doc ID 239888.1):
 Usually the DB_NAME and SID are same but they need not be same
 
 
-So I generally have kept thing simple and used this pattern:
+So I generally have kept thing simple and used this pattern.
+Port: 1521 is resvered for live, 1522 - 1529 is for TEST/DEV enviroments.
 
 ### LIVE:
 Some 4 letter synonym for application.

@@ -1,6 +1,6 @@
 # Deployment best practices
 
-If possible use some version control software your database like Liquibase
+If possible use some version control software for database like Liquibase
 https://www.liquibase.org/
 
 

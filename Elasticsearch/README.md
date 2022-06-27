@@ -9,6 +9,7 @@
     - [Data migration with reindex and timestamp plus field query.](#data-migration-with-reindex-and-timestamp-plus-field-query)
     - [Details on the shards status](#details-on-the-shards-status)
     - [Exlude some nodes by IP](#exlude-some-nodes-by-ip)
+    - [ILM](#ilm)
 
 ## General
 
@@ -120,3 +121,8 @@ curl -X PUT -k -u $ELASTIC_USERNAME:$ELASTIC_PASSWORD "https://localhost:9200/_c
   }
 }
 ```
+
+
+### ILM
+
+![ILM](ILM.png)

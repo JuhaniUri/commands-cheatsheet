@@ -29,11 +29,11 @@ As example:
 - DEVAPP
 
 
-Or you could even simplfy this with general rule: [ENV]+[SID]
+Or you could even simplfy this with general rule: [ENV]+[SID]:[PORT]
 
-- LIVEAPP
-- TESTAPP
-- DEVAPP
+- LIVEAPP: 1521
+- TESTAPP: 1522
+- DEVAPP: 1523
 
 
 

@@ -1,3 +1,11 @@
+
+- [Restore](#restore)
+  - [Restore datafile](#restore-datafile)
+    - [Take datafile offline](#take-datafile-offline)
+    - [View datafile status](#view-datafile-status)
+    - [View restore and recovery](#view-restore-and-recovery)
+    - [Example](#example)
+
 # Restore 
 
 ## Restore datafile

@@ -46,3 +46,5 @@ As example: LISTENER_APP, LISTENER_TESTAPP etc.
 1521 is resvered for LIVE
 1522 - 1529 is for TEST/DEV enviroments.
 
+
+

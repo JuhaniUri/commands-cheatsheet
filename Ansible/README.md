@@ -31,6 +31,7 @@
 
 ## Example layout for ansible 
 ### Monorepo
+```
 Infra
  ├── environments
  │   ├── dev
@@ -60,7 +61,7 @@ Infra
     ├── oracle-client
     ├── tomcat
     └── zabbix-agent
-
+```
 
 ## Adhoc
 ### Adhoc examples

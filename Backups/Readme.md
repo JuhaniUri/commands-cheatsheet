@@ -35,7 +35,7 @@ Backups should not be on the same physical storage with your Production system.
 
 
 
-## Let put it together to one table as an example
+## Let put it together to one table
 
 | Backup settings           |                |
 | ------------------------- | -------------- |
@@ -51,5 +51,5 @@ Backups should not be on the same physical storage with your Production system.
 | Monitoring                | Yes            |
 
 * We keep 30days backups (full+incremental), so it's possible to restore at any point within 30days
-* We keep one full backups from last 3 months
+* We keep one full backup from each last 3 month.
 

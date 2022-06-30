@@ -5,7 +5,7 @@ Backups in short.
 Backups should not be on the same physical storage with your Production system.
 
 
-## Business requrements 
+## Business requirements 
 * RTO: Recovery Time Objective is the amount of downtime a business can tolerate.
 * RPO: Recovery Point Objective the amount of data that can be lost within a period.
 

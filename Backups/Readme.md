@@ -45,7 +45,7 @@ Backups should not be on the same physical storage with your Production system.
 | Strategy                  | 2-1-1          |
 | Rotation*                 | 90d, 30d       |
 | Compression               | No             |
-| Encryption                | YES            |
+| Encryption                | Yes            |
 | Testing                   | Yearly         |
 | Monitoring                | Yes            |
 

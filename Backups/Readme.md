@@ -20,18 +20,35 @@ Backups should not be on the same physical storage with your Production system.
 
 ## Rotation
 * Grandfather-father-son
-* Custom (90d, 30d)
+* Custom (3 months, 3 0days)
 
 ## Data at rest
 * Encryption
 
 ## Regular testing (Often overlooked or with low priority)
 * Yearly
-* Quarterly  
+* Quarterly 
 
 ## Monitoring (Ofter not implemented)
 * Status (OK or failed)
-* How long it took
+* Backup time 
 
 
- 
+### Example backup setup table
+
+| Backup settings           |                |
+| ------------------------- | -------------- |
+| Scope                     | LIVE           |
+| Full                      | Sunday         |
+| Incremental               | Immediately    |
+| Differential              | -              |
+| Strategy                  | 2-1-1          |
+| Rotation*                 | 90d, 30d       |
+| Compression               | No             |
+| Encryption                | YES            |
+| Testing                   | Yearly         |
+| Monitoring                | Yes            |
+
+* We keep 30days backups (full+incremental), so it's possible to restore at any point within 30days
+  We keep one full backups from last 3 months
+

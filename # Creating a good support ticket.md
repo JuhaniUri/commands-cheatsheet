@@ -21,6 +21,7 @@ Actual Behavior: but we see <Actual Behavior> in version C
 
 
 ## Evidence ak. logs/screenshots (attach)
+Environment
 
 ## Severity
 Make sure the Severity matches your problem.
@@ -30,5 +31,4 @@ Make sure the Severity matches your problem.
 
 
  
-
 

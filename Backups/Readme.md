@@ -1,6 +1,6 @@
 # Backups
 
-Backups in short.
+Backups in short facts.
 
 Backups should not be on the same physical storage with your Production system.
 
@@ -34,7 +34,8 @@ Backups should not be on the same physical storage with your Production system.
 * Backup time 
 
 
-### Example backup setup table
+
+## Let put it together to one table as an example
 
 | Backup settings           |                |
 | ------------------------- | -------------- |

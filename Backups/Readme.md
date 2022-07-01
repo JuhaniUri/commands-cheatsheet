@@ -28,9 +28,7 @@ Backups should not be on the same physical storage with your Production system.
 * RTO: Recovery Time Objective is the amount of downtime a business can tolerate.
 * RPO: Recovery Point Objective the amount of data that can be lost within a period.
 
-![RTO and RPO](rpoandrto.png)
-
-Image is from: https://medium.com/@asfinachdian/rpo-vs-rto-difference-71b09dc96f78
+ RTO and RPO picture: https://medium.com/@asfinachdian/rpo-vs-rto-difference-71b09dc96f78
 
 
 

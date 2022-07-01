@@ -43,3 +43,11 @@ CN=web.fi
 $openssl req -new -sha256 -days 720 -newkey rsa:2048 -keyout web.key -out web.csr -config csr_details_for_web.txt
 $openssl req -in web.csr -noout -text
 ```
+
+## Private and public keys
+
+### How can I tell how many bits my ssh key is?
+```
+$  ssh-keygen -l -f ~/.ssh/id_rsa.pub
+3072 SHA256:4QBx/Vc5dZscdoaHFRNYJEe/ErTq2h+TgKGatYaMAEo user@work (RSA)
+```

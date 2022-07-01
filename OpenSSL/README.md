@@ -51,3 +51,8 @@ $openssl req -in web.csr -noout -text
 $  ssh-keygen -l -f ~/.ssh/id_rsa.pub
 3072 SHA256:4QBx/Vc5dZscdoaHFRNYJEe/ErTq2h+TgKGatYaMAEo user@work (RSA)
 ```
+
+### Ubuntu 20 will create 3072 bit key by default, in case you need 2048
+```
+$ ssh-keygen -b 2048 -t rsa
+```

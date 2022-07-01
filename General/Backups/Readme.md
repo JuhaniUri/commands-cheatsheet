@@ -1,9 +1,6 @@
 # Backups
 
-Backups in short facts.
-Backups should not be on the same physical storage with your Production system.
-
-# Example setup for databases
+## Example setup for databases
 
 | Backup settings           |                |
 | ------------------------- | -------------- |
@@ -22,9 +19,9 @@ Backups should not be on the same physical storage with your Production system.
 * We'll keep one full backup from each month and from last 3 months.
 
 
-# Possible options
+## Possible options
 
-## Business requirements 
+### Business requirements 
 * RTO: Recovery Time Objective is the amount of downtime a business can tolerate.
 * RPO: Recovery Point Objective the amount of data that can be lost within a period.
 
@@ -32,27 +29,28 @@ Backups should not be on the same physical storage with your Production system.
 
 
 
-## Types
+### Types
 * Full (If size and backup time is acceptable, then go for daily Full backups)
 * Differential
 * Incremental
 
-## Strategy 
+### Strategy 
 * Backup 3-2-1 (3 copies of data, 2 different media, 1 being off site)
 * Custom (2-2-1, 2-2-0, ...)
+NB! Should not be on the same physical storage with your Production system.
 
-## Rotation
+### Rotation
 * Grandfather-father-son
 * Custom (3 months, 3 0days)
 
-## Data at rest
+### Data at rest
 * Encryption
 
-## Regular testing and documented
+### Regular testing and documented
 * Yearly or Quarterly. 
 * Documentation should be easy to read (command by command with explations/recovery time) as when disater will you be in hurry. 
 
-## Monitoring
+### Monitoring
 * Status (OK or failed)
 * Backup time 
 

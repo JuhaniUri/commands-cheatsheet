@@ -48,11 +48,11 @@ Backups should not be on the same physical storage with your Production system.
 ## Data at rest
 * Encryption
 
-## Regular testing (Often overlooked or with low priority)
-* Yearly
-* Quarterly 
+## Regular testing and documented
+* Yearly or Quarterly. 
+* Documentation should be easy to read (command by command with explations/recovery time) as when disater will you be in hurry. 
 
-## Monitoring (Ofter not implemented)
+## Monitoring
 * Status (OK or failed)
 * Backup time 
 

@@ -5,7 +5,7 @@
 
 ## Data at rest
 
-[Data at rest]: (data-at-rest.md)
+[Data at rest](data-at-rest.md)
 
 ## Data in motion 
 

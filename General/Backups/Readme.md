@@ -45,7 +45,7 @@ NB! Should not be on the same physical storage with your Production system.
 ### Data at rest
 * Encryption
 
-### Regular testing and documented
+### Recovery testing and documentation
 * Yearly or Quarterly. 
 * Documentation should be easy to read (command by command with explations/recovery time) as when disater will you be in hurry. 
 

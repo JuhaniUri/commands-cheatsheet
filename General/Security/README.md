@@ -3,12 +3,12 @@
 Security topic is quite wide, I just going to cover some important section.
 I not going to cover network part, has it is huge
 
-# Authorizaion 
-- complex 
-- ssh keys
+# Authentication   
+- Complex 
+- SSH keys
 - MFA
 
-# 
+# Authorization
 
 - least privilege approach
 
@@ -18,11 +18,11 @@ I not going to cover network part, has it is huge
 
 # Secret management 
 
-Consider tools like
-- Hasicorp Vault
+- Hashicorp Vault
 
 
 # Certificates
+- PKI
 
 # Logging 
 
@@ -45,7 +45,6 @@ Consider tools like
 
 ## Data at rest
 
-Tools like
 
 [Deep dive into data at rest](data-at-rest.md)
 

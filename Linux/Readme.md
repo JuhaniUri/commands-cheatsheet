@@ -24,6 +24,10 @@
     - [SED with find: Replacing multiple values in multiple files in subdirectories (Mac)](#sed-with-find-replacing-multiple-values-in-multiple-files-in-subdirectories-mac)
     - [AWK: List of all locked accounts (accounts with passwords) :](#awk-list-of-all-locked-accounts-accounts-with-passwords-)
     - [AWK: List of all unlocked accounts (accounts with passwords) :](#awk-list-of-all-unlocked-accounts-accounts-with-passwords-)
+  - [Perfomance](#perfomance)
+    - [vmstat](#vmstat)
+    - [top](#top)
+    - [htop](#htop)
   - [SSH keys](#ssh-keys)
     - [ssh-keygen: generate private and public key to file](#ssh-keygen-generate-private-and-public-key-to-file)
     - [Convert MIIE key content](#convert-miie-key-content)
@@ -253,6 +257,27 @@ awk -F: '{ system("passwd -S " $1)}' /etc/passwd | grep " LK "
 ```
 awk -F: '{ system("passwd -S " $1)}' /etc/passwd | grep " PS "
 ```
+
+## Perfomance 
+
+### vmstat 
+
+Detecting a server with CPU resource problems is simple. When the value of the runqueue "r" column exceeds the number of CPUs on the server, tasks are forced to wait for execution.
+```
+[oracle@vm01 ~]$ vmstat 5 5
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+40  1      0 33275964 750340 30270020    0    0    22   104    1    3 65 16  1  0 18
+15  0      0 33310408 750340 30270336    0    0     7   326 28836 30509 70 19  0  0 10
+42  0      0 33285596 750340 30270972    0    0     6   249 28673 31171 72 16  0  0 12
+24  0      0 33317896 750340 30271336    0    0     6   196 17484 20959 54 14  0  0 32
+44  0      0 33308640 750344 30271788    0    0    14  1677 22492 25631 61 16  0  0 22
+```
+
+### top
+... 
+### htop
+... 
 
 
 ## SSH keys 

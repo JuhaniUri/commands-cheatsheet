@@ -11,4 +11,14 @@ COLUMN total format 999,999,999
 SET feedback ON
 ```
 
+## Connect with SQLplus (tested with Oracle client 12.2)
 
+### Connect core or pdb db with password manually (preferred):
+```
+sqlplus system@\"localhost:1521/ORCLCDB\"
+```
+
+### Connect core or pdb db with password in command:
+```
+sqlplus system/*******@localhost:1521/ORCLCDB
+```

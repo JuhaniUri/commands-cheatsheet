@@ -15,7 +15,7 @@ v_api_request = requests.get(v_api_url, headers=v_api_header).json()
 ## Access data
 v_json_data = v_api_request["data"]
 
-## Loop trought pages (pagination)
+## Loop through pages (pagination)
 ## Check for the value "nextPage" from JSON
 while "nextPage" in v_api_request: 
     v_api_request = requests.get(v_api_request["nextPage"],headers=v_api_header).json()

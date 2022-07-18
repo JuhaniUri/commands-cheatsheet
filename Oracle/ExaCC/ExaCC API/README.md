@@ -46,7 +46,7 @@ curl -X GET --user $ORA_API_username:$ORA_API_pass -H "X-ID-TENANT-NAME:idcs-***
 curl -X GET --user $ORA_API_username:$ORA_API_pass -H "X-ID-TENANT-NAME:idcs-******" https://example.com/paas/service/dbcs/api/v1.1/instances/idcs-****** | jq -r '.services[] | "\(.service_name) \(.version)"'
 ```
 
-# Get details from service eg. database
+#### Get details from service eg. database
 View a Database Deployment
 
 https://docs.oracle.com/en/cloud/cloud-at-customer/exadata-cloud-at-customer/eccrs/op-paas-service-dbcs-api-v1.1-instances-identitydomainid-serviceidget.html

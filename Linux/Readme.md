@@ -53,6 +53,8 @@
     - [sync logs to nfs](#sync-logs-to-nfs)
   - [Concatenate multiple files and include filename as section headers](#concatenate-multiple-files-and-include-filename-as-section-headers)
   - [Disk speed quick and easy](#disk-speed-quick-and-easy)
+  - [Curl](#curl)
+    - [Download Mozilla CA certificate store in PEM format](#download-mozilla-ca-certificate-store-in-pem-format)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -428,5 +430,9 @@ Timing cached reads:   6132 MB in  1.99 seconds = 3076.04 MB/sec
 Timing buffered disk reads:  302 MB in  3.01 seconds = 100.46 MB/sec
 ```
 
+## Curl
+### Download Mozilla CA certificate store in PEM format
 
-
+```
+[ -f cacert.pem ] || curl --remote-name --time-cond cacert.pem https://curl.haxx.se/ca/cacert.pem
+```

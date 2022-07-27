@@ -2,9 +2,12 @@
 
 
 ## Tools:
-- Oracle Data Safe https://docs.oracle.com/en-us/iaas/data-safe/doc/oracle-data-safe-overview.html
-- Oracle DBSAT https://www.oracle.com/uk/database/technologies/security/dbsat.html
-- ODAT https://github.com/quentinhardy/odat
+- Oracle Data Safe 
+https://docs.oracle.com/en-us/iaas/data-safe/doc/oracle-data-safe-overview.html
+- Oracle DBSAT 
+https://www.oracle.com/uk/database/technologies/security/dbsat.html
+- ODAT 
+https://github.com/quentinhardy/odat
 
 ## Guides: 
 - Follow Security Guide provided by Oracle.

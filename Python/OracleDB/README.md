@@ -2,6 +2,7 @@
 
 ## Quick start
 https://github.com/oracle/python-oracledb
+
 https://python-oracledb.readthedocs.io/en/latest/user_guide/installation.html
 
 ### Install

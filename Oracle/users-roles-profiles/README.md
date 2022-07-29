@@ -11,7 +11,7 @@
       - [Create role](#create-role-1)
       - [Grant select and debug](#grant-select-and-debug)
     - [Oracle profile and change the password lifetime limit](#oracle-profile-and-change-the-password-lifetime-limit)
-    - [1. List users](#1-list-users)
+      - [1. List users](#1-list-users)
       - [2. For showing the specific profiles property](#2-for-showing-the-specific-profiles-property)
       - [3. Allow users to keep their password forever](#3-allow-users-to-keep-their-password-forever)
       - [4. Verify](#4-verify)
@@ -42,7 +42,6 @@
 | INACTIVE_ACCOUNT_TIME     | 30 (days)                     | 30 (days)                     |
 | PASSWORD_VERIFY_FUNCTION  | ORA12C_STRONG_VERIFY_FUNCTION | ORA12C_STRONG_VERIFY_FUNCTION |
 | PASSWORD_ROLLOVER_TIME    | -1                            | 3 (days)                      |
-|---------------------------|-------------------------------|-------------------------------|
 
 ## Roles
 ### Readonly role example in Prod with job 
@@ -113,7 +112,7 @@ END;
 
 ### Oracle profile and change the password lifetime limit
 
-### 1. List users
+#### 1. List users
 ```
 SELECT username,
        account_status,

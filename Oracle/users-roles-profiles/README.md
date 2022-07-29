@@ -1,5 +1,5 @@
-# User and role setups for Oracle 
-- [User and role setups for Oracle](#user-and-role-setups-for-oracle)
+# User, roles, profile in Oracle 
+- [User, roles, profile in Oracle](#user-roles-profile-in-oracle)
   - [Profiles](#profiles)
     - [Starting point for profiles](#starting-point-for-profiles)
   - [Roles](#roles)

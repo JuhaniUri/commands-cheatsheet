@@ -3,6 +3,7 @@
   - [Profiles](#profiles)
     - [Starting point for profiles](#starting-point-for-profiles)
   - [Roles](#roles)
+    - [Common roles](#common-roles)
     - [Password-protected role](#password-protected-role)
     - [Oracle database role-related MOS notes:](#oracle-database-role-related-mos-notes)
     - [Examples](#examples)
@@ -25,7 +26,7 @@
 
 |                           | User account                  | Service account               |
 |---------------------------|-------------------------------|-------------------------------|
-| SESSIONS_PER_USER         | 2                             | Depends on use case           |
+| SESSIONS_PER_USER         | 2                             | Per case                      |
 | CONNECT_TIME              | 480 (minutes)                 | unlimited                     |
 | IDLE_TIME                 | 30 (minutes)                  | unlimited                     |
 |                           |                               |                               |
@@ -48,8 +49,20 @@
 
 ## Roles
 
+### Common roles
+
+| Role                | Description                                                                   |
+|----- ---------------|-------------------------------------------------------------------------------|
+| CONNECT             | CREATE SESSION and SET CONTAINER system privileges                            |
+| RESOURCE            | Privileges for creation of table, index, procedure, trigger, sequence, etc    |
+| SELECT_CATALOG_ROLE | SELECT privileges on data dictionary views                                    |
+| DBA                 | Most system privileges                                                        |
+| PUBLIC              | Every user has it automatically when the account is created                   |
+
 
 ### Password-protected role
+
+... Will add later
 
 ### Oracle database role-related MOS notes:
 - Primary Note For Privileges And Roles (Doc ID 1347470.1)

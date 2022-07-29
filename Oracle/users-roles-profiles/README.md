@@ -3,11 +3,11 @@
   - [Profiles](#profiles)
     - [Starting point for profiles](#starting-point-for-profiles)
   - [Roles](#roles)
-    - [Readonly role example in Prod with job](#readonly-role-example-in-prod-with-job)
+    - [Readonly role example in with daily update job](#readonly-role-example-in-with-daily-update-job)
       - [Create role](#create-role)
       - [Create daily job](#create-daily-job)
       - [Grant access to role](#grant-access-to-role)
-    - [Create a readonly role without jos](#create-a-readonly-role-without-jos)
+    - [Create a readonly role](#create-a-readonly-role)
       - [Create role](#create-role-1)
       - [Grant select and debug](#grant-select-and-debug)
     - [Oracle profile and change the password lifetime limit](#oracle-profile-and-change-the-password-lifetime-limit)
@@ -44,7 +44,7 @@
 | PASSWORD_ROLLOVER_TIME    | -1                            | 3 (days)                      |
 
 ## Roles
-### Readonly role example in Prod with job 
+### Readonly role example in with daily update job 
 
 #### Create role
 ```
@@ -90,7 +90,7 @@ END;
 GRANT DEVELOPER_READ_ONLY TO USER;
 ```
 
-### Create a readonly role without jos
+### Create a readonly role 
 
 #### Create role
 ```

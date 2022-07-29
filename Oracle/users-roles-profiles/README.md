@@ -5,18 +5,19 @@
   - [Roles](#roles)
     - [Password-protected role](#password-protected-role)
     - [Oracle database role-related MOS notes:](#oracle-database-role-related-mos-notes)
-    - [Readonly role example in with daily update job](#readonly-role-example-in-with-daily-update-job)
-      - [Create role](#create-role)
-      - [Create daily job](#create-daily-job)
-      - [Grant access to role](#grant-access-to-role)
-    - [Create a readonly role](#create-a-readonly-role)
-      - [Create role](#create-role-1)
-      - [Grant select and debug](#grant-select-and-debug)
-    - [Oracle profile and change the password lifetime limit](#oracle-profile-and-change-the-password-lifetime-limit)
-      - [1. List users](#1-list-users)
-      - [2. For showing the specific profiles property](#2-for-showing-the-specific-profiles-property)
-      - [3. Allow users to keep their password forever](#3-allow-users-to-keep-their-password-forever)
-      - [4. Verify](#4-verify)
+    - [Examples](#examples)
+      - [Readonly role example in with daily update job](#readonly-role-example-in-with-daily-update-job)
+        - [Create role](#create-role)
+        - [Create daily job](#create-daily-job)
+        - [Grant access to role](#grant-access-to-role)
+      - [Create a readonly role](#create-a-readonly-role)
+        - [Create role](#create-role-1)
+        - [Grant select and debug](#grant-select-and-debug)
+      - [Oracle profile and change the password lifetime limit](#oracle-profile-and-change-the-password-lifetime-limit)
+        - [1. List users](#1-list-users)
+        - [2. For showing the specific profiles property](#2-for-showing-the-specific-profiles-property)
+        - [3. Allow users to keep their password forever](#3-allow-users-to-keep-their-password-forever)
+        - [4. Verify](#4-verify)
 
 
 ## Profiles
@@ -48,9 +49,6 @@
 ## Roles
 
 
-
-
-
 ### Password-protected role
 
 ### Oracle database role-related MOS notes:
@@ -61,14 +59,17 @@
 - Invokers Rights Procedure Executed by Definers Rights Procedures (Doc ID 162489.1)
 - Be Cautious When Revoking Privileges Granted to PUBLIC (Doc ID 247093.1)
 
-### Readonly role example in with daily update job 
 
-#### Create role
+### Examples
+
+#### Readonly role example in with daily update job 
+
+##### Create role
 ```
 CREATE ROLE DEVELOPER_READ_ONLY;
 GRANT CREATE SESSION TO DEVELOPER_READ_ONLY;
 ```
-#### Create daily job
+##### Create daily job
 ```
 BEGIN
     DBMS_SCHEDULER.CREATE_JOB (
@@ -102,18 +103,18 @@ END;',
     
 END;
 ```
-#### Grant access to role
+##### Grant access to role
 ```
 GRANT DEVELOPER_READ_ONLY TO USER;
 ```
 
-### Create a readonly role 
+#### Create a readonly role 
 
-#### Create role
+##### Create role
 ```
 CREATE ROLE READ_ONLY;
 ```
-#### Grant select and debug
+##### Grant select and debug
 ```
 BEGIN
   FOR t IN (SELECT object_name, object_type, owner FROM all_objects WHERE OWNER in ('SCHEMA1', 'SCHEMA2', 'SCHEMA3')  AND object_type IN ('TABLE','VIEW','PROCEDURE','FUNCTION','PACKAGE', 'PACKAGE BODY')) LOOP
@@ -127,9 +128,9 @@ END;
 ```
 
 
-### Oracle profile and change the password lifetime limit
+#### Oracle profile and change the password lifetime limit
 
-#### 1. List users
+##### 1. List users
 ```
 SELECT username,
        account_status,
@@ -145,17 +146,17 @@ WHERE  username LIKE UPPER('%&1%')
 ORDER BY username;
 ```
 
-#### 2. For showing the specific profiles property
+##### 2. For showing the specific profiles property
 ```
 select * from dba_profiles where profile='DEFAULT';
 ```
 
-#### 3. Allow users to keep their password forever
+##### 3. Allow users to keep their password forever
 ```
 alter profile "DEFAULT" limit password_life_time unlimited;
 ```
 
-#### 4. Verify 
+##### 4. Verify 
 ```
 select * from dba_profiles where profile='DEFAULT';
 ```

@@ -52,7 +52,7 @@
 ### Common roles
 
 | Role                | Description                                                                   |
-|----- ---------------|-------------------------------------------------------------------------------|
+|---------------------|-------------------------------------------------------------------------------|
 | CONNECT             | CREATE SESSION and SET CONTAINER system privileges                            |
 | RESOURCE            | Privileges for creation of table, index, procedure, trigger, sequence, etc    |
 | SELECT_CATALOG_ROLE | SELECT privileges on data dictionary views                                    |

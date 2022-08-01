@@ -29,7 +29,7 @@ NB! Should not be on the same physical storage with your Production system.
 
 ### Recovery testing and documentation
 * Yearly or Quarterly. 
-* Documentation should be easy to read (command by command with explations/recovery time) as when disater will you be in hurry. 
+* Documentation should be easy to read (command by command with expiations/recovery time) as when disaster will you be in hurry. 
 
 ### Monitoring
 * Status (OK or failed)
@@ -56,7 +56,7 @@ NB! Should not be on the same physical storage with your Production system.
 
 
 ## Backups vs Archiving 
-Lot of confusion around this topic. Quite common case is that Backups are retention is quite high, so that they could fulfill the Archive requirements. In a sense that is OK and of course simplifies the setup. But, you should consider keep the Archives separately. 
+Lot of confusion around this topic. Quite common case is that Backups retention policy is quite high, so that it would fulfill the Archive requirements. In a sense that is OK and it simplifies the setup. But, you should consider threat Archives separately. 
 Here is comparison why: 
 
 |                | BACKUPS                                                | ARCHIVING                                        |

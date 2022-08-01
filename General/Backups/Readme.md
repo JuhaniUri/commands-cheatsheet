@@ -56,8 +56,8 @@ NB! Should not be on the same physical storage with your Production system.
 
 
 ## Backups vs Archiving 
-There is lot of confusion around this topic. Quite common case is that Backups are used as Archive, in a sense that is OK and of course simplifies the setup.
-But, you should consider keep the Archives separately
+Lot of confusion around this topic. Quite common case is that Backups are retention is quite high, so that they could fulfill the Archive requirements. In a sense that is OK and of course simplifies the setup. But, you should consider keep the Archives separately. 
+Here is comparison why: 
 
 |                | BACKUPS                                                | ARCHIVING                                        |
 |----------------|--------------------------------------------------------|--------------------------------------------------|
@@ -65,8 +65,8 @@ But, you should consider keep the Archives separately
 | Usage          | Event of failure                                       | As required                                      |
 | Speed          | Speed is very important                                | Not concerned                                    |
 | Storage        | Short to mid-term storage (costly)                     | Long-term storage (cheaper)                      |
-| Retention      | Typically short-term (weeks or months)                 | Typically long-term (months, years or decades)  |
-| Cyclic process | Overwriting itself after retention time is reached     | Might be forever growing                        |
+| Retention      | Typically short-term (weeks or months)                 | Typically long-term (months, years or decades)   |
+| Cyclic process | Overwriting itself after retention time is reached     | Might be forever growing                         |
 | Data Type      | Replicated data of active data, hot data and warm data | Cold data                                        |
-| Format         | Not important                                          | For decades something standard                   |
+| Format         | Not important                                          | For decades something standard (like txt)        |
 |                |                                                        |                                                  |

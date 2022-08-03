@@ -22,6 +22,7 @@
     - [SED with find: Replacing values in multiple files inside directory (Mac)](#sed-with-find-replacing-values-in-multiple-files-inside-directory-mac)
     - [SED with find: Replacing values in multiple files inside directory (Linux)](#sed-with-find-replacing-values-in-multiple-files-inside-directory-linux)
     - [SED with find: Replacing multiple values in multiple files in subdirectories (Mac)](#sed-with-find-replacing-multiple-values-in-multiple-files-in-subdirectories-mac)
+    - [GREP: Print line before, don't print match](#grep-print-line-before-dont-print-match)
     - [AWK: List of all locked accounts (accounts with passwords) :](#awk-list-of-all-locked-accounts-accounts-with-passwords-)
     - [AWK: List of all unlocked accounts (accounts with passwords) :](#awk-list-of-all-unlocked-accounts-accounts-with-passwords-)
   - [Perfomance](#perfomance)
@@ -232,7 +233,6 @@ sed -i 's/.*plugins=ifcfg-rh,ibft.*/dns=none\n&/' /etc/NetworkManager/NetworkMan
 sed -i -e 's/11\.4\.0\.27/11\.4\.0\.10/g' terraform-outputs.yml
 ```
 
-
 ### SED with find: Replacing values in multiple files inside directory (Mac)
 ```
 find foldername -type f -exec grep -H 'hostname' {} \;
@@ -250,6 +250,10 @@ find foldername/*/some-other/ -type f -name "*.yaml" -exec sed -i 's/hostname.lo
 find foldername/*/openstack  -type f -name "*.yaml" -exec sed -i '' '/firewall:/d;/l7policy:/d;/listener:/d;/member:/d;/healthmonitor:/d;/loadbalancer:/d' {} \
 ```
 
+### GREP: Print line before, don't print match
+```
+grep -B 1 Dead alert.log | grep -vE 'Dead|^--$'
+```
 
 ### AWK: List of all locked accounts (accounts with passwords) :
 ```

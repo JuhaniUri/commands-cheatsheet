@@ -25,6 +25,7 @@
     - [GREP: Print line before, don't print match](#grep-print-line-before-dont-print-match)
     - [AWK: List of all locked accounts (accounts with passwords) :](#awk-list-of-all-locked-accounts-accounts-with-passwords-)
     - [AWK: List of all unlocked accounts (accounts with passwords) :](#awk-list-of-all-unlocked-accounts-accounts-with-passwords-)
+    - [Tail: Show file content with file names](#tail-show-file-content-with-file-names)
   - [Perfomance](#perfomance)
     - [vmstat](#vmstat)
     - [top](#top)
@@ -262,6 +263,21 @@ awk -F: '{ system("passwd -S " $1)}' /etc/passwd | grep " LK "
 ### AWK: List of all unlocked accounts (accounts with passwords) :
 ```
 awk -F: '{ system("passwd -S " $1)}' /etc/passwd | grep " PS "
+```
+
+### Tail: Show file content with file names
+```
+tail -v -n +1 /u02/app/oracle/product/*/*/network/admin/sqlnet.ora
+```
+Example output
+```
+==> /u02/app/oracle/product/18.0.0.0/dbhome_6/network/admin/sqlnet.ora <==
+SQLNET.ENCRYPTION_SERVER = required
+SQLNET.CRYPTO_CHECKSUM_SERVER = required
+
+==> /u02/app/oracle/product/19.0.0.0/dbhome_2/network/admin/sqlnet.ora <==
+SQLNET.ENCRYPTION_SERVER = required
+SQLNET.CRYPTO_CHECKSUM_SERVER = required
 ```
 
 ## Perfomance 

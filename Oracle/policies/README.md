@@ -24,15 +24,13 @@ Some 4 letter synonym for application.
 
 ### TEST and DEV: [ENV]+[SID]
 
-As example: 
+Example 1: 
 - TESTAPP
 - DEVAPP
 
-Or you could even simplfy this with general rule: [ENV]+[SID]:[PORT]
-
-- LIVEAPP: 1521
-- TESTAPP: 1522
-- DEVAPP: 1523
+Example 2:
+- TAPP
+- DAPP
 
 ## Listener and ports
 
@@ -40,11 +38,11 @@ Or you could even simplfy this with general rule: [ENV]+[SID]:[PORT]
 
 Naming is rule is simple: LISTENER_[SID]
 
-As example: LISTENER_APP, LISTENER_TESTAPP etc.
+As example: LISTENER_APP, LISTENER_TESTAPP or LISTENER_TAPP etc.
 
 ### Ports
-1521 is resvered for LIVE
-1522 - 1529 is for TEST/DEV enviroments.
+1521 is reserved for LIVE
+1522 - 1529 is for TEST/DEV environment's.
 
 
 

@@ -1,5 +1,9 @@
 # Monitoring
 
+General monitoring for application 
+![APM](APM.png)
+
+
 ## Linux (Minimal)
 
 - CPU usage (Load)

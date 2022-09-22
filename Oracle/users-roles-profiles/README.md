@@ -53,7 +53,6 @@ Oracle Database 19.12 introduces a new parameter related to the already existing
 |                           | User account                  | Service account               |
 |---------------------------|-------------------------------|-------------------------------|
 | PASSWORD_ROLLOVER_TIME    | -1                            | 3 (days)                      |
-|---------------------------|-------------------------------|-------------------------------|
 
 
 ## Roles

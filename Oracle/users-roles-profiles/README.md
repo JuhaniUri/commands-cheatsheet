@@ -50,8 +50,10 @@ Parameters for Oracle 12
 
 Oracle Database 19.12 introduces a new parameter related to the already existing PASSWORD_LIFE_TIME and PASSWORD_GRACE_TIME parameters called PASSWORD_ROLLOVER_TIME.
 
+|                           | User account                  | Service account               |
 |---------------------------|-------------------------------|-------------------------------|
 | PASSWORD_ROLLOVER_TIME    | -1                            | 3 (days)                      |
+|---------------------------|-------------------------------|-------------------------------|
 
 
 ## Roles

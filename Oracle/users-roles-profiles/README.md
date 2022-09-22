@@ -24,6 +24,8 @@
 ## Profiles
 ### Starting point for profiles
 
+Oracle 12
+
 |                           | User account                  | Service account               |
 |---------------------------|-------------------------------|-------------------------------|
 | SESSIONS_PER_USER         | 2                             | Per case                      |
@@ -45,7 +47,10 @@
 | PASSWORD_GRACE_TIME       | unlimited                     | unlimited                     |
 | INACTIVE_ACCOUNT_TIME     | 30 (days)                     | 30 (days)                     |
 | PASSWORD_VERIFY_FUNCTION  | ORA12C_STRONG_VERIFY_FUNCTION | ORA12C_STRONG_VERIFY_FUNCTION |
-| PASSWORD_ROLLOVER_TIME    | -1                            | 3 (days)                      |
+
+Oracle Database 19.12 introduces a new parameter related to the already existing PASSWORD_LIFE_TIME and PASSWORD_GRACE_TIME parameters called PASSWORD_ROLLOVER_TIME.
+
+
 
 ## Roles
 

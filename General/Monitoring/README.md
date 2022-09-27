@@ -1,17 +1,13 @@
 # Monitoring
 
-General monitoring for application 
-![APM](APM.png)
+One can say that monitoring can be divided two parts:
 
+Basic monitoring aka infra part. Usually tools like Zabbix, Prometheus, Grafana, Statuscake etc.
+Advanced monitoring ak application monitoring. Tools like Prometheus, Grafana, AppDynamics, Dynatrace etc.
 
-## Linux (Minimal)
+It's quite common that basic monitoring is enabled and maintained by Infra/Ops team.
+The advanced monitoring is enablement comes from the developers and business side.
 
-- CPU usage (Load)
-- Memory usage
-- Disk usage
-- I/O wait
-- I/O (Filesystem like ext4, xfs) Error monitoring/altering is a must! 
-- Time
+Good setup has a centralized logging enabled like ELK, OpenSearch etc. Logging can compliment our monitoring set.
 
-
-
+![Monitoring](Monit.png)

@@ -10,4 +10,10 @@ Is enablement comes from the developers and business side.
 
 Good setup has a centralized logging enabled like ELK, OpenSearch etc. Logging can compliment our monitoring set.
 
+
 ![Monitoring](Monit.png)
+
+
+
+Application performance monitoring (APM)
+![APM](APM.png)

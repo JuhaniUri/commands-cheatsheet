@@ -1,5 +1,6 @@
 # User, roles, profile in Oracle 
 - [User, roles, profile in Oracle](#user-roles-profile-in-oracle)
+  - [Diagram for Oracle user, privileges, roles, profiles.](#diagram-for-oracle-user-privileges-roles-profiles)
   - [Profiles](#profiles)
     - [Starting point for profiles](#starting-point-for-profiles)
   - [Roles](#roles)
@@ -20,6 +21,8 @@
         - [3. Allow users to keep their password forever](#3-allow-users-to-keep-their-password-forever)
         - [4. Verify](#4-verify)
 
+## Diagram for Oracle user, privileges, roles, profiles.
+![Oracle](Oracle-users-roles-profiles-privileges.png)
 
 ## Profiles
 ### Starting point for profiles

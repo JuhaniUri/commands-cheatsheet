@@ -52,7 +52,5 @@ I not going to cover network part, has it is huge
 
 
 ## Defends in layers
-![defense in layers](defense-in-layers.jpg)
 
-![defense in layers](defence-in-layers-icons.png)
 

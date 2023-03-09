@@ -114,7 +114,7 @@ xfs_growfs /dev/vg_new_docs/lv_doku
 growpart /dev/sda 1
 pvscan
 lvscan
-lvextend -l 100%FREE /dev/mapper/lvm_pool_data1-lvol001
+lvextend -l +100%FREE /dev/mapper/lvm_pool_data1-lvol001
 xfs_growfs /dev/mapper/lvm_pool_data1-lvol001
 ```
 

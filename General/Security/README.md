@@ -51,6 +51,6 @@ I not going to cover network part, has it is huge
 ## Data in motion 
 
 
-## Defends in layers
+## Defense in layers
 
 

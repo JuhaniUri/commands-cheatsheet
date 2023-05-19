@@ -55,8 +55,3 @@ $ ps -ax | grep snmp
 ```
 
 
-### Get list of cluster names
-```
-```
-
-

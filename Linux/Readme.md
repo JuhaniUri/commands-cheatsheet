@@ -63,7 +63,6 @@
   - [Snmpwalk examples](#snmpwalk-examples)
     - [SNMP v2c](#snmp-v2c)
     - [SNMP v3](#snmp-v3)
-- [Export password](#export-password)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -468,14 +467,12 @@ Timing buffered disk reads:  302 MB in  3.01 seconds = 100.46 MB/sec
 ## Snmpwalk examples
 
 ### SNMP v2c
-
 ```
 $ snmpwalk -v2c -c <community-string>  192.168.0.1
 ```
 
 ### SNMP v3
-# Export password
 ```
-$ export SNMPPASS=‘***’*******
+$ export SNMPPASS=‘***’
 $ snmpwalk -v3 -l authPriv -u USERNAME -a SHA1 -A $SNMPPASS -x AES128 -X $SNMPPASS 192.168.0.1
 ```

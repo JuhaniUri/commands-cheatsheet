@@ -1,6 +1,7 @@
 # Useful Linux commands
 
 - [Useful Linux commands](#useful-linux-commands)
+- [](#)
   - [Partitions, LVM, LUKS, FS etc](#partitions-lvm-luks-fs-etc)
     - [Create file that will utilize space from storage](#create-file-that-will-utilize-space-from-storage)
     - [LUKS: Format the filesystem with LUKS and add extra password to slot1](#luks-format-the-filesystem-with-luks-and-add-extra-password-to-slot1)
@@ -12,8 +13,10 @@
     - [LVM reduce](#lvm-reduce)
     - [Mounting a Windows fileshare (tested with RHEL6)](#mounting-a-windows-fileshare-tested-with-rhel6)
     - [Find dublicates in fstab](#find-dublicates-in-fstab)
+  - [](#-1)
   - [Permissions](#permissions)
     - [Test permissions of file/folder for user, works even when user has "nologin"](#test-permissions-of-filefolder-for-user-works-even-when-user-has-nologin)
+  - [](#-2)
   - [Text manipulation with SED, AWK](#text-manipulation-with-sed-awk)
     - [SED: Replace in file (Mac)](#sed-replace-in-file-mac)
     - [SED: Insert line at very end](#sed-insert-line-at-very-end)
@@ -41,7 +44,7 @@
     - [ausearch: audit daemon logs for date](#ausearch-audit-daemon-logs-for-date)
     - [restorecon: restore file(s) default SELinux security contexts.](#restorecon-restore-files-default-selinux-security-contexts)
   - [YAML](#yaml)
-    - [YAML validator -> yamllint](#yaml-validator---yamllint)
+    - [YAML validator -\> yamllint](#yaml-validator---yamllint)
   - [Find](#find)
     - [Find with file name](#find-with-file-name)
   - [Network](#network)
@@ -57,6 +60,10 @@
   - [Disk speed quick and easy](#disk-speed-quick-and-easy)
   - [Curl](#curl)
     - [Download Mozilla CA certificate store in PEM format](#download-mozilla-ca-certificate-store-in-pem-format)
+  - [Snmpwalk examples](#snmpwalk-examples)
+    - [SNMP v2c](#snmp-v2c)
+    - [SNMP v3](#snmp-v3)
+- [Export password](#export-password)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -68,11 +75,11 @@ xfs_mkfile 10240m 10Gigfile
 ```
 
 
-### LUKS: Format the filesystem with LUKS and add extra password to slot1 
+### LUKS: Format the filesystem with LUKS and add extra password to slot1
 ```
 cryptsetup luksFormat --cipher aes-xts-plain64 /dev/mapper/lvm_pool_data1-lvol001
 cryptsetup luksOpen /dev/mapper/lvm_pool_data1-lvol001 es_data
-cryptsetup luksAddKey --key-slot 1 /dev/mapper/lvm_pool_data1-lvol001 
+cryptsetup luksAddKey --key-slot 1 /dev/mapper/lvm_pool_data1-lvol001
 mkfs.xfs /dev/mapper/es_data
 ```
 
@@ -84,18 +91,18 @@ vgextend vg_crypt /dev/sdc1
 lvextend -L +10G  /dev/mapper/vg_crypt-lv_crypt
   Size of logical volume vg_crypt/lv_crypt changed from 11.00 GiB (2816 extents) to 21.00 GiB (5376 extents).
   Logical volume lv_crypt successfully resized.
- 
+
 cryptsetup resize /dev/mapper/vg_crypt-lv_crypt
 xfs_growfs /dev/mapper/crypted_lvm
 ```
 
-### Create part/VG/LV/FS 
+### Create part/VG/LV/FS
 ```
 parted /dev/sdb mklabel msdos mkpart primary 1M 100% set 1 lvm on
 pvcreate /dev/sdb1
 vgcreate vg_pgsql /dev/sdb1
   lvcreate -L 20G -n lv_pgsql vg_pgsql
-  or 
+  or
   lvcreate -l 100%FREE -n lv_pgsql vg_pgsql
 mkfs.xfs /dev/mapper/vg_pgsql-lv_pgsql
 ```
@@ -109,7 +116,7 @@ lvextend -l +100%FREE /dev/vg_new_docs/lv_doku
 xfs_growfs /dev/vg_new_docs/lv_doku
 ```
 
-### Growpart if disk was increased 
+### Growpart if disk was increased
 ```
 growpart /dev/sda 1
 pvscan
@@ -175,7 +182,7 @@ lvreduce -L 60G /dev/mapper/VolGroup00-orabackup
 [root@TEST ~]# vgreduce VolGroup00 /dev/xvdc1
   Removed "/dev/xvdc1" from volume group "VolGroup00"
 ```
-10.	pvremove 
+10.	pvremove
 ```
 [root@TEST ~]# pvs
   PV         VG         Fmt  Attr PSize  PFree
@@ -280,9 +287,9 @@ SQLNET.ENCRYPTION_SERVER = required
 SQLNET.CRYPTO_CHECKSUM_SERVER = required
 ```
 
-## Perfomance 
+## Perfomance
 
-### vmstat 
+### vmstat
 
 Detecting a server with CPU resource problems is simple. When the value of the runqueue "r" column exceeds the number of CPUs on the server, tasks are forced to wait for execution.
 ```
@@ -297,19 +304,19 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
 ```
 
 ### top
-... 
+...
 ### htop
-... 
+...
 
 
-## SSH keys 
+## SSH keys
 
 ### ssh-keygen: generate private and public key to file
 ```
 ssh-keygen -t rsa -b 4096 -out filename
 ```
 
-### Convert MIIE key content 
+### Convert MIIE key content
 
 Copy the value of the private_key_pem field.
 Reformat the copied value and save it in the current directory to a file named PRIVATE-KEY-FILE. Run:
@@ -331,7 +338,7 @@ $ printf --  "-----BEGIN RSA PRIVATE KEY----- MIIEkeycontents ----END RSA PRIVAT
 1. Go in block visual mode ctrl-v
 2. Select the lines you want to modify
 3. Press shift+i (capital i)
-4. Apply any changes for the first line. 
+4. Apply any changes for the first line.
 5. Leaving visual mode esc will apply all changes on the first line to all lines.
 ```
 
@@ -350,7 +357,7 @@ $ printf --  "-----BEGIN RSA PRIVATE KEY----- MIIEkeycontents ----END RSA PRIVAT
 3. Type 5dd and hit Enter to delete the next five lines.
 ```
 
-## SElinux 
+## SElinux
 ### ausearch: audit daemon logs for date
 ```
 ausearch -m avc -ts 10/22/2021
@@ -455,4 +462,20 @@ Timing buffered disk reads:  302 MB in  3.01 seconds = 100.46 MB/sec
 
 ```
 [ -f cacert.pem ] || curl --remote-name --time-cond cacert.pem https://curl.haxx.se/ca/cacert.pem
+```
+
+
+## Snmpwalk examples
+
+### SNMP v2c
+
+```
+$ snmpwalk -v2c -c <community-string>  192.168.0.1
+```
+
+### SNMP v3
+# Export password
+```
+$ export SNMPPASS=‘***’*******
+$ snmpwalk -v3 -l authPriv -u USERNAME -a SHA1 -A $SNMPPASS -x AES128 -X $SNMPPASS 192.168.0.1
 ```

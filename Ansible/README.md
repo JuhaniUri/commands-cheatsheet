@@ -1,6 +1,6 @@
-# Generic ansible 
+# Generic ansible
 
-## Best practices 
+## Best practices
 
 ### Overall organization
 
@@ -21,7 +21,7 @@
 
 ### Staging
 
-    o	Different environments (development, test, production) 
+    o	Different environments (development, test, production)
 
 ### Encryption of data (e.g. passwords, certificates)
 
@@ -29,7 +29,7 @@
 
 
 
-## Example layout for ansible 
+## Example layout for ansible
 ### Monorepo
 ```
 Infra
@@ -40,8 +40,8 @@ Infra
  │   ├── test
  │   │   ├── group_vars
  │   │   └── host_vars
- │   └── prod                 
- │    
+ │   └── prod
+ │  
  ├── filter_plugins            # if any custom modules, put them here (optional)
  ├── group_vars
  ├── library                   # if any custom module_utils to support modules, put them here (optional)
@@ -68,4 +68,20 @@ Infra
 ```
 ansible all -s -m shell -a 'hostname' -i hosts --become-method=sudo
 ansible all -s -m shell -a 'yum update -y' -i hosts --become-method=sudo
+```
+
+#### Query running services
+```
+$ ansible all -m shell -a "systemctl | grep running | grep -E 'zabbix*|qualys-cloud*|salt-minion*'" -i inventory --limit "test"
+[WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+live01 | CHANGED | rc=0 >>
+  qualys-cloud-agent.service                                                          loaded active running   Qualys cloud agent daemon
+  zabbix-agent2.service                                                               loaded active running   Zabbix Agent 2
+test01 | CHANGED | rc=0 >>
+  qualys-cloud-agent.service                                                          loaded active running   Qualys cloud agent daemon
+  zabbix-agent2.service                                                               loaded active running   Zabbix Agent 2
+test02 | CHANGED | rc=0 >>
+  qualys-cloud-agent.service                                                          loaded active running   Qualys cloud agent daemon
+  salt-minion.service                                                                 loaded active running   The Salt Minion
+  zabbix-agent2.service                                                               loaded active running   Zabbix Agent 2
 ```

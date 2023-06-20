@@ -70,3 +70,6 @@ Here is comparison why:
 | Data Type      | Replicated data of active data, hot data and warm data | Cold data                                        |
 | Format         | Not important                                          | For decades something standard (like txt)        |
 |                |                                                        |                                                  |
+
+
+

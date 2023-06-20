@@ -60,6 +60,8 @@
   - [Disk speed quick and easy](#disk-speed-quick-and-easy)
   - [Curl](#curl)
     - [Download Mozilla CA certificate store in PEM format](#download-mozilla-ca-certificate-store-in-pem-format)
+  - [Compress](#compress)
+    - [TAR and remove files after compressing them](#tar-and-remove-files-after-compressing-them)
   - [Snmpwalk examples](#snmpwalk-examples)
     - [SNMP v2c](#snmp-v2c)
     - [SNMP v3](#snmp-v3)
@@ -463,6 +465,12 @@ Timing buffered disk reads:  302 MB in  3.01 seconds = 100.46 MB/sec
 [ -f cacert.pem ] || curl --remote-name --time-cond cacert.pem https://curl.haxx.se/ca/cacert.pem
 ```
 
+## Compress
+
+### TAR and remove files after compressing them
+```
+tar -cvzf 2023-05-26.tar.gz 0000000100000125000000* --remove-files
+```
 
 ## Snmpwalk examples
 

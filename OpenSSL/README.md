@@ -1,4 +1,4 @@
-# OpenSSL 
+# OpenSSL
 
 ## General
 
@@ -43,6 +43,12 @@ CN=web.fi
 $openssl req -new -sha256 -days 720 -newkey rsa:2048 -keyout web.key -out web.csr -config csr_details_for_web.txt
 $openssl req -in web.csr -noout -text
 ```
+
+### One-liner for creating a key and csr
+```
+openssl req -new -sha256 -newkey rsa:2048 -keyout web.key -out web.csr -subj "/C=EE/ST=Tallinn/O=Company/CN=something.ee"
+```
+
 
 ## Private and public keys
 

@@ -56,11 +56,16 @@ $ ps -ax | grep snmp
 
 
 ## Zabbix sender usage examples
-Sending data from file
+### Sending data from file
 ```
 /usr/bin/zabbix_sender -vv -z <IP> -s <NAME> -T -i /tmp/file.tmp
 ```
-Sending a data from command line
+### Sending a data from command line
 ```
 /usr/bin/zabbix_sender -vv -c /etc/zabbix/zabbix_agentd.conf --host "Zabbix server" --key some.test.value --value 0
+```
+
+### Zabbix server run housekeeper manually
+```
+zabbix_server -R housekeeper_execute
 ```

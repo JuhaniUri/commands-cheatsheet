@@ -69,3 +69,8 @@ $ ps -ax | grep snmp
 ```
 zabbix_server -R housekeeper_execute
 ```
+
+### Zabbix PostgreSQL db. View timescale compression settings
+```
+zabbix=# select * from timescaledb_information.compression_settings
+```

@@ -29,6 +29,7 @@
     - [AWK: List of all locked accounts (accounts with passwords) :](#awk-list-of-all-locked-accounts-accounts-with-passwords-)
     - [AWK: List of all unlocked accounts (accounts with passwords) :](#awk-list-of-all-unlocked-accounts-accounts-with-passwords-)
     - [Tail: Show file content with file names](#tail-show-file-content-with-file-names)
+    - [more: Show folder content with file names](#more-show-folder-content-with-file-names)
   - [Perfomance](#perfomance)
     - [vmstat](#vmstat)
     - [top](#top)
@@ -286,6 +287,11 @@ SQLNET.CRYPTO_CHECKSUM_SERVER = required
 ==> /u02/app/oracle/product/19.0.0.0/dbhome_2/network/admin/sqlnet.ora <==
 SQLNET.ENCRYPTION_SERVER = required
 SQLNET.CRYPTO_CHECKSUM_SERVER = required
+```
+
+### more: Show folder content with file names
+```
+more whitelists/* | cat
 ```
 
 ## Perfomance

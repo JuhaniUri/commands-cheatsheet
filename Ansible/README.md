@@ -68,6 +68,7 @@ Infra
 ```
 ansible all -s -m shell -a 'hostname' -i hosts --become-method=sudo
 ansible all -s -m shell -a 'yum update -y' -i hosts --become-method=sudo
+ansible all -m shell -a "cat /etc/rsyslog.d/*|grep 514" -i inventory --limit "live-rp-k8s"
 ```
 
 #### Query running services

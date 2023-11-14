@@ -63,6 +63,7 @@
     - [Download Mozilla CA certificate store in PEM format](#download-mozilla-ca-certificate-store-in-pem-format)
   - [Compress](#compress)
     - [TAR and remove files after compressing them](#tar-and-remove-files-after-compressing-them)
+    - [Gzip multiple files](#gzip-multiple-files)
   - [Snmpwalk examples](#snmpwalk-examples)
     - [SNMP v2c](#snmp-v2c)
     - [SNMP v3](#snmp-v3)
@@ -476,6 +477,11 @@ Timing buffered disk reads:  302 MB in  3.01 seconds = 100.46 MB/sec
 ### TAR and remove files after compressing them
 ```
 tar -cvzf 2023-05-26.tar.gz 0000000100000125000000* --remove-files
+```
+
+### Gzip multiple files
+```
+gzip k8s_worker-2023-09-{25..30}
 ```
 
 ## Snmpwalk examples

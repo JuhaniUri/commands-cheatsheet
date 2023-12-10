@@ -79,13 +79,7 @@
     kubectl get nodes -o wide
     ```
 
-2. Set up `KUBECONFIG`:
-
-    ```bash
-    export KUBECONFIG=.kubeconf
-    ```
-
-3. Verify the cluster:
+2. Verify the cluster:
 
     ```bash
     kubectl get nodes

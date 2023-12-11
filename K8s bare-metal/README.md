@@ -51,41 +51,42 @@
 
 3. Modify `inventory/mycluster/hosts.yaml` with node details.
 
-```yaml
-all:
-  hosts:
-    control01:
-      ansible_host: 192.168.10.70
-      ip: 192.168.10.70
-      access_ip: 192.168.10.70
-    worker01:
-      ansible_host: 192.168.10.71
-      ip: 192.168.10.71
-      access_ip: 192.168.10.71
-    worker02:
-      ansible_host: 192.168.10.72
-      ip: 192.168.10.72
-      access_ip: 192.168.10.72
-  children:
-    kube_control_plane:
-      hosts:
+    ```yaml
+    all:
+    hosts:
         control01:
-    kube_node:
-      hosts:
-        control01:
+        ansible_host: 192.168.10.70
+        ip: 192.168.10.70
+        access_ip: 192.168.10.70
         worker01:
+        ansible_host: 192.168.10.71
+        ip: 192.168.10.71
+        access_ip: 192.168.10.71
         worker02:
-    etcd:
-      hosts:
-        control01:
-    k8s_cluster:
-      children:
+        ansible_host: 192.168.10.72
+        ip: 192.168.10.72
+        access_ip: 192.168.10.72
+    children:
         kube_control_plane:
+        hosts:
+            control01:
         kube_node:
+        hosts:
+            control01:
+            worker01:
+            worker02:
         etcd:
-    calico_rr:
-      hosts: {}
+        hosts:
+            control01:
+        k8s_cluster:
+        children:
+            kube_control_plane:
+            kube_node:
+            etcd:
+        calico_rr:
+        hosts: {}
     ```
+
 4. Change K8s-cluster values:
 
     ```bash

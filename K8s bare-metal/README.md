@@ -109,7 +109,7 @@
 
 ## Verification
 
-1. Log into the control node:
+1. Verify the cluster:
 
     ```bash
     kubectl get nodes -o wide
@@ -122,13 +122,6 @@
     worker02    Ready    <none>          14m   v1.28.4   192.168.10.72   <none>        Rocky Linux 9.3 (Blue Onyx)   5.14.0-362.8.1.el9_3.x86_64   containerd://1.7.8
     ```
 
-2. Verify the cluster:
-
-    ```bash
-    kubectl get nodes
-    kubectl cluster-info
-    kubectl apply -f https://k8s.io/examples/application/deployment.yaml
-    ```
 
 ---
 

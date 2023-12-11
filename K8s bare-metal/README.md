@@ -51,7 +51,7 @@
 
 3. Modify `inventory/mycluster/hosts.yaml` with node details.
 
-    ```
+```yaml
 all:
   hosts:
     control01:
@@ -85,7 +85,6 @@ all:
         etcd:
     calico_rr:
       hosts: {}
-
     ```
 4. Change K8s-cluster values:
 

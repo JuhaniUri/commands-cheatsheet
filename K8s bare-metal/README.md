@@ -106,6 +106,7 @@
     ```bash
     ansible-playbook -i inventory/mycluster/hosts.yaml --become --become-user=root cluster.yml
     ```
+**Note:** Takes ca 15minutes to deploy
 
 ## Verification
 

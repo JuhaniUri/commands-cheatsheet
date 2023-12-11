@@ -51,6 +51,42 @@
 
 3. Modify `inventory/mycluster/hosts.yaml` with node details.
 
+    ```
+all:
+  hosts:
+    control01:
+      ansible_host: 192.168.10.70
+      ip: 192.168.10.70
+      access_ip: 192.168.10.70
+    worker01:
+      ansible_host: 192.168.10.71
+      ip: 192.168.10.71
+      access_ip: 192.168.10.71
+    worker02:
+      ansible_host: 192.168.10.72
+      ip: 192.168.10.72
+      access_ip: 192.168.10.72
+  children:
+    kube_control_plane:
+      hosts:
+        control01:
+    kube_node:
+      hosts:
+        control01:
+        worker01:
+        worker02:
+    etcd:
+      hosts:
+        control01:
+    k8s_cluster:
+      children:
+        kube_control_plane:
+        kube_node:
+        etcd:
+    calico_rr:
+      hosts: {}
+
+    ```
 4. Change K8s-cluster values:
 
     ```bash
@@ -77,6 +113,13 @@
 
     ```bash
     kubectl get nodes -o wide
+    ```
+
+    ```
+    NAME        STATUS   ROLES           AGE   VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE                      KERNEL-VERSION                CONTAINER-RUNTIME
+    control01   Ready    control-plane   14m   v1.28.4   192.168.10.70   <none>        Rocky Linux 9.3 (Blue Onyx)   5.14.0-362.8.1.el9_3.x86_64   containerd://1.7.8
+    worker01    Ready    <none>          13m   v1.28.4   192.168.10.71   <none>        Rocky Linux 9.3 (Blue Onyx)   5.14.0-362.8.1.el9_3.x86_64   containerd://1.7.8
+    worker02    Ready    <none>          14m   v1.28.4   192.168.10.72   <none>        Rocky Linux 9.3 (Blue Onyx)   5.14.0-362.8.1.el9_3.x86_64   containerd://1.7.8
     ```
 
 2. Verify the cluster:

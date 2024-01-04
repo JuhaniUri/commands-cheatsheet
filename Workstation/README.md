@@ -1,5 +1,11 @@
 # Workstation
 
+## General
+
+### Secure disk erasure/wipe
+https://github.com/PartialVolume/shredos.x86_64
+
+
 ## Mac
 
 ### Iterm2 cusrsor disappear

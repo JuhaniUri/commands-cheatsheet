@@ -5,6 +5,7 @@
   - [Partitions, LVM, LUKS, FS etc](#partitions-lvm-luks-fs-etc)
     - [Create file that will utilize space from storage](#create-file-that-will-utilize-space-from-storage)
     - [LUKS: Format the filesystem with LUKS and add extra password to slot1](#luks-format-the-filesystem-with-luks-and-add-extra-password-to-slot1)
+    - [Note more 2TB disks](#note-more-2tb-disks)
     - [LUKS: Resize VG/LV with LUKS](#luks-resize-vglv-with-luks)
     - [Create part/VG/LV/FS](#create-partvglvfs)
     - [Add disk to VG and grow](#add-disk-to-vg-and-grow)
@@ -86,6 +87,9 @@ cryptsetup luksAddKey --key-slot 1 /dev/mapper/lvm_pool_data1-lvol001
 mkfs.xfs /dev/mapper/es_data
 ```
 
+### Note more 2TB disks
+ An msdos partition table can only format up to 2TB of disk space
+ A GPT partition table, however, have the potential to address up to 8 zebibytes of space.
 ### LUKS: Resize VG/LV with LUKS
 ```
 parted /dev/sdc mklabel msdos mkpart primary 1M 100% set 1 lvm on

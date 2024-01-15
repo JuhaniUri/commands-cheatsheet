@@ -90,6 +90,7 @@ mkfs.xfs /dev/mapper/es_data
 ### Note more 2TB disks
  An msdos partition table can only format up to 2TB of disk space
  A GPT partition table, however, have the potential to address up to 8 zebibytes of space.
+
 ### LUKS: Resize VG/LV with LUKS
 ```
 parted /dev/sdc mklabel msdos mkpart primary 1M 100% set 1 lvm on

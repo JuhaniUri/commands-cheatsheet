@@ -3,17 +3,29 @@
 ## Bastion settings
 
 
+
+
 ### Getting a shell to a container 
 
 ```
 $ kubectl exec -i -t -n dev app-dev-5d9fdb847f-8bjnr -- /bin/sh
 ```
 
+## Logs
+
 ### Fetch logs from POD that has two containers
 
 ```
 $ kubectl -n dev logs app-dev-5d9fdb847f-8bjnr -c container-2 > container-2.logs
 ```
+
+### Show all logs from pod nginx written in the last hour
+
+```
+kubectl logs --since=1h nginx
+```
+
+## Tricks
 
 ### k8s Trick to Scale down daemonset to zero
 ```

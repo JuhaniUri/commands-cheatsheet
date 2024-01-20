@@ -14,3 +14,14 @@ $ kubectl exec -i -t -n dev app-dev-5d9fdb847f-8bjnr -- /bin/sh
 ```
 $ kubectl -n dev logs app-dev-5d9fdb847f-8bjnr -c container-2 > container-2.logs
 ```
+
+### k8s Trick to Scale down daemonset to zero
+```
+kubectl -n cattle-logging patch daemonset rancher-logging-fluentd-linux -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
+```
+
+### k8s Trick to Scale daemonset to up
+
+```
+kubectl -n cattle-logging patch daemonset rancher-logging-fluentd-linux  --type json -p='[{"op": "remove", "path": "/spec/template/spec/nodeSelector/non-existing"}]'
+```

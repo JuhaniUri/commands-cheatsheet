@@ -25,7 +25,7 @@ $ kubectl -n dev logs app-dev-5d9fdb847f-8bjnr -c container-2 > container-2.logs
 kubectl logs --since=1h nginx
 ```
 
-## Tricks
+## Hacks and tricks
 
 ### k8s Trick to Scale down daemonset to zero
 ```

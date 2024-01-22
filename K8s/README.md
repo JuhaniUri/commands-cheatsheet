@@ -19,6 +19,12 @@ $ kubectl exec -i -t -n dev app-dev-5d9fdb847f-8bjnr -- /bin/sh
 $ kubectl -n dev logs app-dev-5d9fdb847f-8bjnr -c container-2 > container-2.logs
 ```
 
+### Tail logs from POD
+
+```
+$ kubectl -n dev logs -f --tail=100 app-dev-5d9fdb847f-8bjnr
+```
+
 ### Show all logs from pod nginx written in the last hour
 
 ```

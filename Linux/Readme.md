@@ -64,7 +64,12 @@
     - [Download Mozilla CA certificate store in PEM format](#download-mozilla-ca-certificate-store-in-pem-format)
   - [Compress](#compress)
     - [TAR and remove files after compressing them](#tar-and-remove-files-after-compressing-them)
+    - [View file list from tar.gz](#view-file-list-from-targz)
+    - [Extract single file from tar.gz to /tmp](#extract-single-file-from-targz-to-tmp)
     - [Gzip multiple files](#gzip-multiple-files)
+    - [List the content of zip file](#list-the-content-of-zip-file)
+    - [Unzip one file](#unzip-one-file)
+    - [Unzip file to folder](#unzip-file-to-folder)
   - [Snmpwalk examples](#snmpwalk-examples)
     - [SNMP v2c](#snmp-v2c)
     - [SNMP v3](#snmp-v3)
@@ -484,10 +489,35 @@ Timing buffered disk reads:  302 MB in  3.01 seconds = 100.46 MB/sec
 tar -cvzf 2023-05-26.tar.gz 0000000100000125000000* --remove-files
 ```
 
+### View file list from tar.gz
+```
+tar -ztvf archive.tar.gz
+```
+### Extract single file from tar.gz to /tmp
+```
+tar xvf archive.tar.gz -C /tmp/ filename.xml
+```
+
 ### Gzip multiple files
 ```
 gzip k8s_worker-2023-09-{25..30}
 ```
+
+### List the content of zip file
+```
+unzip -l archive.zip
+```
+
+### Unzip one file
+```
+unzip  archive.zip somefile.log
+```
+
+### Unzip file to folder
+```
+unzip ExampleDelivery.zip 'Delivery/PostgreSql Scripts/*' -d /tmp/
+```
+
 
 ## Snmpwalk examples
 

@@ -7,9 +7,9 @@
     - [LUKS: Format the filesystem with LUKS and add extra password to slot1](#luks-format-the-filesystem-with-luks-and-add-extra-password-to-slot1)
     - [Note for disks larger than 2TB](#note-for-disks-larger-than-2tb)
     - [LUKS: Resize VG/LV with LUKS](#luks-resize-vglv-with-luks)
-    - [Create part/VG/LV/FS](#create-partvglvfs)
+    - [Create part/VG/LV/FS (msdos)](#create-partvglvfs-msdos)
+    - [Create part/VG/LV/FS (gpt)](#create-partvglvfs-gpt)
     - [Add disk to VG and grow (msdos)](#add-disk-to-vg-and-grow-msdos)
-    - [Add disk to VG and grow (gpt)](#add-disk-to-vg-and-grow-gpt)
     - [Growpart if disk was increased](#growpart-if-disk-was-increased)
     - [Deactive/Active LV](#deactiveactive-lv)
     - [LVM reduce](#lvm-reduce)
@@ -110,7 +110,7 @@ cryptsetup resize /dev/mapper/vg_crypt-lv_crypt
 xfs_growfs /dev/mapper/crypted_lvm
 ```
 
-### Create part/VG/LV/FS
+### Create part/VG/LV/FS (msdos)
 ```
 parted /dev/sdb mklabel msdos mkpart primary 1M 100% set 1 lvm on
 pvcreate /dev/sdb1
@@ -121,6 +121,17 @@ vgcreate vg_pgsql /dev/sdb1
 mkfs.xfs /dev/mapper/vg_pgsql-lv_pgsql
 ```
 
+### Create part/VG/LV/FS (gpt)
+```
+parted /dev/sdb mklabel gpt mkpart primary 1M 100% set 1 lvm on
+pvcreate /dev/sdb1
+vgcreate vg_minio /dev/sdb1
+vcreate -l 100%FREE -n lv_minio vg_minio
+mkfs.xfs /dev/mapper/vg_minio-lv_minio
+```
+
+
+
 ### Add disk to VG and grow (msdos)
 ```
 parted /dev/xvdr mklabel msdos mkpart primary 1M 100% set 1 lvm on
@@ -130,14 +141,6 @@ lvextend -l +100%FREE /dev/vg_new_docs/lv_doku
 xfs_growfs /dev/vg_new_docs/lv_doku
 ```
 
-### Add disk to VG and grow (gpt)
-```
-parted /dev/sdb mklabel gpt mkpart primary 1M 100% set 1 lvm on
-pvcreate /dev/sdb1
-vgcreate vg_minio /dev/sdb1
-vcreate -l 100%FREE -n lv_minio vg_minio
-mkfs.xfs /dev/mapper/vg_minio-lv_minio
-```
 
 ### Growpart if disk was increased
 ```

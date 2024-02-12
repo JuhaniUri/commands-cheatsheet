@@ -1,6 +1,6 @@
 # General & Daily tasks
 
-- [General & Daily tasks](#general--daily-tasks)
+- [General \& Daily tasks](#general--daily-tasks)
   - [Backup settings](#backup-settings)
     - [Show Recovery are (RMAN)](#show-recovery-are-rman)
     - [Change FRA size](#change-fra-size)
@@ -8,6 +8,7 @@
     - [Change location](#change-location)
     - [Check the RMAN status](#check-the-rman-status)
   - [Tablespaces and datafiles](#tablespaces-and-datafiles)
+    - [Tablespace used/free/total](#tablespace-usedfreetotal)
     - [Add datafile to TABLESPACE](#add-datafile-to-tablespace)
     - [Resize datafile](#resize-datafile)
     - [Check if autoextend is enabled](#check-if-autoextend-is-enabled)
@@ -26,10 +27,11 @@
   - [Random stuff](#random-stuff)
     - [Disable jobs at startup](#disable-jobs-at-startup)
     - [Startup for pdbs](#startup-for-pdbs)
+    - [Shutdown Immediate Hangs / Active Processes Prevent Shutdown (Doc ID 416658.1)](#shutdown-immediate-hangs--active-processes-prevent-shutdown-doc-id-4166581)
     - [DBCA examples](#dbca-examples)
     - [Using pipes in Linux with Oracle](#using-pipes-in-linux-with-oracle)
     - [Move controlfile location](#move-controlfile-location)
-    - [UTL_FILE examples tested in 10G](#utl_file-examples-tested-in-10g)
+    - [UTL\_FILE examples tested in 10G](#utl_file-examples-tested-in-10g)
     - [Test env delete archivelog](#test-env-delete-archivelog)
 
 
@@ -40,7 +42,7 @@
 show parameter db_recovery_file
 ```
 
-### Change FRA size 
+### Change FRA size
 ```
 alter system set db_recovery_file_dest_size=30g scope=both;
 ```
@@ -66,6 +68,30 @@ AND    SOFAR <> TOTALWORK;
 
 
 ## Tablespaces and datafiles
+
+
+### Tablespace used/free/total
+```
+SELECT df.tablespace_name "Tablespace",
+  totalusedspace "Used MB",
+  (df.totalspace - tu.totalusedspace) "Free MB",
+  df.totalspace "Total MB",
+  ROUND(100 * ( (df.totalspace - tu.totalusedspace)/ df.totalspace)) "% Free"
+FROM
+  (SELECT tablespace_name,
+    ROUND(SUM(bytes) / 1048576) TotalSpace
+  FROM dba_data_files
+  GROUP BY tablespace_name
+  ) df,
+  (SELECT ROUND(SUM(bytes)/(1024*1024)) totalusedspace,
+    tablespace_name
+  FROM dba_segments
+  GROUP BY tablespace_name
+  ) tu
+WHERE df.tablespace_name = tu.tablespace_name;
+```
+
+
 ### Add datafile to TABLESPACE
 ```
 ALTER TABLESPACE DAT1 ADD datafile '/u02/TEST/DAT1_05.dbf' size 1G autoextend on next 1G MAXSIZE 20G;
@@ -178,7 +204,7 @@ group by trunc(COMPLETION_TIME,'HH'),thread#  order by 1 ;
 
 
 ### Force logging
-The FORCE LOGGING option is the safest method to ensure that all the changes made in the database will be captured and available for recovery in the redo logs. 
+The FORCE LOGGING option is the safest method to ensure that all the changes made in the database will be captured and available for recovery in the redo logs.
 
 ```
 ALTER DATABASE FORCE LOGGING;
@@ -197,7 +223,7 @@ ALTER DATABASE ADD LOGFILE GROUP 10 ('/oradata/test/redo10.log') SIZE 500m;
 
 
 
-## Random stuff 
+## Random stuff
 ### Disable jobs at startup
 
 ```
@@ -215,17 +241,17 @@ alter system set job_queue_processes=1000 scope=both;
 
 ### Startup for pdbs
 ```
-CREATE OR REPLACE TRIGGER open_pdbs 
-  AFTER STARTUP ON DATABASE 
-BEGIN 
-   EXECUTE IMMEDIATE 'ALTER PLUGGABLE DATABASE ALL OPEN'; 
+CREATE OR REPLACE TRIGGER open_pdbs
+  AFTER STARTUP ON DATABASE
+BEGIN
+   EXECUTE IMMEDIATE 'ALTER PLUGGABLE DATABASE ALL OPEN';
 END open_pdbs;
 /
 ```
 
 ###	Shutdown Immediate Hangs / Active Processes Prevent Shutdown (Doc ID 416658.1)
 
-Symptom: 
+Symptom:
 Alert.log shows:
 Active call for process 22181 user 'oracle' program 'oracle@TESTDB2'
 Active call for process 25813 user 'oracle' program 'oracle@TESTDB2'

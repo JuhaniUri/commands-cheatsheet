@@ -6,11 +6,15 @@
 - [Export/Import](#exportimport)
     - [Export to CSV](#export-to-csv)
     - [Import from CSV](#import-from-csv)
-    - [pg_dump](#pg_dump)
+    - [pg\_dump](#pg_dump)
 - [Create tables from](#create-tables-from)
     - [Generate create table statement](#generate-create-table-statement)
     - [Create table like](#create-table-like)
 - [User/Role privileges](#userrole-privileges)
+- [Sessions management](#sessions-management)
+    - [show running queries](#show-running-queries)
+    - [kill running query](#kill-running-query)
+    - [kill idle query](#kill-idle-query)
 - [psql tips and tricks](#psql-tips-and-tricks)
     - [Watch](#watch)
 - [Create database with random data](#create-database-with-random-data)
@@ -19,7 +23,7 @@
     - [Create some random data](#create-some-random-data)
 - [Performance testing](#performance-testing)
     - [pgbench usage with existing database](#pgbench-usage-with-existing-database)
-- [pg_extension](#pg_extension)
+- [pg\_extension](#pg_extension)
     - [dblink](#dblink)
 
 # Generic stuff
@@ -28,7 +32,7 @@
 ```
 SELECT *
 FROM pg_catalog.pg_tables
-WHERE schemaname != 'pg_catalog' AND 
+WHERE schemaname != 'pg_catalog' AND
     schemaname != 'information_schema';
 ```
 
@@ -68,14 +72,14 @@ Compressed
 pg_dump -h 10.1.1.14 -U username -W -F t randomdemo > /tmp/randomdemo.tar
 ```
 
-In plain 
+In plain
 ```
 pg_dump -h 10.1.1.14 -U username -W randomdemo > /tmp/randomdemo.dump
 ```
 
 
 
-# Create tables from 
+# Create tables from
 
 ### Generate create table statement
 ```
@@ -99,8 +103,8 @@ WHERE grantee = 'myuser'
 
 
 ```
-SELECT grantee AS user, CONCAT(table_schema, '.', table_name) AS table, 
-    CASE 
+SELECT grantee AS user, CONCAT(table_schema, '.', table_name) AS table,
+    CASE
         WHEN COUNT(privilege_type) = 7 THEN 'ALL'
         ELSE ARRAY_TO_STRING(ARRAY_AGG(privilege_type), ', ')
     END AS grants
@@ -108,9 +112,29 @@ FROM information_schema.role_table_grants
 GROUP BY table_name, table_schema, grantee;
 ```
 
+# Sessions management
+
+### show running queries
+```
+SELECT pid, age(clock_timestamp(), query_start), usename, query
+FROM pg_stat_activity
+WHERE query != '<IDLE>' AND query NOT ILIKE '%pg_stat_activity%'
+ORDER BY query_start desc;
+```
+
+### kill running query
+```
+SELECT pg_cancel_backend(procpid);
+```
+
+### kill idle query
+```
+SELECT pg_terminate_backend(procpid);
+```
+
 # psql tips and tricks
 
-### Watch 
+### Watch
 ```
 postgres=# SELECT * FROM pg_replication_slots;
  slot_name | plugin | slot_type | datoid | database | temporary | active | active_pid | xmin | catalog_xmin | restart_lsn | confirmed_flush_lsn
@@ -148,10 +172,10 @@ CREATE SCHEMA schema_demo;
 ### Create some random data
 It will generate ca 130MB of data, will run 4-8sec.
 ```
-CREATE TABLE schema_demo.demo_random1 AS SELECT s, md5(random()::text) FROM generate_Series(1,2000000) s;  
+CREATE TABLE schema_demo.demo_random1 AS SELECT s, md5(random()::text) FROM generate_Series(1,2000000) s;
 ```
 
-# Performance testing 
+# Performance testing
 
 ### pgbench usage with existing database
 It will create 4 tables under public schema
@@ -183,13 +207,13 @@ done.
 $ psql postgres
 psql (11.10)
 Type "help" for help.
- 
+
 postgres=# SELECT * FROM pg_extension;
  extname | extowner | extnamespace | extrelocatable | extversion | extconfig | extcondition
 ---------+----------+--------------+----------------+------------+-----------+--------------
  plpgsql |       10 |           11 | f              | 1.0        |           |
 (1 row)
- 
+
 postgres=# CREATE EXTENSION dblink;
 CREATE EXTENSION
 postgres=# SELECT * FROM pg_extension;
@@ -197,11 +221,11 @@ postgres=# SELECT * FROM pg_extension;
 ---------+----------+--------------+----------------+------------+-----------+--------------
  plpgsql |       10 |           11 | f              | 1.0        |           |
  dblink  |       10 |         2200 | t              | 1.2        |           |
-(2 rows)  
- 
+(2 rows)
+
 postgres=# select * from dblink('dbname=test-db-1 port=5432 host=10.0.14.2
 user=user password=***', 'select username from schema1.demousers') AS t1(t text);
- 
+
      t
 ------------
  uriiijuh

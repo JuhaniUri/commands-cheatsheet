@@ -48,6 +48,9 @@ scp /u03/full_2024_02* oracle@10.20.30.40:/u03/
 create directory IMPDIR as '/u03';
 ```
 
+### Create par file
+[Check here](exclude.par)
+
 ### Import
 ```
 $ impdp system@dbname DIRECTORY=IMPDIR PARFILE=exclude.par DUMPFILE=full_2024_02%U logfile=full_import.log

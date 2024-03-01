@@ -13,8 +13,8 @@
 - [User/Role privileges](#userrole-privileges)
 - [Sessions management](#sessions-management)
     - [show running queries](#show-running-queries)
-    - [kill running query](#kill-running-query)
-    - [kill idle query](#kill-idle-query)
+    - [Terminate a query but keep the connection alive (kill query)](#terminate-a-query-but-keep-the-connection-alive-kill-query)
+    - [Terminate a query and kill the connection (kill query + connection)](#terminate-a-query-and-kill-the-connection-kill-query--connection)
 - [psql tips and tricks](#psql-tips-and-tricks)
     - [Watch](#watch)
 - [Create database with random data](#create-database-with-random-data)
@@ -122,12 +122,12 @@ WHERE query != '<IDLE>' AND query NOT ILIKE '%pg_stat_activity%'
 ORDER BY query_start desc;
 ```
 
-### kill running query
+### Terminate a query but keep the connection alive (kill query)
 ```
 SELECT pg_cancel_backend(procpid);
 ```
 
-### kill idle query
+### Terminate a query and kill the connection (kill query + connection)
 ```
 SELECT pg_terminate_backend(procpid);
 ```

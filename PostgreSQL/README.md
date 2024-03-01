@@ -15,6 +15,7 @@
     - [show running queries](#show-running-queries)
     - [Terminate a query but keep the connection alive (kill query)](#terminate-a-query-but-keep-the-connection-alive-kill-query)
     - [Terminate a query and kill the connection (kill query + connection)](#terminate-a-query-and-kill-the-connection-kill-query--connection)
+    - [Kill long-running queries + session](#kill-long-running-queries--session)
 - [psql tips and tricks](#psql-tips-and-tricks)
     - [Watch](#watch)
 - [Create database with random data](#create-database-with-random-data)
@@ -130,6 +131,14 @@ SELECT pg_cancel_backend(procpid);
 ### Terminate a query and kill the connection (kill query + connection)
 ```
 SELECT pg_terminate_backend(procpid);
+```
+
+### Kill long-running queries + session
+```
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity
+where usename = ‘USERNAME’ and  query ILIKE 'SELECT%'
+and (now() - pg_stat_activity.query_start) > interval '120 minutes' ;
 ```
 
 # psql tips and tricks

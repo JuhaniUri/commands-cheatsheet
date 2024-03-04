@@ -13,6 +13,11 @@
     - [Growpart if disk was increased](#growpart-if-disk-was-increased)
     - [Deactive/Active LV](#deactiveactive-lv)
     - [LVM reduce](#lvm-reduce)
+  - [VDO](#vdo)
+    - [Create LVM + VDO](#create-lvm--vdo)
+    - [Create VDO](#create-vdo)
+    - [Disable compression](#disable-compression)
+    - [Resize](#resize)
     - [Mounting a Windows fileshare (tested with RHEL6)](#mounting-a-windows-fileshare-tested-with-rhel6)
     - [Find dublicates in fstab](#find-dublicates-in-fstab)
   - [](#-1)
@@ -218,6 +223,15 @@ lvreduce -L 60G /dev/mapper/VolGroup00-orabackup
 [root@STEST ~]# pvremove /dev/xvdc1
   Labels on physical volume "/dev/xvdc1" successfully wiped
 ```
+
+## VDO
+https://www.redhat.com/en/blog/look-vdo-new-linux-compression-layer
+
+### Create LVM + VDO
+### Create VDO
+### Disable compression
+### Resize
+
 
 
 ### Mounting a Windows fileshare (tested with RHEL6)

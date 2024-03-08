@@ -1,10 +1,14 @@
-# Security section for Infra 
+# Security section for Infra
 
-Security topic is quite wide, I just going to cover some important section.
-I not going to cover network part, has it is huge
 
-# Authentication   
-- Complex 
+## Country IP blocks
+https://www.ip2location.com/free/visitor-blocker
+https://git.herrbischoff.com/country-ip-blocks-alternative/
+
+
+
+# Authentication
+- Complex
 - SSH keys
 - MFA
 
@@ -14,9 +18,9 @@ I not going to cover network part, has it is huge
 
 # Bastion
 
-# Audit 
+# Audit
 
-# Secret management 
+# Secret management
 
 - Hashicorp Vault
 
@@ -24,21 +28,21 @@ I not going to cover network part, has it is huge
 # Certificates
 - PKI
 
-# Logging 
+# Logging
 
-- Local 
+- Local
 - Elasticsearch (ELK)
 - Graylog
-- OpenSearch 
+- OpenSearch
 
 
-# Firewall 
+# Firewall
 
 
 # VPN
 
 - OpenVPN
-- 
+-
 
 
 # Data
@@ -48,7 +52,7 @@ I not going to cover network part, has it is huge
 
 [Deep dive into data at rest](data-at-rest.md)
 
-## Data in motion 
+## Data in motion
 
 
 ## Defense in layers

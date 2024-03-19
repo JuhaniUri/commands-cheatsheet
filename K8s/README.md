@@ -31,6 +31,14 @@ $ kubectl -n dev logs -f --tail=100 app-dev-5d9fdb847f-8bjnr
 kubectl logs --since=1h nginx
 ```
 
+## Copy files
+
+### Copy file from pod to local
+```
+kubectl cp test/-test-549d85696-cj4qn:/etc/ssl/certs/java/cacerts /Users/juhaniuri/Downloads/cacerts
+```
+
+
 ## Hacks and tricks
 
 ### k8s Trick to Scale down daemonset to zero

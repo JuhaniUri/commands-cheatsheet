@@ -22,6 +22,8 @@
     - [Move indexes to tablespace](#move-indexes-to-tablespace)
   - [Redologs](#redologs)
     - [Hourly/Daily Archive generation](#hourlydaily-archive-generation)
+      - [Hourly Archive Log Generation](#hourly-archive-log-generation)
+      - [Daily Archive Log Generation](#daily-archive-log-generation)
     - [Force logging](#force-logging)
     - [Add more redo](#add-more-redo)
   - [Random stuff](#random-stuff)
@@ -197,9 +199,21 @@ where tablespace_name ='TEST';
 
 ### Hourly/Daily Archive generation
 
+
+#### Hourly Archive Log Generation
 ```
-select trunc(COMPLETION_TIME,'HH') Hour,thread# , round(sum(BLOCKS*BLOCK_SIZE)/1048576) MB,count(*) Archives from v$archived_log
-group by trunc(COMPLETION_TIME,'HH'),thread#  order by 1 ;
+select to_char(trunc(first_time, 'HH24'), 'DD/MM/YYYY HH24:MI:SS') date_by_hour, sum(round(blocks*block_size/1024/1024)) CHURN_IN_MB
+from v$archived_log
+group by trunc(first_time, 'HH24')
+order by 1;
+```
+
+#### Daily Archive Log Generation
+```
+select trunc(COMPLETION_TIME,'DD') Day, thread#,
+round(sum(BLOCKS*BLOCK_SIZE)/1024/1024/1024) GB,
+count(*) Archives_Generated from v$archived_log
+group by trunc(COMPLETION_TIME,'DD'),thread# order by 1;
 ```
 
 

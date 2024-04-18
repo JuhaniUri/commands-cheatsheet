@@ -39,6 +39,12 @@ kubectl cp test/-test-549d85696-cj4qn:/etc/ssl/certs/java/cacerts /Users/juhaniu
 ```
 
 
+## Association between the Pods and the PVCs
+```
+kubectl get po -o json --all-namespaces | jq -j '.items[] | "\(.metadata.namespace), \(.metadata.name), \(.spec.volumes[].persistentVolumeClaim.claimName)\n"' | grep -v null
+```
+
+
 ## Hacks and tricks
 
 ### k8s Trick to Scale down daemonset to zero

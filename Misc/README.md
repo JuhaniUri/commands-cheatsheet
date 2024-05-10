@@ -1,11 +1,11 @@
-# Random 
+# Random
 
 
-### os-collect-config 
+### os-collect-config
 
 Fix for:
 ```
-os-collect-config: /usr/lib/python2.7/site-packages/requests/packages/urllib3/connectionpool.py:852: 
+os-collect-config: /usr/lib/python2.7/site-packages/requests/packages/urllib3/connectionpool.py:852:
 InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
 ```
 
@@ -19,7 +19,7 @@ systemctl restart os-collect-config
 
 ### Image modification with qemu
 
-Requirements: 
+Requirements:
 - user with sudo rights
 - complex password
 - Allow password logins
@@ -28,7 +28,7 @@ Download ubuntu 18.04 cloud image and resize disk to 20G
 
 ```
 wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
- 
+
 qemu-img info bionic-server-cloudimg-amd64.img
 qemu-img resize bionic-server-cloudimg-amd64.img 20G
 ```
@@ -55,7 +55,7 @@ Review changes by coping image to /tmp and mounting it:
 cp bionic-server-cloudimg-amd64.img /tmp/
 sudo guestmount -a /tmp/bionic-server-cloudimg-amd64.img -i --rw /mnt
 ```
- Verify that user is created: 
+ Verify that user is created:
 ```
 sudo cat /mnt/etc/passwd
 ```
@@ -77,7 +77,7 @@ virt-customize -a xenial-server-cloudimg-amd64-disk1.img --uninstall cloud-init
 ### Image modification with virt-customize and questmount
 
 
-Mount image to /mnt 
+Mount image to /mnt
 ```
 guestmount -a /tmp/CentOS-6-x86_64-GenericCloud-1809.qcow2 -i --rw /mnt
 ```
@@ -93,17 +93,17 @@ guestunmount /mnt/
 qemu-img convert -p -f qcow2 -O vmdk -o adapter_type=lsilogic,subformat=streamOptimized,compat6 /tmp/CentOS-6-x86_64-GenericCloud-1809.qcow2 /tmp/mvp/CentOS-6-x86_64-GenericCloud-1809.vmdk
 ```
 
-### Basic image setup and layout  
+### Basic image setup and layout
 
-- Set the proper Timezone  
-- Install basic packages:  zip unzip wget open-vm-tools 
+- Set the proper Timezone
+- Install basic packages:  zip unzip wget open-vm-tools
 - Make release number /etc/my-image-release
-- Default Filesystem layout as bellow. 
+- Default Filesystem layout as bellow.
 ```
 NAME	SIZE	TYPE	MOUNTPOINT
-sda	20G	disk	
-├─sda1	512M	part	
-└─sda2	18.1G	part	
+sda	20G	disk
+├─sda1	512M	part
+└─sda2	18.1G	part
 ├─vg_root-lv_root	3G	lvm	/
 ├─vg_root-lv_tmp	128M	lvm	/tmp
 ├─vg_root-lv_vartmp	512M	lvm	/var/tmp
@@ -126,3 +126,32 @@ ssh -q -D 1999 username@11.11.11.29
 echo "Hello there" | mail -s "testing" -r sender@company.com someone@gmail.com
 ```
 
+
+### s3cmd usage with pilw.io
+Grab the tool https://github.com/s3tools/s3cmd
+
+Configure
+```
+$ s3cmd --configure
+```
+
+Result:
+```
+New settings:
+  Access Key: ********
+  Secret Key: ********
+  Default Region: US
+  S3 Endpoint: s3.pilw.io:8080
+  DNS-style bucket+hostname:port template for accessing a bucket:  %(bucket)s.s3.pilw.io:8080
+  Encryption password:
+  Path to GPG program: None
+  Use HTTPS protocol: True
+  HTTP Proxy server name:
+  HTTP Proxy server port: 0
+
+```
+
+Delete recursive
+```
+ s3cmd del --recursive s3://postgres/main-repo/backup/main/20230813-023002F/
+```

@@ -127,7 +127,7 @@ echo "Hello there" | mail -s "testing" -r sender@company.com someone@gmail.com
 ```
 
 
-### s3cmd usage with pilw.io
+### s3cmd usage
 Grab the tool https://github.com/s3tools/s3cmd
 
 Configure
@@ -153,5 +153,10 @@ New settings:
 
 Delete recursive
 ```
- s3cmd del --recursive s3://postgres/main-repo/backup/main/20230813-023002F/
+ s3cmd del --recursive s3://postgres-backup/main-repo/backup/main/20230813-023002F/
+```
+
+Delete multiple folders
+```
+$ s3cmd ls s3://postgres-backups/main-repo/backup/main/ | grep '202309' | awk '{print $2}' | while read file; do s3cmd del --recursive $file; done
 ```

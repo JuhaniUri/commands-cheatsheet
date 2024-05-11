@@ -141,8 +141,8 @@ New settings:
   Access Key: ********
   Secret Key: ********
   Default Region: US
-  S3 Endpoint: s3.pilw.io:8080
-  DNS-style bucket+hostname:port template for accessing a bucket:  %(bucket)s.s3.pilw.io:8080
+  S3 Endpoint: s3.host.com:8080
+  DNS-style bucket+hostname:port template for accessing a bucket:  %(bucket)s.s3.host.com:8080
   Encryption password:
   Path to GPG program: None
   Use HTTPS protocol: True

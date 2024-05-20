@@ -15,9 +15,8 @@
     - [LVM reduce](#lvm-reduce)
   - [VDO](#vdo)
     - [Create LVM + VDO](#create-lvm--vdo)
-    - [Create VDO](#create-vdo)
     - [Disable compression](#disable-compression)
-    - [Resize](#resize)
+    - [Resize wo extending pool with vdo resize](#resize-wo-extending-pool-with-vdo-resize)
     - [Mounting a Windows fileshare (tested with RHEL6)](#mounting-a-windows-fileshare-tested-with-rhel6)
     - [Find dublicates in fstab](#find-dublicates-in-fstab)
   - [](#-1)
@@ -228,10 +227,16 @@ lvreduce -L 60G /dev/mapper/VolGroup00-orabackup
 https://www.redhat.com/en/blog/look-vdo-new-linux-compression-layer
 
 ### Create LVM + VDO
-### Create VDO
+```
+vgcreate vg_test_slow01 /dev/sdi
+lvcreate --type vdo --name vdo_test_slow01 --size 3.9T --virtualsize 6T vg_test_slow01
+mkfs.xfs -K /dev/mapper/vg_test_slow01-vdo_test_slow01
+```
 ### Disable compression
-### Resize
-
+### Resize wo extending pool with vdo resize
+```
+lvextend -L +1T /dev/vg_medium01/vpool0
+```
 
 
 ### Mounting a Windows fileshare (tested with RHEL6)

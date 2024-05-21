@@ -17,6 +17,7 @@
     - [Create LVM + VDO](#create-lvm--vdo)
     - [Disable compression](#disable-compression)
     - [Resize wo extending pool with vdo resize](#resize-wo-extending-pool-with-vdo-resize)
+    - [Resize pool + lv + xfs](#resize-pool--lv--xfs)
     - [Mounting a Windows fileshare (tested with RHEL6)](#mounting-a-windows-fileshare-tested-with-rhel6)
     - [Find dublicates in fstab](#find-dublicates-in-fstab)
   - [](#-1)
@@ -238,6 +239,13 @@ mkfs.xfs -K /dev/mapper/vg_test_slow01-vdo_test_slow01
 lvextend -L +1T /dev/vg_medium01/vpool0
 ```
 
+### Resize pool + lv + xfs
+```
+pvresize /dev/sde
+lvextend -L +4T /dev/vg_slow02/vpool0
+lvextend -L +4.5T /dev/vg_slow02/vdo_slow02
+xfs_growfs /dev/vg_slow02/vdo_slow02
+```
 
 ### Mounting a Windows fileshare (tested with RHEL6)
 ```

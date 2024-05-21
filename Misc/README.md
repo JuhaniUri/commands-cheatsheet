@@ -127,12 +127,12 @@ echo "Hello there" | mail -s "testing" -r sender@company.com someone@gmail.com
 ```
 
 
-### s3cmd usage
+## s3cmd usage
 Grab the tool https://github.com/s3tools/s3cmd
 
-Configure
+### Configure
 ```
-$ s3cmd --configure
+s3cmd --configure
 ```
 
 Result:
@@ -151,27 +151,27 @@ New settings:
 
 ```
 
-Delete recursive
+### Delete recursive
 ```
- s3cmd del --recursive s3://postgres-backup/main-repo/backup/main/20230813-023002F/
-```
-
-Delete multiple folders
-```
-$ s3cmd ls s3://postgres-backups/main-repo/backup/main/ | grep '202309' | awk '{print $2}' | while read file; do s3cmd del --recursive $file; done
+s3cmd del --recursive s3://postgres-backup/main-repo/backup/main/20230813-023002F/
 ```
 
-Bucket settings
+### Delete multiple folders
+```
+s3cmd ls s3://postgres-backups/main-repo/backup/main/ | grep '202309' | awk '{print $2}' | while read file; do s3cmd del --recursive $file; done
+```
+
+### Bucket settings
 ```
 s3cmd info  s3://pgsql-test01-db-backups/
 ```
 
-Bucket lifecycle
+### Bucket lifecycle
 ```
 s3cmd getlifecycle s3://pgsql-test01-db-backups/
 ```
 
-Set expire for files
+### Set expire for files
 ```
 s3cmd expire --expiry-days=15 s3://pgsql-test01-db-backups/
 ```

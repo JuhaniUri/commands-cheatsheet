@@ -160,3 +160,18 @@ Delete multiple folders
 ```
 $ s3cmd ls s3://postgres-backups/main-repo/backup/main/ | grep '202309' | awk '{print $2}' | while read file; do s3cmd del --recursive $file; done
 ```
+
+Bucket settings
+```
+s3cmd info  s3://pgsql-test01-db-backups/
+```
+
+Bucket lifecycle
+```
+s3cmd getlifecycle s3://pgsql-test01-db-backups/
+```
+
+Set expire for files
+```
+s3cmd expire --expiry-days=15 s3://pgsql-test01-db-backups/
+```

@@ -26,6 +26,7 @@
       - [Daily Archive Log Generation](#daily-archive-log-generation)
     - [Force logging](#force-logging)
     - [Add more redo](#add-more-redo)
+  - [Clean-up old audit files via cron](#clean-up-old-audit-files-via-cron)
   - [Random stuff](#random-stuff)
     - [Disable jobs at startup](#disable-jobs-at-startup)
     - [Startup for pdbs](#startup-for-pdbs)
@@ -234,6 +235,12 @@ ALTER DATABASE ADD LOGFILE GROUP 9 ('/oradata/test/redo09.log') SIZE 500m;
 ALTER DATABASE ADD LOGFILE GROUP 10 ('/oradata/test/redo10.log') SIZE 500m;
 ```
 
+## Clean-up old audit files via cron
+
+```
+## Clean-up old audit files
+00 17 * * 7 /usr/bin/find /u01/app/oracle/admin/*/adump/ -type f -name '*.aud' -mtime +30  -exec rm {} \;
+```
 
 
 

@@ -1,4 +1,21 @@
 # Random
+- [Random](#random)
+    - [os-collect-config](#os-collect-config)
+    - [Image modification with qemu](#image-modification-with-qemu)
+    - [Image modification with virt-customize](#image-modification-with-virt-customize)
+    - [Image modification with virt-customize and questmount](#image-modification-with-virt-customize-and-questmount)
+    - [Basic image setup and layout](#basic-image-setup-and-layout)
+    - [Socks proxy usage](#socks-proxy-usage)
+    - [Send email from command line](#send-email-from-command-line)
+  - [s3cmd usage](#s3cmd-usage)
+    - [Configure](#configure)
+    - [Delete recursive](#delete-recursive)
+    - [Delete multiple folders](#delete-multiple-folders)
+    - [Bucket settings](#bucket-settings)
+    - [Bucket lifecycle](#bucket-lifecycle)
+    - [Set expire for files](#set-expire-for-files)
+  - [PHP](#php)
+    - [Change the upload max value](#change-the-upload-max-value)
 
 
 ### os-collect-config

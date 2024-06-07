@@ -186,6 +186,11 @@ The maximum size of an uploaded file.
 post_max_size must be larger than this value.
 https://www.php.net/manual/en/ini.core.php#ini.upload-max-filesize
 ```
-sed -i '/upload_max_filesize/s/= *2M/=100M/' /etc/php/8.0/apache2/php.ini
-sed -i '/post_max_size/s/= *8M/=108M/' /etc/php/8.0/apache2/php.ini
+sed -i '/upload_max_filesize/s/= *2M/=100M/' /etc/php/8.0/cli/php.ini
+sed -i '/post_max_size/s/= *8M/=108M/' /etc/php/8.0/cli/php.ini
+```
+
+Validate the change
+```
+# php -i | grep upload
 ```

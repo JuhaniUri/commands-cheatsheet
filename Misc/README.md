@@ -175,3 +175,17 @@ s3cmd getlifecycle s3://pgsql-test01-db-backups/
 ```
 s3cmd expire --expiry-days=15 s3://pgsql-test01-db-backups/
 ```
+
+
+## PHP
+
+### Change the upload max value
+
+upload_max_filesize
+The maximum size of an uploaded file.
+post_max_size must be larger than this value.
+https://www.php.net/manual/en/ini.core.php#ini.upload-max-filesize
+```
+sed -i '/upload_max_filesize/s/= *2M/=100M/' /etc/php/8.0/apache2/php.ini
+sed -i '/post_max_size/s/= *8M/=108M/' /etc/php/8.0/apache2/php.ini
+```

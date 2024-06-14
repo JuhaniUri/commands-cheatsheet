@@ -61,6 +61,7 @@
   - [Rsync](#rsync)
     - [rsync copy with dry-run](#rsync-copy-with-dry-run)
     - [rsync copy](#rsync-copy)
+    - [copy file from orin to source (executed on destination server)](#copy-file-from-orin-to-source-executed-on-destination-server)
   - [Cron and stuff](#cron-and-stuff)
     - [Flock usage](#flock-usage)
     - [Bring colors to shell](#bring-colors-to-shell)
@@ -461,6 +462,11 @@ rsync -avn syslog/ /mnt/data2/syslog/
 ### rsync copy
 ```
 rsync -av syslog/ /mnt/data2/syslog/
+```
+### copy file from orin to source (executed on destination server)
+Copy ssh-key to source server server and enable passwordless access
+```
+rsync -ah --numeric-ids --one-file-system user@10.10.10.30:/docs/uploads /docs/ &
 ```
 
 ## Cron and stuff

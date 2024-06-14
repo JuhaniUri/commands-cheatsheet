@@ -58,6 +58,9 @@
   - [Network](#network)
     - [Route (RHEL6)](#route-rhel6)
     - [Poor man port forwarding](#poor-man-port-forwarding)
+  - [Rsync](#rsync)
+    - [rsync copy with dry-run](#rsync-copy-with-dry-run)
+    - [rsync copy](#rsync-copy)
   - [Cron and stuff](#cron-and-stuff)
     - [Flock usage](#flock-usage)
     - [Bring colors to shell](#bring-colors-to-shell)
@@ -449,6 +452,16 @@ cat /etc/sysconfig/network-scripts/route-eth0
 ncat -l –k 844 --sh-exec "ncat 192.168.12.7 84" &
 ```
 
+## Rsync
+
+### rsync copy with dry-run
+```
+rsync -avn syslog/ /mnt/data2/syslog/
+```
+### rsync copy
+```
+rsync -av syslog/ /mnt/data2/syslog/
+```
 
 ## Cron and stuff
 ### Flock usage
@@ -492,6 +505,7 @@ split -b 141m B8465job2.log
 ```
  /bin/df -t nfs | /bin/grep /2ndarchlog && touch /2ndarchlog/test && time -p (rsync -rvu --progress --exclude-from=/root/rsync-excludes --delete /backup/rman/ /2ndarchlog && echo 'Sync archivelog done in:')
 ```
+
 
 
 ## Concatenate multiple files and include filename as section headers

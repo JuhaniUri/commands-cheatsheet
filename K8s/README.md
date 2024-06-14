@@ -2,8 +2,10 @@
 
 ## Bastion settings
 
-
-
+```
+alias k=kubectl
+export do="--dry-run=client -o yaml"
+```
 
 ### Getting a shell to a container 
 

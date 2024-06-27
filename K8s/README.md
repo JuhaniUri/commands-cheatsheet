@@ -7,11 +7,20 @@ alias k=kubectl
 export do="--dry-run=client -o yaml"
 ```
 
+## Access
+
 ### Getting a shell to a container 
 
 ```
 $ kubectl exec -i -t -n dev app-dev-5d9fdb847f-8bjnr -- /bin/sh
 ```
+
+### Port forward pod port to local
+
+```
+k -n test port-forward keycloak-0 8000:8080
+```
+
 
 ## Logs
 

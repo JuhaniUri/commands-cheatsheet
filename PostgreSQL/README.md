@@ -11,6 +11,7 @@
     - [Generate create table statement](#generate-create-table-statement)
     - [Create table like](#create-table-like)
 - [User/Role privileges](#userrole-privileges)
+    - [Create readonly user](#create-readonly-user)
 - [Sessions management](#sessions-management)
     - [show running queries](#show-running-queries)
     - [Terminate a query but keep the connection alive (kill query)](#terminate-a-query-but-keep-the-connection-alive-kill-query)
@@ -95,6 +96,17 @@ CREATE TABLE schema1.t_random13 (LIKE schema1.t_random12 INCLUDING ALL);
 
 
 # User/Role privileges
+
+### Create readonly user
+
+```
+postgres=# CREATE ROLE APP_READONLY WITH LOGIN PASSWORD 'SomeSuperSecret';
+postgres=# GRANT CONNECT ON DATABASE <DATABASE_NAME> TO APP_READONLY;
+postgres=# \c <DATABASE_NAME>
+your_db=# GRANT SELECT ON ALL TABLES IN SCHEMA <SCHEMA_NAME> TO APP_READONLY;
+your_db=# ALTER DEFAULT PRIVILEGES IN SCHEMA <SCHEMA_NAME> GRANT SELECT ON TABLES TO APP_READONLY;
+```
+
 
 ```
 SELECT grantor, grantee, table_schema, table_name, privilege_type

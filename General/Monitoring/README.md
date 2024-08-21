@@ -58,11 +58,11 @@ Example case with Linux monitoring:
 Create dedicated templates.
 For example, case Linux by Zabbix agent
 
-- Production Templates
+**Production Templates**
 * Change the template name to **Prod_Linux_server**
 * Keep the template with default settings, as the Zabbix default template is quite good.
 
-- Test Environment Templates
+**Test Environment Templates**
 * Change the template name to **Test_Linux_server**
 * Changes compared to original template:
   - CPU Load > 90%

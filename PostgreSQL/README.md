@@ -27,6 +27,9 @@
     - [pgbench usage with existing database](#pgbench-usage-with-existing-database)
 - [pg\_extension](#pg_extension)
     - [dblink](#dblink)
+- [pg\_dump and pg\_restore](#pg_dump-and-pg_restore)
+    - [pg\_dump](#pg_dump-1)
+    - [pg\_restore](#pg_restore)
 
 # Generic stuff
 
@@ -254,4 +257,16 @@ user=user password=***', 'select username from schema1.demousers') AS t1(t text)
  uriiijuh2
  unknown
 (3 rows)
+```
+
+
+# pg_dump and pg_restore
+
+### pg_dump
+```
+pg_dump -U postgres -h 10.20.30.10 -p 6432 -W -F c -d DatabaseName > 240913_test.dump
+```
+### pg_restore
+```
+pg_restore -U postgres -h 10.20.30.10 -p 6432 -d DatabaseName 240913_test.dump
 ```

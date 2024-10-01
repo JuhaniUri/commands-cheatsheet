@@ -27,8 +27,12 @@
     - [pgbench usage with existing database](#pgbench-usage-with-existing-database)
 - [pg\_extension](#pg_extension)
     - [dblink](#dblink)
-- [pg\_dump and pg\_restore](#pg_dump-and-pg_restore)
-    - [pg\_dump](#pg_dump-1)
+- [pg\_dump and pg\_restore (binary)](#pg_dump-and-pg_restore-binary)
+    - [Export](#export)
+    - [Import](#import)
+- [pg\_dump and psql (plain).](#pg_dump-and-psql-plain)
+  - [Migrate database from db to other.](#migrate-database-from-db-to-other)
+    - [Export](#export-1)
     - [pg\_restore](#pg_restore)
 
 # Generic stuff
@@ -260,13 +264,25 @@ user=user password=***', 'select username from schema1.demousers') AS t1(t text)
 ```
 
 
-# pg_dump and pg_restore
+# pg_dump and pg_restore (binary)
 
-### pg_dump
+### Export
 ```
 pg_dump -U postgres -h 10.20.30.10 -p 6432 -W -F c -d DatabaseName > 240913_test.dump
 ```
-### pg_restore
+### Import
 ```
 pg_restore -U postgres -h 10.20.30.10 -p 6432 -d DatabaseName 240913_test.dump
+```
+
+
+# pg_dump and psql (plain).
+## Migrate database from db to other.
+### Export
+```
+pg_dump -U DatabaseUSER -W -h 10.20.30.10 -p 6432 DatabaseName > 240913_live.dump
+```
+### pg_restore
+```
+psql -U DatabaseUSER -W -h 30.30.30.30 -p 6432 DatabaseName < 240913_live.dump
 ```

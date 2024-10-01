@@ -33,7 +33,7 @@
 - [pg\_dump and psql (plain).](#pg_dump-and-psql-plain)
   - [Migrate database from db to other.](#migrate-database-from-db-to-other)
     - [Export](#export-1)
-    - [pg\_restore](#pg_restore)
+    - [Import](#import-1)
 
 # Generic stuff
 
@@ -282,7 +282,7 @@ pg_restore -U postgres -h 10.20.30.10 -p 6432 -d DatabaseName 240913_test.dump
 ```
 pg_dump -U DatabaseUSER -W -h 10.20.30.10 -p 6432 DatabaseName > 240913_live.dump
 ```
-### pg_restore
+### Import
 ```
 psql -U DatabaseUSER -W -h 30.30.30.30 -p 6432 DatabaseName < 240913_live.dump
 ```

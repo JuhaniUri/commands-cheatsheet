@@ -86,3 +86,18 @@ test02 | CHANGED | rc=0 >>
   salt-minion.service                                                                 loaded active running   The Salt Minion
   zabbix-agent2.service                                                               loaded active running   Zabbix Agent 2
 ```
+
+
+#### Prep a ansible-playbook for offline install
+
+#### Create folder under ansible playbook
+```bash
+ mkdir collections
+```
+
+#### Download collections and commit
+ ```bash
+ ansible-galaxy collection download ansible.posix -p collections
+ ansible-galaxy collection download ansible.netcommon -p collections
+ ansible-galaxy collection download community.general -p collections
+ ```

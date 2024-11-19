@@ -83,6 +83,8 @@
   - [Snmpwalk examples](#snmpwalk-examples)
     - [SNMP v2c](#snmp-v2c)
     - [SNMP v3](#snmp-v3)
+  - [Varia](#varia)
+    - [CentOS 7 repo fix](#centos-7-repo-fix)
 #
 ## Partitions, LVM, LUKS, FS etc
 Something to look into:
@@ -590,4 +592,14 @@ $ snmpwalk -v2c -c <community-string>  192.168.0.1
 ```
 $ export SNMPPASS=‘***’
 $ snmpwalk -v3 -l authPriv -u USERNAME -a SHA1 -A $SNMPPASS -x AES128 -X $SNMPPASS 192.168.0.1
+```
+
+
+## Varia
+### CentOS 7 repo fix
+Since mirrorlist.centos.org no longer exist you should update all .repo file
+```
+$ sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/*.repo
+$ sed -i s/^#.*baseurl=http/baseurl=http/g /etc/yum.repos.d/*.repo
+$ sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/*.repo
 ```

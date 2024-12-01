@@ -58,6 +58,7 @@
   - [Network](#network)
     - [Route (RHEL6)](#route-rhel6)
     - [Poor man port forwarding](#poor-man-port-forwarding)
+    - [Testing ports with cat](#testing-ports-with-cat)
   - [Rsync](#rsync)
     - [rsync copy with dry-run](#rsync-copy-with-dry-run)
     - [rsync copy](#rsync-copy)
@@ -454,6 +455,14 @@ cat /etc/sysconfig/network-scripts/route-eth0
 ```
 ncat -l –k 844 --sh-exec "ncat 192.168.12.7 84" &
 ```
+
+### Testing ports with cat
+```
+$ cat < /dev/tcp/127.0.0.1/23
+bash: connect: Connection refused
+bash: /dev/tcp/127.0.0.1/23: Connection refused
+```
+
 
 ## Rsync
 

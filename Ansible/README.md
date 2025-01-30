@@ -87,6 +87,17 @@ test02 | CHANGED | rc=0 >>
   zabbix-agent2.service                                                               loaded active running   Zabbix Agent 2
 ```
 
+#### Ansible with passphrase protected private key
+
+```
+$ ssh-agent bash
+$ ssh-add ~/.ssh/id_rsa
+Enter passphrase for /home/juhani.uri/.ssh/id_rsa:
+Identity added: /home/juhani.uri/.ssh/id_rsa (juhani.uri@mkm-pilv-keskhaldus)
+$ ssh-add -l
+3072 SHA256:****************** juhani.uri@mkm-pilv-keskhaldus (RSA)
+```
+
 
 #### Prep a ansible-playbook for offline install
 
@@ -101,3 +112,5 @@ test02 | CHANGED | rc=0 >>
  ansible-galaxy collection download ansible.netcommon -p collections
  ansible-galaxy collection download community.general -p collections
  ```
+
+

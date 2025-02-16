@@ -16,6 +16,8 @@
     - [Set expire for files](#set-expire-for-files)
   - [PHP](#php)
     - [Change the upload max value](#change-the-upload-max-value)
+  - [Nextcloud](#nextcloud)
+    - [Uploading from commandline](#uploading-from-commandline)
 
 
 ### os-collect-config
@@ -210,4 +212,12 @@ sed -i '/post_max_size/s/= *8M/=108M/' /etc/php/8.0/cli/php.ini
 Validate the change
 ```
 # php -i | grep upload
+```
+
+## Nextcloud
+
+### Uploading from commandline
+https://github.com/tavinus/cloudsend.sh
+```
+$ ./cloudsend.sh myfile "https://cloud.mydomain.tld/******" -p 'MyPassword'
 ```

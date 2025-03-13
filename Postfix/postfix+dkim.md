@@ -18,8 +18,8 @@ apt -y install opendkim opendkim-tools perl-Getopt-Long
 
 ```bash
 mkdir /etc/opendkim
-opendkim-genkey -D /etc/opendkim/example.ee -d example.ee -s lum1
-opendkim-genkey -D /etc/opendkim/example.lv -d example.lv -s lum1
+opendkim-genkey -D /etc/opendkim/example.ee -d example.ee -s mydkim01
+opendkim-genkey -D /etc/opendkim/example.lv -d example.lv -s mydkim01
 ```
 
 ## Change `/etc/opendkim.conf`
@@ -43,15 +43,15 @@ RequireSafeKeys         False
 ## Create `/etc/opendkim/key.table`
 
 ```
-lum1._domainkey.examle.ee examle.ee:lum1:/etc/opendkim/example.ee/lum1.private
-lum1._domainkey.examle.lv examle.lv:lum1:/etc/opendkim/example.lv/lum1.private
+mydkim01._domainkey.examle.ee examle.ee:mydkim01:/etc/opendkim/example.ee/mydkim01.private
+mydkim01._domainkey.examle.lv examle.lv:mydkim01:/etc/opendkim/example.lv/mydkim01.private
 ```
 
 ## Create `/etc/opendkim/signing.table`
 
 ```
-example.ee lum1._domainkey.example.ee
-example.lv lum1._domainkey.example.lv
+example.ee mydkim01._domainkey.example.ee
+example.lv mydkim01._domainkey.example.lv
 ```
 
 ## Create `/etc/opendkim/internalhosts`
@@ -97,7 +97,7 @@ echo "Hello" | mail -s "testing" -r info@example.ee myemail@gmail.com
 
 ```bash
 cat /var/log/mail.log | grep opendkim
-Mar 12 11:22:03 smtp opendkim[3905285]: 6F392200AC: DKIM-Signature field added (s=lum1, d=example.ee)
+Mar 12 11:22:03 smtp opendkim[3905285]: 6F392200AC: DKIM-Signature field added (s=mydkim01, d=example.ee)
 ```
 
 

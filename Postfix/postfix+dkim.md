@@ -1,5 +1,14 @@
  Here is the provided content converted to Markdown (md) format:
 
+- [Install and Configure OpenDKIM](#install-and-configure-opendkim)
+  - [Generate Dedicated Keys](#generate-dedicated-keys)
+  - [Change `/etc/opendkim.conf`](#change-etcopendkimconf)
+  - [Create `/etc/opendkim/key.table`](#create-etcopendkimkeytable)
+  - [Create `/etc/opendkim/signing.table`](#create-etcopendkimsigningtable)
+  - [Create `/etc/opendkim/internalhosts`](#create-etcopendkiminternalhosts)
+  - [Change Ownership](#change-ownership)
+  - [Add to `/etc/postfix/main.cf`](#add-to-etcpostfixmaincf)
+  - [Restart OpenDKIM and Postfix](#restart-opendkim-and-postfix)
 - [Testing](#testing)
   - [Domain with DKIM](#domain-with-dkim)
     - [From logs you should see DKIM-Signature field added](#from-logs-you-should-see-dkim-signature-field-added)
@@ -7,7 +16,6 @@
     - [From the logs you should see "no signing table match for '"](#from-the-logs-you-should-see-no-signing-table-match-for-)
 
 
-```markdown
 # Install and Configure OpenDKIM
 
 ```bash

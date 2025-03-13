@@ -33,6 +33,7 @@
     - [SED with find: Replacing values in multiple files inside directory (Linux)](#sed-with-find-replacing-values-in-multiple-files-inside-directory-linux)
     - [SED with find: Replacing multiple values in multiple files in subdirectories (Mac)](#sed-with-find-replacing-multiple-values-in-multiple-files-in-subdirectories-mac)
     - [GREP: Print line before, don't print match](#grep-print-line-before-dont-print-match)
+    - [GREP: To suppress all blank lines use egrep command as follows](#grep-to-suppress-all-blank-lines-use-egrep-command-as-follows)
     - [AWK: List of all locked accounts (accounts with passwords) :](#awk-list-of-all-locked-accounts-accounts-with-passwords-)
     - [AWK: List of all unlocked accounts (accounts with passwords) :](#awk-list-of-all-unlocked-accounts-accounts-with-passwords-)
     - [Tail: Show file content with file names](#tail-show-file-content-with-file-names)
@@ -322,6 +323,12 @@ find foldername/*/openstack  -type f -name "*.yaml" -exec sed -i '' '/firewall:/
 ```
 grep -B 1 Dead alert.log | grep -vE 'Dead|^--$'
 ```
+
+### GREP: To suppress all blank lines use egrep command as follows
+```
+grep -E -v "^#|^$" /etc/zabbix/zabbix_agent2.conf
+```
+
 
 ### AWK: List of all locked accounts (accounts with passwords) :
 ```

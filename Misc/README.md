@@ -14,6 +14,8 @@
     - [Bucket settings](#bucket-settings)
     - [Bucket lifecycle](#bucket-lifecycle)
     - [Set expire for files](#set-expire-for-files)
+  - [Git usage](#git-usage)
+    - [Use socks proxy with git](#use-socks-proxy-with-git)
   - [PHP](#php)
     - [Change the upload max value](#change-the-upload-max-value)
   - [Nextcloud](#nextcloud)
@@ -195,6 +197,11 @@ s3cmd getlifecycle s3://pgsql-test01-db-backups/
 s3cmd expire --expiry-days=15 s3://pgsql-test01-db-backups/
 ```
 
+## Git usage
+### Use socks proxy with git
+```
+ git config http.proxy 'socks5://127.0.0.1:3999'
+```
 
 ## PHP
 
